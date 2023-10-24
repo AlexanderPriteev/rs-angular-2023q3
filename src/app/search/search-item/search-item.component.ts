@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SearchItemInterface } from './search-item.interface';
+import { ISearchItem } from './search-item.interface';
 
 @Component({
   selector: 'app-search-item',
@@ -7,5 +7,5 @@ import { SearchItemInterface } from './search-item.interface';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
-  @Input() searchItem = {} as SearchItemInterface;
+  @Input() searchItem = {} as ISearchItem;
 }

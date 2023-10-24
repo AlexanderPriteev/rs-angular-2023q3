@@ -1,14 +1,14 @@
-import { SearchItemInterface } from '../search-item/search-item.interface';
+import { ISearchItem } from '../search-item/search-item.interface';
 
-interface PageInfoInterface {
+interface IPageInfo {
   totalResults: number;
   resultsPerPage: number;
 }
 
-export interface SearchResultsInterface {
+export interface ISearchResults {
   TODO?: string;
   kind: string;
   etag: string;
-  pageInfo: PageInfoInterface;
-  items: SearchItemInterface[];
+  pageInfo: IPageInfo;
+  items: ISearchItem[];
 }

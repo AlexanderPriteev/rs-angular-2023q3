@@ -1,36 +1,36 @@
-interface ImageSizeInterface {
+interface IImageSize {
   url: string;
   width: number;
   height: number;
 }
 
-interface ItemThumbnailsInterface {
-  default: ImageSizeInterface;
-  medium: ImageSizeInterface;
-  high: ImageSizeInterface;
-  standard: ImageSizeInterface;
-  maxres: ImageSizeInterface;
+interface IItemThumbnails {
+  default: IImageSize;
+  medium: IImageSize;
+  high: IImageSize;
+  standard: IImageSize;
+  maxres: IImageSize;
 }
 
-interface ItemLocalizedInterface {
+interface IItemLocalized {
   title: string;
   description: string;
 }
 
-interface ItemSnippetInterface {
+interface IItemSnippet {
   publishedAt: string;
   channelId: string;
   title: string;
   description: string;
-  thumbnails: ItemThumbnailsInterface;
+  thumbnails: IItemThumbnails;
   channelTitle: string;
   tags: string[];
   categoryId: string;
   liveBroadcastContent: string;
-  localized: ItemLocalizedInterface;
+  localized: IItemLocalized;
   defaultAudioLanguage: string;
 }
-interface ItemStatisticsInterface {
+interface IItemStatistics {
   viewCount: string;
   likeCount: string;
   dislikeCount: string;
@@ -38,10 +38,10 @@ interface ItemStatisticsInterface {
   commentCount: string;
 }
 
-export interface SearchItemInterface {
+export interface ISearchItem {
   kind: string;
   etag: string;
   id: string;
-  snippet: ItemSnippetInterface;
-  statistics: ItemStatisticsInterface;
+  snippet: IItemSnippet;
+  statistics: IItemStatistics;
 }
