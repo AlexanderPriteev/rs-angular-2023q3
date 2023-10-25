@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchResultComponent } from './search-result.component';
+import { NgModule } from '@angular/core';
+
 import { SearchItemModule } from '../search-item/search-item.module';
+import { SearchResultComponent } from './search-result.component';
 
 @NgModule({
   declarations: [
