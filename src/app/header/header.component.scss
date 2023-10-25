@@ -1,0 +1,44 @@
+@import "../../assets/scss/basic/variables";
+.header{
+  background-color: $grey;
+  &__inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem 3rem 1.5rem 12rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+  &__main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 auto;
+  }
+  &__logo{
+    width: 5rem;
+  }
+}
+
+.filter-btn{
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .4rem;
+  box-sizing: border-box;
+  padding: .5rem;
+  background-color: $blue;
+  box-shadow: .2rem 0 .4rem 0 $blue;
+  transition: all .15s linear;
+  cursor: pointer;
+  &:hover{
+    box-shadow: 0 0 0 0 $cyan;
+    background-color: $cyan;
+  }
+}

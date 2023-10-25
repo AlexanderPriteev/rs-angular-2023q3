@@ -1,0 +1,45 @@
+@import "../../../assets/scss/basic/variables";
+
+.sorting{
+  box-sizing: border-box;
+  padding: 1.8rem 3rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 65rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  &__title{
+    color: $grey-text;
+  }
+  &__link{
+    color: $blue;
+    text-decoration: underline;
+    transition: color .15s linear;
+    &:hover{
+      color: $cyan;
+    }
+  }
+  &__label{
+    color: $blue;
+  }
+  &__search{
+    width: 15rem;
+    height: 1.3rem;
+    background-color: $white;
+    box-sizing: border-box;
+    padding: 0 .5rem;
+    color: $text-dark;
+    font-size: 1.2rem;
+    line-height: 1;
+    &::placeholder{
+      color: $grey-text;
+    }
+    &-wrapper{
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}

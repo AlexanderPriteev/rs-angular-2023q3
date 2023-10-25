@@ -1,0 +1,13 @@
+.search-result{
+  width: 100%;
+  max-width: 120rem;
+  box-sizing: border-box;
+  padding: 3rem;
+  gap: 2.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.search-item-wrapper{
+  width: calc(25% - 2.1rem);
+}

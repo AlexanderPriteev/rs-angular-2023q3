@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,  ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import {SearchResultComponent} from "./search/search-result/search-result.component";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef
+  ) { }
+
+  ngOnInit() {
+    const factory = this.componentFactoryResolver.resolveComponentFactory(SearchResultComponent);
+    const componentRef = factory.create(this.viewContainerRef.parentInjector);
+    this.viewContainerRef.insert(componentRef.hostView);
+  }
 }
