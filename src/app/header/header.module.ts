@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
+import { NgModule } from '@angular/core';
+
 import { FilterModule } from './filter/filter.module';
+import { HeaderComponent } from './header.component';
 import { SearchModule } from './search/search.module';
 import { SortModule } from './sort/sort.module';
 import { UserInfoModule } from './user-info/user-info.module';
