@@ -7,5 +7,5 @@ import { ISearchResults } from './search-result.interface';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent {
-  @Input() searchResults = {} as ISearchResults;
+  @Input() searchResults!: ISearchResults;
 }
