@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ButtonComponent } from '../../elements/button/button.component';
 import { SearchItemComponent } from './search-item.component';
 import { SearchItemDirective } from './search-item.directive';
 
@@ -8,6 +9,7 @@ import { SearchItemDirective } from './search-item.directive';
   declarations: [
     SearchItemComponent,
     SearchItemDirective,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
