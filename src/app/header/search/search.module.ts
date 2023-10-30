@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { SearchComponent } from './search.component';
@@ -9,6 +10,7 @@ import { SearchComponent } from './search.component';
   ],
   imports: [
     CommonModule,
+    FormsModule
   ],
   exports: [
     SearchComponent,
