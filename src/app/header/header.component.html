@@ -5,11 +5,11 @@
         <img src="../../assets/images/png/logo.png" alt="" class="img img--contain">
       </div>
       <app-search></app-search>
-      <span class="filter-btn">
+      <span class="filter-btn" (click)="toggleSort()">
       <img src="../../assets/images/svg/filter.svg" alt="" class="img img--contain">
     </span>
     </div>
     <app-user-info></app-user-info>
   </div>
-  <app-sort class="sorting"></app-sort>
+  <app-sort class="sorting" *ngIf="isSortVisible"></app-sort>
 </header>

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  isSortVisible: boolean = false;
 
+  toggleSort() {
+    this.isSortVisible = !this.isSortVisible;
+  }
 }

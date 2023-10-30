@@ -3,8 +3,9 @@
     <div class="search-item__image">
       <picture>
         <source media="(min-width:1920px)" [srcset]="searchItem.snippet.thumbnails.standard.url">
-        <source media="(min-width:1440px)" [srcset]="searchItem.snippet.thumbnails.high.url">
-        <img [src]="searchItem.snippet.thumbnails.medium.url" [alt]="searchItem.snippet.title" class="img img--cover">
+        <source media="(min-width:1240px)" [srcset]="searchItem.snippet.thumbnails.high.url">
+        <source media="(min-width:768px)" [srcset]="searchItem.snippet.thumbnails.medium.url">
+        <img [src]="searchItem.snippet.thumbnails.default.url" [alt]="searchItem.snippet.title" class="img img--cover">
       </picture>
     </div>
   </div>
