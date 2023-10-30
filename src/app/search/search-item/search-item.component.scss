@@ -61,28 +61,6 @@
     -webkit-box-orient: vertical;
   }
   &__btn{
-    width: 12rem;
-    height: 3.2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: .5rem;
-    background-color: $blue;
-    font-size: 1.2rem;
-    color: $white;
-    box-shadow: .2rem 0 .4rem 0 $blue;
-    transition: all .15s linear;
-    cursor: pointer;
-    &:hover{
-      box-shadow: 0 0 0 0 $cyan;
-      background-color: $cyan;
-    }
-    &:disabled{
-      pointer-events: none;
-      box-shadow: none;
-      background-color: $grey-dark;
-      color: $grey-text-2;
-    }
     &-wrapper{
       display: flex;
       gap: 1rem;
