@@ -1,7 +1,7 @@
 <div class="sorting">
   <span class="sorting__title">Sorting by:</span>
-  <span class="sorting__link">date</span>
-  <span class="sorting__link">count of views</span>
+  <span class="sorting__link" (click)="onSort('date')">date</span>
+  <span class="sorting__link" (click)="onSort('count')">count of views</span>
   <div class="sorting__search-wrapper">
     <span class="sorting__label">by word or sentance</span>
     <input type="text" class="sorting__search">

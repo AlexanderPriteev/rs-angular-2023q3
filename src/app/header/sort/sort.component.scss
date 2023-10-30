@@ -17,6 +17,7 @@
     color: $blue;
     text-decoration: underline;
     transition: color .15s linear;
+    cursor: pointer;
     &:hover{
       color: $cyan;
     }
