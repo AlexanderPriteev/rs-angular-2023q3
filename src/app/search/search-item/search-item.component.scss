@@ -52,6 +52,13 @@
     box-sizing: border-box;
     padding: 0 1rem;
     font-weight: $bold;
+    line-height: 1;
+    display: -webkit-box;
+    height: 4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   &__btn{
     width: 12rem;

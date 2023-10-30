@@ -1,5 +1,9 @@
 <div class="search-result">
-  <app-search-item class="search-item-wrapper"></app-search-item>
+  <ng-container *ngIf="searchResults">
+    <ng-container *ngFor="let item of searchResults.items">
+      <app-search-item [searchItem]="item" class="search-item-wrapper"></app-search-item>
+    </ng-container>
+  </ng-container>
 </div>
 
 

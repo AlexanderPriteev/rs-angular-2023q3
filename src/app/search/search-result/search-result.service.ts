@@ -1,0 +1,16 @@
+import { Injectable } from '@angular/core';
+import { ISearchResults } from './search-result.interface';
+import * as responseData from './response.json';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SearchResultService {
+  private data: ISearchResults = responseData;
+
+  getSearchResults(): Promise<ISearchResults> {
+    return new Promise((resolve) => {
+      resolve(this.data);
+    });
+  }
+}
