@@ -12,4 +12,8 @@ export class SortComponent {
   onSort(data: 'date' | 'count') {
     this.sortService.triggerSort(data);
   }
+  onInput(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
+    this.sortService.triggerFilter(inputValue);
+  }
 }

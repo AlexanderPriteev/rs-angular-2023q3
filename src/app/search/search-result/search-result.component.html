@@ -1,6 +1,6 @@
 <div class="search-result">
   <ng-container *ngIf="searchResults">
-    <ng-container *ngFor="let item of searchResults.items">
+    <ng-container *ngFor="let item of searchResults.items | searchFilter: filterTerm">
       <app-search-item [searchItem]="item" class="search-item-wrapper"></app-search-item>
     </ng-container>
   </ng-container>

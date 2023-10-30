@@ -12,6 +12,7 @@ import { SearchResultService } from './search-result.service';
 })
 export class SearchResultComponent implements OnInit {
   searchResults: ISearchResults | undefined;
+  filterTerm = '';
 
   constructor(
     private searchService: SearchService,
@@ -45,6 +46,10 @@ export class SearchResultComponent implements OnInit {
         }
         return sortTrigger[1] ? first - second : second - first;
       });
+    });
+
+    this.sortService.filterTrigger$.subscribe((filterTrigger) => {
+      this.filterTerm = filterTrigger;
     });
   }
 }
