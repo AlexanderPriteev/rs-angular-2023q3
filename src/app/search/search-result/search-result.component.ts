@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { SearchResultService } from './search-result.service';
+import { Component, OnInit } from '@angular/core';
 
+import { SearchService } from '../../header/search/search.service';
+import { SortService } from '../../header/sort/sort.service';
 import { ISearchResults } from './search-result.interface';
-import {SearchService} from "../../header/search/search.service";
-import {SortService} from "../../header/sort/sort.service";
+import { SearchResultService } from './search-result.service';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
 })
-export class SearchResultComponent {
+export class SearchResultComponent implements OnInit {
   searchResults: ISearchResults | undefined;
 
   constructor(
@@ -29,19 +29,22 @@ export class SearchResultComponent {
     });
 
     this.sortService.sortTrigger$.subscribe((sortTrigger) => {
-      if(!this.searchResults) return;
+      if (!this.searchResults) return;
       this.searchResults.items.sort((a, b) => {
-         let [first, second] = [0, 0];
-         switch (sortTrigger[0]){
-           case 'date':
-             first = new Date(a.snippet.publishedAt).getTime();
-             second =  new Date(b.snippet.publishedAt).getTime();
-             break;
-           case 'count':
-             [first, second] = [+a.statistics.viewCount, +b.statistics.viewCount];
-         }
-         return sortTrigger[1] ? first - second : second - first;
-      })
+        let first: number;
+        let second: number;
+        switch (sortTrigger[0]) {
+          case 'date':
+            first = new Date(a.snippet.publishedAt).getTime();
+            second = new Date(b.snippet.publishedAt).getTime();
+            break;
+          case 'count':
+            [first, second] = [+a.statistics.viewCount, +b.statistics.viewCount];
+            break;
+          default: [first, second] = [0, 0];
+        }
+        return sortTrigger[1] ? first - second : second - first;
+      });
     });
   }
 }

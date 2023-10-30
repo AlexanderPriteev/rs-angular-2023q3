@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ISearchResults } from './search-result.interface';
+
 import * as responseData from './response.json';
+import { ISearchResults } from './search-result.interface';
 
 @Injectable({
   providedIn: 'root',

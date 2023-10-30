@@ -1,9 +1,12 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive, ElementRef, Input, Renderer2
+} from '@angular/core';
 
 @Directive({
   selector: '[appAgeColor]'
 })
-export class SearchItemDirective {
+export class SearchItemDirective implements AfterViewInit {
   @Input() createdDate!: string;
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 

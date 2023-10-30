@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { SearchService } from './search.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { SearchService } from './search.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  searchTerm: string = '';
+  searchTerm = '';
   constructor(private searchService: SearchService) {}
 
   onSearch() {

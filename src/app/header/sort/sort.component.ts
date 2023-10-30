@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {SortService} from "./sort.service";
+
+import { SortService } from './sort.service';
 
 @Component({
   selector: 'app-sort',
@@ -8,7 +9,7 @@ import {SortService} from "./sort.service";
 })
 export class SortComponent {
   constructor(private sortService: SortService) {}
-  onSort(data: 'date' | 'count'){
+  onSort(data: 'date' | 'count') {
     this.sortService.triggerSort(data);
   }
 }

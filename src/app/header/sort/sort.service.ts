@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class SortService {
   private sortTrigger = new BehaviorSubject<(string | boolean)[]>([]);
   private sort = {
-    'date': true,
-    'count': true
+    date: true,
+    count: true
   };
   sortTrigger$ = this.sortTrigger.asObservable();
 
@@ -16,5 +16,4 @@ export class SortService {
     this.sortTrigger.next([data, this.sort[data]]);
     this.sort[data] = !this.sort[data];
   }
-
 }
