@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { NotFoundComponent } from './not-found.component';
+import { ButtonComponent } from './button.component';
 
 @NgModule({
-  declarations: [NotFoundComponent],
+  declarations: [
+    ButtonComponent
+  ],
   imports: [
     CommonModule
   ],
   exports: [
-    NotFoundComponent
+    ButtonComponent
   ]
 })
-export class NotFoundModule { }
+export class ButtonModule { }

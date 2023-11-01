@@ -1,0 +1,63 @@
+.form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  box-sizing: border-box;
+  padding: 2.8rem 2rem 2.4rem;
+  border-radius: .5rem;
+  background-color: $grey-light-3;
+
+  &-wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 36.5rem;
+    margin: 4.5rem auto;
+    padding: 0 1rem;
+  }
+
+  &__title{
+    color: $black;
+    font-size: 1.8rem;
+    font-weight: $bold;
+  }
+  &__wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+  &__btn{
+    padding: 12px;
+    background-color: $blue;
+    color: $white;
+    font-size: 12px;
+    &-wrapper{
+      margin-top: 1.1rem;
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  &__label{
+    font-size: 1.2rem;
+    color: $grey-text-3;
+    padding-left: .6rem;
+  }
+  &__input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 .9rem;
+    height: 3.7rem;
+    line-height: 1;
+    font-size: 1rem;
+    color: $black;
+    background-color: $grey-light;
+  }
+}

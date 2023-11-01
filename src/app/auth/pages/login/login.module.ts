@@ -2,20 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ButtonModule } from '../../../shared/companents/button/button.module';
-import { SearchItemComponent } from './search-item.component';
-import { SearchItemDirective } from './search-item.directive';
+import { LoginComponent } from './login.component';
 
 @NgModule({
   declarations: [
-    SearchItemComponent,
-    SearchItemDirective,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     ButtonModule
   ],
   exports: [
-    SearchItemComponent,
-  ],
+    LoginComponent
+  ]
 })
-export class SearchItemModule { }
+export class LoginModule { }
