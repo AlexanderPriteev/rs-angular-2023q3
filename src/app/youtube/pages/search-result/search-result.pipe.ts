@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ISearchItem } from '../search-item/search-item.interface';
+import { ISearchItem } from '../../companents/search-item/search-item.interface';
 
 @Pipe({
   name: 'searchFilter'

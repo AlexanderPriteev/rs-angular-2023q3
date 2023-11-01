@@ -7,7 +7,7 @@ import {
   selector: '[appAgeColor]'
 })
 export class SearchItemDirective implements AfterViewInit {
-  @Input() createdDate: string = '';
+  @Input() createdDate = '';
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit() {
