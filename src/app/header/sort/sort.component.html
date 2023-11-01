@@ -1,9 +1,9 @@
 <div class="sorting">
   <span class="sorting__title">Sorting by:</span>
-  <span class="sorting__link" (click)="onSort('date')">date</span>
-  <span class="sorting__link" (click)="onSort('count')">count of views</span>
+  <button type="button" class="sorting__link" (click)="onSort('date')">date</button>
+  <button type="button" class="sorting__link" (click)="onSort('count')">count of views</button>
   <div class="sorting__search-wrapper">
-    <span class="sorting__label">by word or sentance</span>
+    <label class="sorting__label">by word or sentance</label>
     <input type="text" class="sorting__search" (input)="onInput($event)">
   </div>
 </div>

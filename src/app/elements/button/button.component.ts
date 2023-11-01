@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-button',
   template: `
-    <button class="btn">
+    <button type="button" class="btn">
       <ng-content></ng-content>
     </button>
   `,
