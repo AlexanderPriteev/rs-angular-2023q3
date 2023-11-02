@@ -14,10 +14,10 @@ import { YoutubeModule } from './youtube/youtube.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
 
     AuthModule,
-    CoreModule,
-    YoutubeModule
+    YoutubeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

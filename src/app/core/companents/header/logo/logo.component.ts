@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-logo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   template: `
-    <div class="logo">
+    <a [routerLink]="['/']" class="logo">
       <img src="../../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
-    </div>
+    </a>
   `,
   styleUrls: ['./logo.component.scss']
 })
