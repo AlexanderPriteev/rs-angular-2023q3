@@ -1,4 +1,6 @@
-<div class="search-item"  appAgeColor [createdDate]="searchItem.snippet.publishedAt">
+<div class="search-item"
+     appAgeColor [createdDate]="searchItem.snippet.publishedAt"
+     [id]="searchItem.id">
   <div class="search-item__image-wrapper">
     <div class="search-item__image">
       <picture>
@@ -12,26 +14,25 @@
   <div class="search-item__statistics">
     <div class="statistic-item">
       <div class="statistic-item__image">
-
-        <img src="../../../../assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
+        <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
       </div>
       <span class="statistic-item__value">{{ searchItem.statistics.viewCount }}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
-        <img src="../../../../assets/images/svg/liked.svg" alt="liked" class="img img--contain">
+        <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
       </div>
       <span class="statistic-item__value">{{ searchItem.statistics.likeCount }}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
-        <img src="../../../../assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
+        <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
       </div>
       <span class="statistic-item__value">{{ searchItem.statistics.dislikeCount }}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
-        <img src="../../../../assets/images/svg/comment.svg" alt="comments" class="img img--contain">
+        <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
       </div>
       <span class="statistic-item__value">{{ searchItem.statistics.commentCount }}</span>
     </div>

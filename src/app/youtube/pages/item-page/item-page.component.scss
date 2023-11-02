@@ -1,0 +1,125 @@
+@import "../../../../assets/scss/basic/variables";
+
+.item{
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: .3rem;
+  &__btn{
+    align-self: flex-start;
+    width: 3.2rem;
+    min-width: 3.2rem;
+    height: 3.2rem;
+    border-radius: .5rem 0 0 .5rem;
+    background-color: $blue;
+    color: $white;
+    box-shadow: .2rem 0 .4rem 0 $blue;
+    transition: all .15s linear;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 0 0 0 $cyan;
+      background-color: $cyan;
+    }
+    &--older{
+      border-color: $red;
+      &:hover {
+        box-shadow: 0 0 0 0 $yellow;
+        background-color: $red-light;
+      }
+    }
+    &--old{
+      border-color: $yellow;
+      &:hover {
+        box-shadow: 0 0 0 0 $yellow;
+        background-color: $yellow-yellow;
+      }
+    }
+    &--normal{
+      border-color: $green;
+      &:hover {
+        box-shadow: 0 0 0 0 $green;
+        background-color: $green-light;
+      }
+    }
+  }
+  &__inner{
+    display: flex;
+    flex-grow: 1;
+    box-shadow: .5rem 1rem 2rem 0 rgba($text-dark, .25);
+    min-height: 46rem;
+  }
+  &__image{
+    width: 62.6%;
+    background-color: $grey;
+  }
+  &__about{
+    flex-grow: 1;
+    width: 37.4%;
+    min-width: 28rem;
+    box-sizing: border-box;
+    padding: 3.5rem;
+    border-bottom: .6rem solid $blue;
+    background-color: $grey-light;
+    display: flex;
+    flex-direction: column;
+    gap: 2.6rem;
+    &--older{
+      border-color: $red;
+    }
+    &--old{
+      border-color: $yellow;
+    }
+    &--normal{
+      border-color: $green;
+    }
+  }
+  &__head{
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  &__title{
+    font-weight: $bold;
+    color: $black;
+    font-size: 2.4rem;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+  &__date{
+    line-height: 3.4rem;
+    color: $grey-text-3;
+  }
+  &__wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: .4rem;
+  }
+  &__subtitle{
+    font-size: 1.4rem;
+    color: $black;
+  }
+  &__description{
+    font-size: 1.2rem;
+    color: $grey-text-3;
+  }
+  &__stats{
+    display: inline-flex;
+    align-items: center;
+    color: $black;
+    gap: .3rem;
+
+    &-wrapper{
+      display: flex;
+      justify-content: center;
+      gap: 1.7rem;
+    }
+    &-image{
+      height: 1.3rem;
+    }
+  }
+}

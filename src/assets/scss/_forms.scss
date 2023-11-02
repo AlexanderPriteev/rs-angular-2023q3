@@ -8,14 +8,6 @@
   border-radius: .5rem;
   background-color: $grey-light-3;
 
-  &-wrapper{
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 36.5rem;
-    margin: 4.5rem auto;
-    padding: 0 1rem;
-  }
-
   &__title{
     color: $black;
     font-size: 1.8rem;
