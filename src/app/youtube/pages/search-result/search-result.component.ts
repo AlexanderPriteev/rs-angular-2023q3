@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SearchService } from '../../../shared/pages/header/search/search.service';
-import { SortService } from '../../../shared/pages/header/sort/sort.service';
+import { SearchService } from '../../../core/companents/header/search/search.service';
+import { SortService } from '../../../core/companents/header/sort/sort.service';
 import { ISearchResults } from './search-result.interface';
 import { SearchResultService } from './search-result.service';
 

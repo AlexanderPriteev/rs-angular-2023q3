@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ButtonModule } from '../../../shared/companents/button/button.module';
-import { LoginComponent } from './login.component';
+import { ButtonModule } from '../shared/companents/button/button.module';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,4 +16,4 @@ import { LoginComponent } from './login.component';
     LoginComponent
   ]
 })
-export class LoginModule { }
+export class AuthModule { }

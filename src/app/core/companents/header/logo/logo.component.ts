@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   template: `
-      <div class="logo">
-          <img src="../../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
-      </div>
+    <div class="logo">
+      <img src="../../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
+    </div>
   `,
   styleUrls: ['./logo.component.scss']
 })

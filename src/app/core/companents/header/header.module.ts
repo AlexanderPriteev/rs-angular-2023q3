@@ -1,22 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './logo/logo.component';
-import { SearchModule } from './search/search.module';
-import { SortModule } from './sort/sort.module';
-import { UserInfoModule } from './user-info/user-info.module';
+import { SearchComponent } from './search/search.component';
+import { SortComponent } from './sort/sort.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    SearchComponent,
+    SortComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,
-    SearchModule,
-    SortModule,
-    UserInfoModule,
-    LogoComponent
+    LogoComponent,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
