@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ISearchItem } from './search-item.interface';
+import { ISearchItem } from '../../interfaces/search-item.interface';
 
 @Component({
   selector: 'app-search-item',

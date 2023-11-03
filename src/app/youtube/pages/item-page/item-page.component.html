@@ -1,45 +1,47 @@
 <div class="item-wrapper">
-  <div class="item">
-    <button class="item__btn" type="button">
+  <div class="item" *ngIf="item">
+    <button [routerLink]="['/']" class="item__btn" type="button"
+            appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__btn'">
       <img src="assets/images/svg/back_button.svg" alt="<" class="img img--contain">
     </button>
     <div class="item__inner">
       <div class="item__image">
-        <img src="" alt="" class="img img__cover">
+        <img [src]="item.snippet.thumbnails.standard.url" [alt]="item.snippet.title" class="img img--cover">
       </div>
-      <div class="item__about">
+      <div class="item__about"
+           appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__about'">
         <div class="item__head">
-          <h2 class="item__title" title="Kuji Podcast #20">Kuji Podcast #20</h2>
-          <span class="item__date">Thursday, December 20, 2019</span>
+          <h2 class="item__title" title="Kuji Podcast #20">{{ item.snippet.title }}</h2>
+          <span class="item__date">{{ item.snippet.publishedAt }}</span>
         </div>
         <div class="item__wrapper">
           <p class="item__subtitle">Description:</p>
-          <p class="item__description">This Is KuJi Podcast. In this issue, Timur karginov, Andrey Konyaev and Nurlan Saburov discuss the end of 2018: Khabib's fight with McGregor, Kokorin and Mamayev, Urgant's show on channel One, the economic crisis and gifts for loved ones.</p>
+          <p class="item__description">{{ item.snippet.description }}</p>
         </div>
         <div class="item__stats-wrapper">
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
             </div>
-            <span class="item__stats-value">1000</span>
+            <span class="item__stats-value">{{ item.statistics.viewCount }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
             </div>
-            <span class="item__stats-value">680</span>
+            <span class="item__stats-value">{{ item.statistics.likeCount }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
             </div>
-            <span class="item__stats-value">380</span>
+            <span class="item__stats-value">{{ item.statistics.dislikeCount }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
             </div>
-            <span class="item__stats-value">250</span>
+            <span class="item__stats-value">{{ item.statistics.commentCount }}</span>
           </div>
         </div>
       </div>

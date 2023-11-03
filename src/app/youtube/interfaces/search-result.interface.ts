@@ -1,4 +1,4 @@
-import { ISearchItem } from '../../companents/search-item/search-item.interface';
+import { ISearchItem } from './search-item.interface';
 
 interface IPageInfo {
   totalResults: number;

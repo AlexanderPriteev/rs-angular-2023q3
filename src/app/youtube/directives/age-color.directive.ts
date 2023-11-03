@@ -6,8 +6,9 @@ import {
 @Directive({
   selector: '[appAgeColor]'
 })
-export class SearchItemDirective implements AfterViewInit {
+export class AgeColorDirective implements AfterViewInit {
   @Input() createdDate = '';
+  @Input() cssClass = '';
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit() {
@@ -17,11 +18,11 @@ export class SearchItemDirective implements AfterViewInit {
     const timeDifferenceInDays = (currentDate - itemDate) / (1000 * 3600 * 24);
 
     if (timeDifferenceInDays > 180) {
-      addClass('search-item--older');
+      addClass(`${this.cssClass}--older`);
     } else if (timeDifferenceInDays >= 30 && timeDifferenceInDays <= 180) {
-      addClass('search-item--old');
+      addClass(`${this.cssClass}--old`);
     } else if (timeDifferenceInDays >= 7 && timeDifferenceInDays < 30) {
-      addClass('search-item--normal');
+      addClass(`${this.cssClass}--normal`);
     }
   }
 }

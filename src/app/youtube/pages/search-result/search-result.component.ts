@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { SearchService } from '../../../core/companents/header/search/search.service';
 import { SortService } from '../../../core/companents/header/sort/sort.service';
-import { ISearchResults } from './search-result.interface';
-import { SearchResultService } from './search-result.service';
+import { ISearchResults } from '../../interfaces/search-result.interface';
+import { ResultsService } from '../../services/results.service';
 
 @Component({
   selector: 'app-search-result',
@@ -17,7 +17,7 @@ export class SearchResultComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private sortService: SortService,
-    private searchResultService: SearchResultService
+    private searchResultService: ResultsService
   ) {}
 
   ngOnInit(): void {

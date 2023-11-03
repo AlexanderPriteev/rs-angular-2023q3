@@ -30,21 +30,24 @@
       background-color: $cyan;
     }
     &--older{
-      border-color: $red;
+      background-color: $red;
+      box-shadow: .2rem 0 .4rem 0 $red;
       &:hover {
         box-shadow: 0 0 0 0 $yellow;
         background-color: $red-light;
       }
     }
     &--old{
-      border-color: $yellow;
+      background-color: $yellow;
+      box-shadow: .2rem 0 .4rem 0 $yellow;
       &:hover {
         box-shadow: 0 0 0 0 $yellow;
         background-color: $yellow-yellow;
       }
     }
     &--normal{
-      border-color: $green;
+      background-color: $green;
+      box-shadow: .2rem 0 .4rem 0 $green;
       &:hover {
         box-shadow: 0 0 0 0 $green;
         background-color: $green-light;
@@ -101,6 +104,7 @@
   &__date{
     line-height: 3.4rem;
     color: $grey-text-3;
+    white-space: nowrap;
   }
   &__wrapper{
     display: flex;
