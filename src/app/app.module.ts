@@ -15,7 +15,6 @@ import { YoutubeModule } from './youtube/models/youtube.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-
     AuthModule,
     YoutubeModule,
   ],
