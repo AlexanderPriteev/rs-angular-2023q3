@@ -10,6 +10,9 @@ html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  /* TODO: need add responsive */
+  min-width: 1100px;
 }
 .main{
   display: flex;
