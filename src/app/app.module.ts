@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
-import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/models/auth.module';
+import { CoreModule } from './core/modules/core.module';
 import { YoutubeModule } from './youtube/models/youtube.module';
 
 @NgModule({

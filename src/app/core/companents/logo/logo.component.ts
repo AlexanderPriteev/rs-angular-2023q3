@@ -10,9 +10,9 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   template: `
-    <a [routerLink]="['/']" class="logo">
-      <img src="../../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
-    </a>
+      <a [routerLink]="['/']" class="logo">
+          <img src="../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
+      </a>
   `,
   styleUrls: ['./logo.component.scss']
 })

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { HeaderModule } from './companents/header/header.module';
-import { AppRoutesModule } from './companents/routes/routes.module';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HeaderModule } from './header.module';
+import { AppRoutesModule } from './routes.module';
+import { NotFoundComponent } from '../pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
