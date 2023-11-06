@@ -10,6 +10,17 @@
   align-items: center;
   gap: 2rem;
   font-size: 1.2rem;
+  @media (max-width: 910px) {
+    max-width: 62rem;
+    padding: 1rem 1.5rem;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding-top: 0;
+    gap: .8rem;
+    align-items: flex-start;
+    max-width: 37rem;
+  }
   &__title{
     color: $grey-text;
   }

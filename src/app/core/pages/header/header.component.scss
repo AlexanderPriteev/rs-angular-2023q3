@@ -11,6 +11,14 @@
     width: 100%;
     max-width: 120rem;
     margin: 0 auto;
+    @media (max-width: 910px) {
+      padding: 1.5rem;
+    }
+    @media (max-width: 767px) {
+      flex-direction: column-reverse;
+      gap: 1rem;
+      align-items: flex-end;
+    }
   }
   &__main{
     display: flex;
