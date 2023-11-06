@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { NotFoundComponent } from '../pages/not-found/not-found.component';
 import { HeaderModule } from './header.module';
+import { LoggerModule } from './logger.module';
 import { AppRoutesModule } from './routes.module';
 
 @NgModule({
@@ -12,12 +13,14 @@ import { AppRoutesModule } from './routes.module';
   imports: [
     CommonModule,
     HeaderModule,
-    AppRoutesModule
+    AppRoutesModule,
+    LoggerModule
   ],
   exports: [
     AppRoutesModule,
     HeaderModule,
-    NotFoundComponent
+    NotFoundComponent,
+    LoggerModule
   ]
 })
 export class CoreModule { }

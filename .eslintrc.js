@@ -63,7 +63,11 @@ module.exports = {
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "no-console": [
+          "warn",
+          { "allow": ["error", "log"] }
+        ],
       }
     },
     {
