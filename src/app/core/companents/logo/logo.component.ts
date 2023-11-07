@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   ],
   template: `
       <a [routerLink]="['/']" class="logo">
-          <img src="../../../../assets/images/png/logo.png" alt="logo" class="logo__img">
+          <img src="assets/images/png/logo.png" alt="logo" class="logo__img">
       </a>
   `,
   styleUrls: ['./logo.component.scss']

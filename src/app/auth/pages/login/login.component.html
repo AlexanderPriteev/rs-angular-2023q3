@@ -3,12 +3,12 @@
     <h2 class="form__title">Login</h2>
     <div class="form__wrapper">
       <div class="field">
-        <span class="field__label">login</span>
-        <input type="text" class="field__input" [(ngModel)]="username" name="username">
+        <label class="field__label" for="username">login</label>
+        <input type="text" class="field__input" [(ngModel)]="username" name="username" id="username">
       </div>
       <div class="field">
-        <span class="field__label">password</span>
-        <input type="password" class="field__input" [(ngModel)]="password" name="password">
+        <label class="field__label" for="password">password</label>
+        <input type="password" class="field__input" [(ngModel)]="password" name="password" id="password">
       </div>
     </div>
     <div class="form__btn-wrapper">

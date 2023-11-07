@@ -8,5 +8,5 @@ import { ISearchItem } from '../../interfaces/search-item.interface';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
-  @Input() searchItem!: ISearchItem;
+  @Input() searchItem: ISearchItem = {} as ISearchItem;
 }

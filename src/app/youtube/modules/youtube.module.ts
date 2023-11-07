@@ -20,13 +20,7 @@ import { SearchFilterPipe } from '../pipes/search-filter.pipe';
   imports: [
     CommonModule,
     RouterModule,
-    ButtonModule,
-    // SearchResultModule
-  ],
-  exports: [
-    ItemPageComponent,
-    SearchResultComponent,
-    SearchItemComponent
+    ButtonModule
   ]
 })
 export class YoutubeModule { }
