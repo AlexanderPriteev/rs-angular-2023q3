@@ -50,14 +50,21 @@
     color: $grey-text-3;
     padding-left: .6rem;
   }
+  &__error{
+    color: $red;
+  }
   &__input{
     width: 100%;
     box-sizing: border-box;
+    border: .1rem solid transparent;
     padding: 0 .9rem;
     height: 3.7rem;
     line-height: 1;
     font-size: 1rem;
     color: $black;
     background-color: $grey-light;
+    &.error{
+      border-color: $red;
+    }
   }
 }
