@@ -22,7 +22,6 @@ export class CreateCardComponent {
     dateCreation: new FormControl('', [Validators.required, dateValidate()]),
     tags: this.tags
   });
-
   errorValue: { [k: string]: string | string[] } = {
     title: '',
     description: '',
@@ -40,6 +39,39 @@ export class CreateCardComponent {
     tags: 'tag'
   };
 
+  setErrorLabel = (
+    isValid: boolean,
+    errors: ValidationErrors | null,
+    key: string,
+    index: number | null = null
+  ): boolean => {
+    let [value, result] = ['', isValid];
+    if (errors) {
+      result = false;
+      switch (Object.keys(errors)[0]) {
+        case 'required':
+          value = `Please enter a ${this.errorTitle[key]}`;
+          break;
+        case 'minlength':
+          value = `The ${this.errorTitle[key]} is too short`;
+          break;
+        case 'maxlength':
+          value = `The ${this.errorTitle[key]} is too long`;
+          break;
+        default:
+          value = `The ${this.errorTitle[key]} is invalid`;
+      }
+    } else {
+      value = '';
+    }
+    if (typeof index === 'number') {
+      (this.errorValue[key] as string[])[index] = value;
+    } else {
+      this.errorValue[key] = value;
+    }
+    return result;
+  };
+
   reset(): void {
     this.createForm.reset();
     Object.keys(this.errorValue).forEach((key) => {
@@ -53,41 +85,14 @@ export class CreateCardComponent {
 
   create(): void {
     let isCreate = true;
-    const setErrorLabel = (errors: ValidationErrors | null, key: string, index: number | null = null): void => {
-      let value = '';
-      if (errors) {
-        isCreate = false;
-        switch (Object.keys(errors)[0]) {
-          case 'required':
-            value = `Please enter a ${this.errorTitle[key]}`;
-            break;
-          case 'minlength':
-            value = `The ${this.errorTitle[key]} is too short`;
-            break;
-          case 'maxlength':
-            value = `The ${this.errorTitle[key]} is too long`;
-            break;
-          default:
-            value = `The ${this.errorTitle[key]} is invalid`;
-        }
-      } else {
-        value = '';
-      }
-      if (typeof index === 'number') {
-        (this.errorValue[key] as string[])[index] = value;
-      } else {
-        this.errorValue[key] = value;
-      }
-    };
-
     Object.keys(this.createForm.controls).forEach((key) => {
       if (key === 'tags') {
         this.tags.controls.forEach((tag, index) => {
-          setErrorLabel(tag.errors, key, index);
+          isCreate = this.setErrorLabel(isCreate, tag.errors, key, index);
         });
       } else {
         const { errors } = this.createForm.controls[key];
-        setErrorLabel(errors, key);
+        isCreate = this.setErrorLabel(isCreate, errors, key);
       }
     });
     if (isCreate) {
