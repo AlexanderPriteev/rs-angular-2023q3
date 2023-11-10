@@ -21,6 +21,15 @@
     background-color: $cyan;
   }
 
+  &--alert{
+    background-color: $red;
+    box-shadow: .2rem 0 .4rem 0 $red;
+    &:hover {
+      box-shadow: 0 0 0 0 $red-light;
+      background-color: $red-light;
+    }
+  }
+
   &:disabled {
     pointer-events: none;
     box-shadow: none;

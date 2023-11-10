@@ -1,0 +1,92 @@
+<div class="form-wrapper">
+  <div class="form" [formGroup]="createForm">
+    <h2 class="form__title">Create new card</h2>
+    <div class="form__wrapper">
+      <div class="field">
+        <label class="field__label" for="title">Title</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': errorValue['title']}"
+               formControlName="title"
+               name="title"
+               id="title">
+        <span class="field__error" *ngIf="errorValue['title']">{{ errorValue['title'] }}</span>
+      </div>
+      <div class="field">
+        <label class="field__label" for="description">Description</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': errorValue['description']}"
+               formControlName="description"
+               name="description"
+               id="description">
+        <span class="field__error" *ngIf="errorValue['description']">{{ errorValue['description'] }}</span>
+      </div>
+      <div class="field">
+        <label class="field__label" for="img">Link img</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': errorValue['img']}"
+               formControlName="img"
+               name="img"
+               id="img">
+        <span class="field__error" *ngIf="errorValue['img']">{{ errorValue['img'] }}</span>
+      </div>
+      <div class="field">
+        <label class="field__label" for="video">Link video</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': errorValue['video']}"
+               formControlName="video"
+               name="video"
+               id="video">
+        <span class="field__error" *ngIf="errorValue['video']">{{ errorValue['video'] }}</span>
+      </div>
+      <div class="field">
+        <label class="field__label" for="dateCreation">Creation date</label>
+        <input type="date"
+               class="field__input"
+               [ngClass]="{'error': errorValue['dateCreation']}"
+               formControlName="dateCreation"
+               name="dateCreation"
+               id="dateCreation">
+        <span class="field__error" *ngIf="errorValue['dateCreation']">{{ errorValue['dateCreation'] }}</span>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <label class="field__label">Tags</label>
+      <div  formArrayName="tags" *ngFor="let tag of tags.controls; let i = index" class="field-btn-wrapper">
+        <div class="field">
+          <input
+            type="text"
+            class="field__input"
+            [formControlName]="i"
+            [ngClass]="{'error': errorValue['tags'][i]}"
+          />
+          <span class="field__error" *ngIf="errorValue['tags'][i]"> {{ errorValue['tags'][i] }} </span>
+        </div>
+        <button type="button"
+                *ngIf="!i" (click)="addTagInput()"
+                class="field__btn field__btn--add"
+                [attr.disabled]="tags.length > 4 ? true : null">
+          <img src="assets/images/svg/plus.svg" alt="" class="img img--contain">
+        </button>
+        <button type="button"
+                *ngIf="i" (click)="removeTagInput(i)"
+                class="field__btn field__btn--remove">
+          <img src="assets/images/svg/remove.svg" alt="" class="img img--contain">
+        </button>
+      </div>
+
+    </div>
+
+
+    <div class="form__btn-wrapper">
+      <app-alert-button (click)="reset()">Reset</app-alert-button>
+      <app-button (click)="create()">Create</app-button>
+    </div>
+  </div>
+</div>
+

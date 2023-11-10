@@ -18,10 +18,11 @@ export class LoginService {
   }
 
   logout(): void {
-    if (!localStorage.getItem(this.authTokenKey)) return;
-    const username = localStorage.getItem(this.authTokenKey)?.split(':')[0];
-    localStorage.removeItem(this.authTokenKey);
-    this.logger.logMessage(`${username} has logged out.`);
+    if (localStorage.getItem(this.authTokenKey)) {
+      const username = localStorage.getItem(this.authTokenKey)?.split(':')[0];
+      localStorage.removeItem(this.authTokenKey);
+      this.logger.logMessage(`${username} has logged out.`);
+    }
     this.router.navigate(['/login']);
   }
 

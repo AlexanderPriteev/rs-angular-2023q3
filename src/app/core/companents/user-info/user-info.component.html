@@ -1,6 +1,10 @@
-<div class="user" title="logout" (click)="logout()">
+<div class="user">
   <span class="user__name">Your Name</span>
   <div class="user__ava">
     <img src="assets/images/svg/user.svg" alt="" class="img img--cover">
+  </div>
+  <div class="user__menu">
+    <span class="user__menu-link" [routerLink]="['/create']">Create new item</span>
+    <span class="user__menu-link" (click)="logout()">Logout</span>
   </div>
 </div>

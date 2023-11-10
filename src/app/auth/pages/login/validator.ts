@@ -11,7 +11,7 @@ export function checkPass(str: string): string[] {
   if (!/(?=.*[a-zA-Z])(?=.*\d)/.test(str)) {
     result.push('a mixture of letters and numbers');
   }
-  if (!/(?=.*[!@#?\]\[])/.test(str)) {
+  if (!/(?=.*[!@#?$%^&*()_+{}[\]:;<>,.?~\\-])/.test(str)) {
     result.push('inclusion of at least one special character, e.g., ! @ # ? ]');
   }
   return result;
