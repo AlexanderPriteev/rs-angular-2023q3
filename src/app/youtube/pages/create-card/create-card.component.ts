@@ -43,7 +43,8 @@ export class CreateCardComponent {
   reset(): void {
     this.createForm.reset();
     Object.keys(this.errorValue).forEach((key) => {
-      this.errorValue[key] = '';
+      if (Array.isArray(this.errorValue[key])) this.errorValue[key] = [''];
+      else this.errorValue[key] = '';
     });
     for (let index = this.tags.length - 1; index > 0; index -= 1) {
       this.tags.removeAt(index);
