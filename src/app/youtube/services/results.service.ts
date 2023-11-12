@@ -4,15 +4,14 @@ import {
   forkJoin, mergeMap, Observable, of
 } from 'rxjs';
 
-import { API_KEY, API_URL } from '../../api/api-config';
 import { ISearchResults } from '../interfaces/search-result.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultsService {
-  private apiUrlSearch = `${API_URL}search`;
-  private apiUrlItem = `${API_URL}videos`;
+  private apiUrlSearch = 'search';
+  private apiUrlItem = 'videos';
   private maxItems = 50;
 
   constructor(private http: HttpClient) {}
@@ -34,7 +33,6 @@ export class ResultsService {
 
   getItemById(id: string): Observable<ISearchResults> {
     const params = new HttpParams()
-      .set('key', API_KEY)
       .set('part', 'snippet,statistics')
       .set('id', id);
     return this.http.get<ISearchResults>(this.apiUrlItem, { params });
@@ -42,7 +40,6 @@ export class ResultsService {
 
   getSearchResults(query: string): Observable<ISearchResults> {
     const params = new HttpParams()
-      .set('key', API_KEY)
       .set('part', 'snippet')
       .set('type', 'video')
       .set('q', query)

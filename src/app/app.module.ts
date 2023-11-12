@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { ApiInterceptorModule } from './api/modules/api-interceptor/api-interceptor.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/models/auth.module';
 import { CoreModule } from './core/modules/core.module';
@@ -13,6 +14,7 @@ import { YoutubeModule } from './youtube/modules/youtube.module';
   imports: [
     BrowserModule,
     CoreModule,
+    ApiInterceptorModule,
     AuthModule,
     YoutubeModule,
   ],
