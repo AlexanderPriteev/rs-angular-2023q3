@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 import { LoggerService } from '../../core/services/logger/logger.service';
 
@@ -8,6 +9,9 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 })
 export class LoginService {
   private authTokenKey = 'authToken';
+  private localUser = localStorage.getItem(this.authTokenKey)?.split(':')[0] || '';
+  currentUser = new BehaviorSubject<string>(this.localUser);
+
   constructor(private router: Router, private logger: LoggerService) {
   }
 
@@ -15,18 +19,17 @@ export class LoginService {
     localStorage.setItem(this.authTokenKey, `${username}:${password}`);
     this.logger.logMessage(`${username} has logged in.`);
     this.router.navigate(['/']);
+    this.currentUser.next(username);
   }
 
   logout(): void {
-    if (localStorage.getItem(this.authTokenKey)) {
-      const username = localStorage.getItem(this.authTokenKey)?.split(':')[0];
-      localStorage.removeItem(this.authTokenKey);
-      this.logger.logMessage(`${username} has logged out.`);
-    }
-    this.router.navigate(['/login']);
+    if (!this.isLoggedIn()) return;
+    localStorage.removeItem(this.authTokenKey);
+    this.logger.logMessage(`${this.localUser} has logged out.`);
+    this.currentUser.next('');
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.authTokenKey);
+    return !!this.currentUser.value;
   }
 }

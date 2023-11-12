@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { LoginService } from '../../../auth/services/login.service';
 
@@ -7,8 +7,15 @@ import { LoginService } from '../../../auth/services/login.service';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit {
+  userName = '';
   constructor(private loginService: LoginService) {}
+
+  ngOnInit(): void {
+    this.loginService.currentUser.subscribe((currentUser: string) => {
+      this.userName = currentUser;
+    });
+  }
 
   logout(): void {
     this.loginService.logout();

@@ -1,10 +1,11 @@
 <div class="user">
-  <span class="user__name">Your Name</span>
+  <span class="user__name">{{userName || 'Your Name'}}</span>
   <div class="user__ava">
     <img src="assets/images/svg/user.svg" alt="" class="img img--cover">
   </div>
   <div class="user__menu">
     <span class="user__menu-link" [routerLink]="['/create']">Create new item</span>
-    <span class="user__menu-link" (click)="logout()">Logout</span>
+    <span class="user__menu-link" *ngIf="!userName" [routerLink]="['/login']">Login</span>
+    <span class="user__menu-link" *ngIf="userName" (click)="logout()">Logout</span>
   </div>
 </div>
