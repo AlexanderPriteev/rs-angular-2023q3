@@ -4,8 +4,8 @@ import {
   forkJoin, mergeMap, Observable, of
 } from 'rxjs';
 
+import { MAX_ITEMS } from '../../api/api-config';
 import { ISearchResults } from '../interfaces/search-result.interface';
-import {MAX_ITEMS} from "../../api/api-config";
 
 @Injectable({
   providedIn: 'root',

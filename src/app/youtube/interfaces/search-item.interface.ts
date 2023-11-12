@@ -31,7 +31,7 @@ interface IItemSnippet {
   localized?: IItemLocalized;
   defaultAudioLanguage?: string;
 }
-interface IItemStatistics {
+export interface IItemStatistics {
   viewCount?: string;
   likeCount?: string;
   dislikeCount?: string;

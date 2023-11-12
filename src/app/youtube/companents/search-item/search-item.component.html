@@ -9,30 +9,30 @@
       </picture>
     </div>
   </div>
-  <div class="search-item__statistics" *ngIf="searchItem.statistics">
+  <div class="search-item__statistics" *ngIf="formatStatistics">
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.viewCount  || 0 }}</span>
+      <span class="statistic-item__value">{{ formatStatistics.viewCount  || 0 }}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.likeCount || 0}}</span>
+      <span class="statistic-item__value">{{ formatStatistics.likeCount || 0}}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.dislikeCount || 0}}</span>
+      <span class="statistic-item__value">{{ formatStatistics.dislikeCount || 0}}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.commentCount || 0 }}</span>
+      <span class="statistic-item__value">{{ formatStatistics.commentCount || 0 }}</span>
     </div>
   </div>
   <h3 class="search-item__title" [title]="searchItem.snippet.title">{{ searchItem.snippet.title }}</h3>

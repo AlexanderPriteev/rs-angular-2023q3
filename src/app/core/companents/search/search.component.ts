@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 
 import { SearchService } from '../../services/search.service';
-import {debounceTime, distinctUntilChanged, Subject} from "rxjs";
 
 @Component({
   selector: 'app-search',
@@ -18,15 +18,15 @@ export class SearchComponent {
 
   private setupSearch(): void {
     this.searchItem
-      .pipe(debounceTime(300))
+      .pipe(debounceTime(500))
       .subscribe((value) => {
-        if(value.length > 2) {
+        if (value.length > 2) {
           this.searchService.triggerSearch(value);
         }
       });
   }
 
   onSearch(): void {
-    this.searchItem.next(this.searchTerm)
+    this.searchItem.next(this.searchTerm);
   }
 }
