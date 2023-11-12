@@ -11,7 +11,7 @@ import { ResultsService } from '../../services/results.service';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit {
-  searchResults: ISearchResults | undefined;
+  searchResults: ISearchResults | null = null;
   filterTerm = '';
 
   constructor(
@@ -23,7 +23,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit(): void {
     this.searchService.searchTrigger$.subscribe((searchTriggered) => {
       if (searchTriggered) {
-        this.searchResultService.getSearchResults().then((data) => {
+        this.searchResultService.getSearchResults(searchTriggered).subscribe((data) => {
           this.searchResults = data;
         });
       }
@@ -40,7 +40,12 @@ export class SearchResultComponent implements OnInit {
             second = new Date(b.snippet.publishedAt).getTime();
             break;
           case 'count':
-            [first, second] = [+a.statistics.viewCount, +b.statistics.viewCount];
+            if (a.statistics && b.statistics) {
+              [first, second] = [Number(a.statistics.viewCount), Number(b.statistics.viewCount)];
+            } else {
+              [first, second] = [0, 0];
+            }
+
             break;
           default: [first, second] = [0, 0];
         }

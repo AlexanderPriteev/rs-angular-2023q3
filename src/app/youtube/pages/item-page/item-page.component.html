@@ -6,7 +6,7 @@
     </button>
     <div class="item__inner">
       <div class="item__image">
-        <img [src]="item.snippet.thumbnails.standard.url" [alt]="item.snippet.title" class="img img--cover">
+        <img [src]="item.snippet.thumbnails.medium.url" [alt]="item.snippet.title" class="img img--cover">
       </div>
       <div class="item__about"
            appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__about'">
@@ -18,30 +18,30 @@
           <p class="item__subtitle">Description:</p>
           <p class="item__description">{{ item.snippet.description }}</p>
         </div>
-        <div class="item__stats-wrapper">
+        <div class="item__stats-wrapper" *ngIf="item.statistics">
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
             </div>
-            <span class="item__stats-value">{{ item.statistics.viewCount }}</span>
+            <span class="item__stats-value">{{ item.statistics.viewCount || 0 }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
             </div>
-            <span class="item__stats-value">{{ item.statistics.likeCount }}</span>
+            <span class="item__stats-value">{{ item.statistics.likeCount || 0 }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
             </div>
-            <span class="item__stats-value">{{ item.statistics.dislikeCount }}</span>
+            <span class="item__stats-value">{{ item.statistics.dislikeCount || 0 }}</span>
           </div>
           <div class="item__stats">
             <div class="item__stats-image">
               <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
             </div>
-            <span class="item__stats-value">{{ item.statistics.commentCount }}</span>
+            <span class="item__stats-value">{{ item.statistics.commentCount || 0 }}</span>
           </div>
         </div>
       </div>

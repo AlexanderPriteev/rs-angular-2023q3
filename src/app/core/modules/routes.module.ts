@@ -10,7 +10,7 @@ import { loginGuard } from '../guards/login.guard';
 import { NotFoundComponent } from '../pages/not-found/not-found.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: SearchResultComponent, canActivate: [authGuard] },
+  { path: '', component: SearchResultComponent },
   { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'create', component: CreateCardComponent },
   { path: 'item/:id', component: ItemPageComponent, canActivate: [authGuard] },

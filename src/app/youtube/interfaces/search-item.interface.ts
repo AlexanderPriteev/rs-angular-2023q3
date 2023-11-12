@@ -8,8 +8,8 @@ interface IItemThumbnails {
   default: IImageSize;
   medium: IImageSize;
   high: IImageSize;
-  standard: IImageSize;
-  maxres: IImageSize;
+  standard?: IImageSize;
+  maxres?: IImageSize;
 }
 
 interface IItemLocalized {
@@ -19,29 +19,35 @@ interface IItemLocalized {
 
 interface IItemSnippet {
   publishedAt: string;
+  publishedTime: string;
   channelId: string;
   title: string;
   description: string;
   thumbnails: IItemThumbnails;
   channelTitle: string;
-  tags: string[];
-  categoryId: string;
+  tags?: string[];
+  categoryId?: string;
   liveBroadcastContent: string;
-  localized: IItemLocalized;
-  defaultAudioLanguage: string;
+  localized?: IItemLocalized;
+  defaultAudioLanguage?: string;
 }
 interface IItemStatistics {
-  viewCount: string;
-  likeCount: string;
-  dislikeCount: string;
-  favoriteCount: string;
-  commentCount: string;
+  viewCount?: string;
+  likeCount?: string;
+  dislikeCount?: string;
+  favoriteCount?: string;
+  commentCount?: string;
+}
+
+interface IItemId {
+  kind: string;
+  videoId: string;
 }
 
 export interface ISearchItem {
   kind: string;
   etag: string;
-  id: string;
+  id: IItemId;
   snippet: IItemSnippet;
-  statistics: IItemStatistics;
+  statistics?: IItemStatistics;
 }

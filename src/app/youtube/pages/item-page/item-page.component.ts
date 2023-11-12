@@ -22,15 +22,18 @@ export class ItemPageComponent implements OnInit {
   toNotFound() {
     this.router.navigate(['/not-found']);
   }
-  ngOnInit(): void {
+
+  async ngOnInit(): Promise<void> {
     this.route.params.subscribe(async (params) => {
       const { id } = params;
       try {
-        const data: ISearchItem | null = await this.resultService.getItemById(id);
-        if (data) {
-          this.item = data;
+        const data = await this.resultService.getItemById(id).toPromise();
+        if (data !== undefined) {
+          [this.item] = data.items;
           this.item.snippet.publishedAt = format(new Date(this.item.snippet.publishedAt), 'EEEE, MMMM dd, yyyy');
-        } else this.toNotFound();
+        } else {
+          this.toNotFound();
+        }
       } catch {
         this.toNotFound();
       }

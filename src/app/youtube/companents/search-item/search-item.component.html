@@ -1,6 +1,6 @@
 <div class="search-item"
      appAgeColor [createdDate]="searchItem.snippet.publishedAt" [cssClass]="'search-item'"
-     [id]="searchItem.id">
+     [id]="searchItem.id.videoId">
   <div class="search-item__image-wrapper">
     <div class="search-item__image">
       <picture>
@@ -9,34 +9,34 @@
       </picture>
     </div>
   </div>
-  <div class="search-item__statistics">
+  <div class="search-item__statistics" *ngIf="searchItem.statistics">
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.viewCount }}</span>
+      <span class="statistic-item__value">{{ searchItem.statistics.viewCount  || 0 }}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.likeCount }}</span>
+      <span class="statistic-item__value">{{ searchItem.statistics.likeCount || 0}}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.dislikeCount }}</span>
+      <span class="statistic-item__value">{{ searchItem.statistics.dislikeCount || 0}}</span>
     </div>
     <div class="statistic-item">
       <div class="statistic-item__image">
         <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
       </div>
-      <span class="statistic-item__value">{{ searchItem.statistics.commentCount }}</span>
+      <span class="statistic-item__value">{{ searchItem.statistics.commentCount || 0 }}</span>
     </div>
   </div>
   <h3 class="search-item__title" [title]="searchItem.snippet.title">{{ searchItem.snippet.title }}</h3>
   <div class="search-item__btn-wrapper">
-    <app-button [routerLink]="['/item', searchItem.id]">more..</app-button>
+    <app-button [routerLink]="['/item', searchItem.id.videoId]">more..</app-button>
   </div>
 </div>
