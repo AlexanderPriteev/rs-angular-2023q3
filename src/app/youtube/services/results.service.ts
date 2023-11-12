@@ -5,6 +5,7 @@ import {
 } from 'rxjs';
 
 import { ISearchResults } from '../interfaces/search-result.interface';
+import {MAX_ITEMS} from "../../api/api-config";
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { ISearchResults } from '../interfaces/search-result.interface';
 export class ResultsService {
   private apiUrlSearch = 'search';
   private apiUrlItem = 'videos';
-  private maxItems = 50;
+  private maxItems = MAX_ITEMS;
 
   constructor(private http: HttpClient) {}
 

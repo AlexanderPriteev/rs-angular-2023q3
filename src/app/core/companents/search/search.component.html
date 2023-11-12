@@ -1,8 +1,8 @@
 <div class="search">
-  <button type="button" class="search__btn" (click)="onSearch()">search</button>
   <input type="text"
          placeholder="What are you want to find out?"
          class="search__field"
          aria-label=""
-         [(ngModel)]="searchTerm">
+         [(ngModel)]="searchTerm"
+         (ngModelChange)="onSearch()">
 </div>
