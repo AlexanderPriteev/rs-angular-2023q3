@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { ApiInterceptor } from '../../services/api-interceptor.service';
+import { ApiInterceptor } from '../services/api-interceptor.service';
 
 @NgModule({
   providers: [

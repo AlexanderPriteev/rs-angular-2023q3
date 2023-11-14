@@ -82,3 +82,32 @@
     font-size: 1rem;
   }
 }
+
+.favorite-btn{
+  position: absolute;
+  z-index: 1;
+  right: .5rem;
+  top: .5rem;
+  display: inline-block;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-color: rgba($grey-light, .7);
+  border-radius: .4rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: .3rem;
+  transition: background-color .2s linear;
+  &:hover{
+    background-color: $white;
+  }
+  &__svg{
+    fill: none;
+    &-path{
+      stroke: $blue;
+      stroke-width: 2;
+      &.checked{
+        fill: $blue;
+      }
+    }
+  }
+}

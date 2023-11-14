@@ -3,6 +3,9 @@ import {
 } from '@angular/core';
 
 import { IItemStatistics, ISearchItem } from '../../interfaces/search-item.interface';
+import { Store } from "@ngrx/store";
+import {addToFavorites, removeFromFavorites} from "../../../redux/actions/favorite.actions";
+import {AppState} from "../../../redux/interfaces/app-store.interface";
 
 @Component({
   selector: 'app-search-item',
@@ -12,11 +15,26 @@ import { IItemStatistics, ISearchItem } from '../../interfaces/search-item.inter
 export class SearchItemComponent implements OnChanges {
   @Input() searchItem: ISearchItem = {} as ISearchItem;
   formatStatistics: IItemStatistics | null = null;
+  isFavorite: boolean = false;
+
+
+  constructor(private store: Store<AppState>) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchItem']) {
       this.formatStatistics = this.transformStatistics();
     }
+  }
+
+  toggleFavorite(): void {
+    if (this.isFavorite) {
+      this.store.dispatch(removeFromFavorites({ videoId: this.searchItem.id.videoId }));
+    } else {
+      this.store.dispatch(addToFavorites({ searchItem: this.searchItem }));
+    }
+    this.isFavorite = !this.isFavorite
+    console.log('test')
+
   }
 
   private transformStatistics(): IItemStatistics | null {
