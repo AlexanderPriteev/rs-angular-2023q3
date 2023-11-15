@@ -7,7 +7,9 @@
         <img [src]="searchItem.snippet.thumbnails.medium.url" [alt]="searchItem.snippet.title" class="img img--cover">
       </picture>
     </div>
-    <button type="button" class="favorite-btn" (click)="toggleFavorite()">
+    <button type="button"
+            class="favorite-btn"
+            (click)="toggleFavorite()" *ngIf="isYoutubeVideo">
       <svg viewBox="0 0 32 32" class="favorite-btn__svg img img--contain">
         <path d="M8.85751 26.9074L10.605 19.2393L10.7372 18.6593L10.2906 18.2664L4.41287 13.0939L12.1678
                    12.4106L12.7706 12.3575L13.0032 11.7989L16 4.60152L18.9968 11.7989L19.2294 12.3575L19.8322

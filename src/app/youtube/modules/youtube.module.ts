@@ -20,6 +20,9 @@ import { SearchFilterPipe } from '../pipes/search-filter.pipe';
     SearchFilterPipe,
     AgeColorDirective,
   ],
+  exports: [
+    SearchItemComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,

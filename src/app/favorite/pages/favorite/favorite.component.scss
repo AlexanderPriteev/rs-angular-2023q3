@@ -1,0 +1,32 @@
+.favorite-list{
+  width: 100%;
+  max-width: 120rem;
+  box-sizing: border-box;
+  padding: 3rem;
+  gap: 2.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  @media (max-width: 910px) {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+}
+.favorite-item-wrapper{
+  width: calc(25% - 2.1rem);
+  display: flex;
+  @media (max-width: 1140px) {
+    width: calc(100% / 3 - 1.9rem);
+  }
+  @media (max-width: 910px) {
+    width: calc(100% / 3 - 1rem);
+  }
+  @media (max-width: 840px) {
+    width: calc(50% - .75rem);
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+    max-width: 38rem;
+    margin: 0 auto;
+  }
+}

@@ -5,6 +5,7 @@
   </div>
   <div class="user__menu">
     <span class="user__menu-link" [routerLink]="['/create']">Create new item</span>
+    <span class="user__menu-link" [routerLink]="['/favorite']">My favorites</span>
     <span class="user__menu-link" *ngIf="!userName" [routerLink]="['/login']">Login</span>
     <span class="user__menu-link" *ngIf="userName" (click)="logout()">Logout</span>
   </div>

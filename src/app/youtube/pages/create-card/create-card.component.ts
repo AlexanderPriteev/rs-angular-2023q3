@@ -4,6 +4,10 @@ import {
 } from '@angular/forms';
 
 import { dateValidate } from './validator';
+import {ISearchItem} from "../../interfaces/search-item.interface";
+import {addToFavorites} from "../../../redux/actions/favorite.actions";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../redux/interfaces/app-store.interface";
 
 @Component({
   selector: 'app-create-card',
@@ -72,6 +76,8 @@ export class CreateCardComponent {
     return result;
   };
 
+  constructor(private store: Store<AppState>) {}
+
   reset(): void {
     this.createForm.reset();
     Object.keys(this.errorValue).forEach((key) => {
@@ -96,7 +102,30 @@ export class CreateCardComponent {
       }
     });
     if (isCreate) {
-      console.log(`New card: ${JSON.stringify((this.createForm.value))}`);
+      const newCard: ISearchItem = {
+        kind: 'newItem',
+        etag: this.createForm.controls['video'].value,
+        id: {
+          kind: 'myVideo',
+          videoId: `id-${new Date().getTime()}`
+        },
+        snippet: {
+          title: this.createForm.controls['title'].value,
+          description: this.createForm.controls['description'].value || '',
+          publishedAt: `${new Date(this.createForm.controls['dateCreation'].value)}`,
+          publishedTime: `${new Date(this.createForm.controls['dateCreation'].value)}`,
+          tags: this.createForm.controls['tags'].value,
+          thumbnails: {
+            default: this.createForm.controls['img'].value,
+            medium: this.createForm.controls['img'].value,
+            high: this.createForm.controls['img'].value,
+          },
+          categoryId: '',
+          channelTitle: '',
+          liveBroadcastContent: 'none',
+        }
+      } as ISearchItem;
+      this.store.dispatch(addToFavorites({ searchItem: newCard }));
     }
   }
 

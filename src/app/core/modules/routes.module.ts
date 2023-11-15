@@ -8,11 +8,13 @@ import { SearchResultComponent } from '../../youtube/pages/search-result/search-
 import { authGuard } from '../guards/auth.guard';
 import { loginGuard } from '../guards/login.guard';
 import { NotFoundComponent } from '../pages/not-found/not-found.component';
+import {FavoriteComponent} from "../../favorite/pages/favorite/favorite.component";
 
 export const appRoutes: Routes = [
   { path: '', component: SearchResultComponent },
   { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'create', component: CreateCardComponent },
+  { path: 'favorite', component: FavoriteComponent },
   { path: 'item/:id', component: ItemPageComponent, canActivate: [authGuard] },
   { path: '**', component: NotFoundComponent, canActivate: [authGuard] },
 ];
