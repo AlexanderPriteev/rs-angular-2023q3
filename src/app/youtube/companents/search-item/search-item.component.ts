@@ -1,12 +1,12 @@
 import {
   Component, Input, OnChanges, SimpleChanges
 } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 
+import { addToFavorites, removeFromFavorites } from '../../../redux/actions/favorite.actions';
+import { AppState } from '../../../redux/interfaces/app-store.interface';
+import { selectFavoriteItems } from '../../../redux/selectors/favorite.selector';
 import { IItemStatistics, ISearchItem } from '../../interfaces/search-item.interface';
-import {select, Store} from "@ngrx/store";
-import {addToFavorites, removeFromFavorites} from "../../../redux/actions/favorite.actions";
-import {AppState} from "../../../redux/interfaces/app-store.interface";
-import {selectFavoriteItems} from "../../../redux/selectors/favorite.selector";
 
 @Component({
   selector: 'app-search-item',
@@ -16,9 +16,8 @@ import {selectFavoriteItems} from "../../../redux/selectors/favorite.selector";
 export class SearchItemComponent implements OnChanges {
   @Input() searchItem: ISearchItem = {} as ISearchItem;
   formatStatistics: IItemStatistics | null = null;
-  isFavorite: boolean = false;
-  isYoutubeVideo: boolean = false;
-
+  isFavorite = false;
+  isYoutubeVideo = false;
 
   constructor(private store: Store<AppState>) {}
 
@@ -42,7 +41,7 @@ export class SearchItemComponent implements OnChanges {
 
   private updateIsFavorite(): void {
     this.store.pipe(select(selectFavoriteItems)).subscribe((favoriteList: ISearchItem[]) => {
-      this.isFavorite = favoriteList.some(item => item.id.videoId === this.searchItem.id.videoId);
+      this.isFavorite = favoriteList.some((item) => item.id.videoId === this.searchItem.id.videoId);
     });
   }
 

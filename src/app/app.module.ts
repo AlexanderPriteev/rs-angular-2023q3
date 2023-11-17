@@ -5,10 +5,9 @@ import { ApiInterceptorModule } from './api/modules/api-interceptor.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/modules/auth.module';
 import { CoreModule } from './core/modules/core.module';
+import { FavoriteModule } from './favorite/modules/favorite/favorite.module';
+import { AppStoreModule } from './redux/modules/store.module';
 import { YoutubeModule } from './youtube/modules/youtube.module';
-import {AppStoreModule} from "./redux/modules/store.module";
-import {FavoriteModule} from "./favorite/modules/favorite/favorite.module";
-
 
 @NgModule({
   declarations: [
