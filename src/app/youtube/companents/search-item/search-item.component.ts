@@ -1,6 +1,7 @@
 import {
   Component, Input, OnChanges, SimpleChanges
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 import { addToFavorites, removeFromFavorites } from '../../../redux/actions/favorite.actions';
@@ -18,8 +19,9 @@ export class SearchItemComponent implements OnChanges {
   formatStatistics: IItemStatistics | null = null;
   isFavorite = false;
   isYoutubeVideo = false;
+  currenRoute = this.router.url;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchItem']) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormArray, FormControl, FormGroup, ValidationErrors, Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { addNewToFavorites } from '../../../redux/actions/favorite.actions';
@@ -79,7 +80,7 @@ export class CreateCardComponent implements OnInit {
     return result;
   };
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   reset(): void {
     this.createForm.reset();
@@ -129,6 +130,7 @@ export class CreateCardComponent implements OnInit {
         }
       } as ISearchItem;
       this.store.dispatch(addNewToFavorites({ searchItem: newCard }));
+      this.router.navigate(['/favorite']);
     }
   }
 

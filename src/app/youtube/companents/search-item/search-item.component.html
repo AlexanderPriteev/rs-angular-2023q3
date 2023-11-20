@@ -47,6 +47,6 @@
   </div>
   <h3 class="search-item__title" [title]="searchItem.snippet.title">{{ searchItem.snippet.title }}</h3>
   <div class="search-item__btn-wrapper">
-    <app-button [routerLink]="['/item', searchItem.id.videoId]">more..</app-button>
+    <app-button [routerLink]="['/item', searchItem.id.videoId, { currenRoute: currenRoute }]">more..</app-button>
   </div>
 </div>

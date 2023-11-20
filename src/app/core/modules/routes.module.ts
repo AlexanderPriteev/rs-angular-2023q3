@@ -15,7 +15,7 @@ export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'create', component: CreateCardComponent },
   { path: 'favorite', component: FavoriteComponent },
-  { path: 'item/:id', component: ItemPageComponent, canActivate: [authGuard] },
+  { path: 'item/:id', component: ItemPageComponent },
   { path: '**', component: NotFoundComponent, canActivate: [authGuard] },
 ];
 

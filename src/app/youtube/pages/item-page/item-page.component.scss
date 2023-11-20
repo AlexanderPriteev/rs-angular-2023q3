@@ -79,6 +79,7 @@
     background-color: $grey;
     @media (max-width: 1140px) {
       width: 100%;
+      min-height: 28vw;
     }
   }
   &__about{

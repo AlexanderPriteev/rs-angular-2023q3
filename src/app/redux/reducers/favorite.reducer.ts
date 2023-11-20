@@ -11,7 +11,7 @@ export const favoriteReducer = createReducer(
   on(addNewToFavorites, (state, { searchItem }) => [searchItem, ...state].sort((a:ISearchItem, b: ISearchItem) => {
     if (a.kind !== 'newItem') return 1;
     if (b.kind !== 'newItem') return -1;
-    return new Date(a.snippet.publishedTime).getTime() - new Date(a.snippet.publishedTime).getTime();
+    return new Date(a.snippet.publishedTime).getTime() - new Date(b.snippet.publishedTime).getTime();
   })),
   on(removeFromFavorites, (state, { videoId }) => state.filter((item) => item.id.videoId !== videoId))
 );

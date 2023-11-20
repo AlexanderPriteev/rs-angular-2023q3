@@ -13,7 +13,7 @@ import { ISearchItem } from '../../../youtube/interfaces/search-item.interface';
 export class FavoriteComponent implements OnInit {
   private maxItemsOnPage = 2;
   paginationNumber: number[] = [];
-  currentPage: number = 1;
+  currentPage = 1;
   favoriteList: ISearchItem[] = [] as ISearchItem[];
   favoritePage: ISearchItem[] = [] as ISearchItem[];
 
@@ -30,7 +30,7 @@ export class FavoriteComponent implements OnInit {
     });
   }
 
-  goToPage(index: number){
+  goToPage(index: number) {
     this.favoritePage = [...this.favoriteList]
       .slice((index - 1) * this.maxItemsOnPage, index * this.maxItemsOnPage);
     this.currentPage = index;

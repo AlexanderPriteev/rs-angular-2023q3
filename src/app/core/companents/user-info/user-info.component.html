@@ -4,6 +4,7 @@
     <img src="assets/images/svg/user.svg" alt="" class="img img--cover">
   </div>
   <div class="user__menu">
+    <span class="user__menu-link" [routerLink]="['/']">Main</span>
     <span class="user__menu-link" [routerLink]="['/create']">Create new item</span>
     <span class="user__menu-link" [routerLink]="['/favorite']">My favorites</span>
     <span class="user__menu-link" *ngIf="!userName" [routerLink]="['/login']">Login</span>
