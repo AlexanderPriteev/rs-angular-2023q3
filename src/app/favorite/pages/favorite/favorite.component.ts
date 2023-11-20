@@ -11,7 +11,7 @@ import { ISearchItem } from '../../../youtube/interfaces/search-item.interface';
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent implements OnInit {
-  private maxItemsOnPage = 2;
+  private maxItemsOnPage = 20;
   paginationNumber: number[] = [];
   currentPage = 1;
   favoriteList: ISearchItem[] = [] as ISearchItem[];

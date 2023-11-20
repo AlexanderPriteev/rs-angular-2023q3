@@ -9,7 +9,8 @@ import { filter } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   isSortVisible = false;
-  isMainRoute = this.router.url === '/';
+  isMainRoute = false;
+  currentURL = '';
 
   constructor(private router: Router) {
   }
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd)
     ).subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.currentURL =  event.url;
         this.isMainRoute = event.url === '/';
       }
     });

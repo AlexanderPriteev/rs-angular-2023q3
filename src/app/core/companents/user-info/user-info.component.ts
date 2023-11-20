@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import { LoginService } from '../../../auth/services/login.service';
 
@@ -8,6 +8,7 @@ import { LoginService } from '../../../auth/services/login.service';
   styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit {
+  @Input() currentURL: string = '/';
   userName = '';
   constructor(private loginService: LoginService) {}
 
