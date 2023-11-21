@@ -1,5 +1,6 @@
+import { ElementRef, Renderer2 } from '@angular/core';
+
 import { AgeColorDirective } from './age-color.directive';
-import {ElementRef, Renderer2} from "@angular/core";
 
 describe('SearchItemDirective', () => {
   it('should create an instance', () => {

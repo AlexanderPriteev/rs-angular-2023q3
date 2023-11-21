@@ -8,5 +8,5 @@ const getFavoriteState = createFeatureSelector<AppState, ISearchItem[]>('favorit
 export const selectFavoriteItems = createSelector(getFavoriteState, (state) => state);
 export const selectItemById = (id: string) => createSelector(
   getFavoriteState,
-  (state) => state.find((elem) => elem.id.videoId === id)
+  (state: ISearchItem[] | undefined) => (state || []).find((elem) => elem.id.videoId === id)
 );

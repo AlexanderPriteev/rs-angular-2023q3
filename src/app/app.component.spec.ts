@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import {CoreModule} from "./core/modules/core.module";
+import { CoreModule } from './core/modules/core.module';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, CoreModule],
+    imports: [RouterTestingModule, CoreModule, StoreModule.forRoot({})],
     declarations: [AppComponent],
   }));
 

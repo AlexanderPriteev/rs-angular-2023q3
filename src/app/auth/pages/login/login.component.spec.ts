@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { ButtonModule } from '../../../shared/modules/button.module';
 import { LoginComponent } from './login.component';
-import {ButtonModule} from "../../../shared/modules/button.module";
-import {ReactiveFormsModule} from "@angular/forms";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

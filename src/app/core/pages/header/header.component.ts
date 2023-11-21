@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd)
     ).subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.currentURL =  event.url;
+        this.currentURL = event.url;
         this.isMainRoute = event.url === '/';
       }
     });

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
+import { ButtonModule } from '../../../shared/modules/button.module';
 import { CreateCardComponent } from './create-card.component';
-import {ButtonModule} from "../../../shared/modules/button.module";
-import {ReactiveFormsModule} from "@angular/forms";
 
 describe('CreateCardComponent', () => {
   let component: CreateCardComponent;
@@ -11,7 +12,7 @@ describe('CreateCardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CreateCardComponent],
-      imports: [ReactiveFormsModule, ButtonModule]
+      imports: [ReactiveFormsModule, ButtonModule, StoreModule.forRoot({})]
     });
     fixture = TestBed.createComponent(CreateCardComponent);
     component = fixture.componentInstance;

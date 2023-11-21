@@ -1,12 +1,15 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import { ItemPageComponent } from './item-page.component';
-import {HttpClientModule} from "@angular/common/http";
-import {of} from "rxjs";
-import {ResultsService} from "../../services/results.service";
-import {testItem} from "../../companents/search-item/search-item.component.spec";
-import {ISearchResults} from "../../interfaces/search-result.interface";
-import {RouterTestingModule} from "@angular/router/testing";
+import { HttpClientModule } from '@angular/common/http';
+import {
+  ComponentFixture, fakeAsync, TestBed, tick
+} from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
+import { of } from 'rxjs';
 
+import { testItem } from '../../companents/search-item/search-item.component.spec';
+import { ISearchResults } from '../../interfaces/search-result.interface';
+import { ResultsService } from '../../services/results.service';
+import { ItemPageComponent } from './item-page.component';
 
 export const testResults: ISearchResults = {
   kind: 'youtube#searchList',
@@ -25,17 +28,21 @@ describe('ItemPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ItemPageComponent],
-      imports: [HttpClientModule, RouterTestingModule],
-      providers: [ResultsService]
+      imports: [HttpClientModule, RouterTestingModule, StoreModule.forRoot({})],
+      providers: [
+        {
+          provide: ResultsService,
+          useValue: {
+            getItemById: jest.fn().mockReturnValue(of(testResults)),
+          },
+        },
+      ]
     });
     fixture = TestBed.createComponent(ItemPageComponent);
     component = fixture.componentInstance;
   });
 
   it('should create', fakeAsync(() => {
-    const resultService = TestBed.inject(ResultsService);
-    jest.spyOn(resultService, 'getItemById' ).mockReturnValue(of(testResults));
-
     fixture.detectChanges();
     tick();
 

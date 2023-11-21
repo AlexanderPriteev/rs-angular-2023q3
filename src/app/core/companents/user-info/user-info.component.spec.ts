@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AppRoutesModule } from '../../modules/routes.module';
 import { UserInfoComponent } from './user-info.component';
-import {AppRoutesModule} from "../../modules/routes.module";
 
 describe('UserInfoComponent', () => {
   let component: UserInfoComponent;

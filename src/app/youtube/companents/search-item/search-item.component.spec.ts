@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
+import { AppRoutesModule } from '../../../core/modules/routes.module';
+import { ButtonModule } from '../../../shared/modules/button.module';
+import { AgeColorDirective } from '../../directives/age-color.directive';
+import { ISearchItem } from '../../interfaces/search-item.interface';
 import { SearchItemComponent } from './search-item.component';
-import {ButtonModule} from "../../../shared/modules/button.module";
-import {ISearchItem} from "../../interfaces/search-item.interface";
-import {AgeColorDirective} from "../../directives/age-color.directive";
-import {AppRoutesModule} from "../../../core/modules/routes.module";
-
 
 export const testItem: ISearchItem = {
   kind: 'youtube#video',
@@ -24,10 +24,10 @@ export const testItem: ISearchItem = {
       default: {
         url: 'https://i.ytimg.com/vi/YN8zNnV0sK8/default.jpg',
       },
-      medium:  {
+      medium: {
         url: 'https://i.ytimg.com/vi/YN8zNnV0sK8/default.jpg',
       },
-      high:  {
+      high: {
         url: 'https://i.ytimg.com/vi/YN8zNnV0sK8/default.jpg',
       },
     },
@@ -44,7 +44,7 @@ describe('SearchItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SearchItemComponent, AgeColorDirective],
-      imports: [ButtonModule, AppRoutesModule],
+      imports: [ButtonModule, AppRoutesModule, StoreModule.forRoot({})],
     });
     fixture = TestBed.createComponent(SearchItemComponent);
     component = fixture.componentInstance;
