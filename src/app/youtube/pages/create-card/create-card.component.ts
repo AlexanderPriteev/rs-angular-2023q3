@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray, FormControl, FormGroup, ValidationErrors, Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import { addNewToFavorites } from '../../../redux/actions/favorite.actions';
+import { AppState } from '../../../redux/interfaces/app-store.interface';
+import { selectFavoriteItems } from '../../../redux/selectors/favorite.selector';
+import { ISearchItem } from '../../interfaces/search-item.interface';
 import { dateValidate } from './validator';
 
 @Component({
@@ -10,7 +16,9 @@ import { dateValidate } from './validator';
   templateUrl: './create-card.component.html',
   styleUrls: ['./create-card.component.scss']
 })
-export class CreateCardComponent {
+export class CreateCardComponent implements OnInit {
+  private itemTypeName = 'newItem';
+
   tags: FormArray = new FormArray([
     new FormControl('', [Validators.required])
   ]);
@@ -72,6 +80,8 @@ export class CreateCardComponent {
     return result;
   };
 
+  constructor(private router: Router, private store: Store<AppState>) {}
+
   reset(): void {
     this.createForm.reset();
     Object.keys(this.errorValue).forEach((key) => {
@@ -96,7 +106,31 @@ export class CreateCardComponent {
       }
     });
     if (isCreate) {
-      console.log(`New card: ${JSON.stringify((this.createForm.value))}`);
+      const newCard: ISearchItem = {
+        kind: this.itemTypeName,
+        etag: this.createForm.controls['video'].value,
+        id: {
+          kind: 'myVideo',
+          videoId: `id-${new Date().getTime()}`
+        },
+        snippet: {
+          title: this.createForm.controls['title'].value,
+          description: this.createForm.controls['description'].value || '',
+          publishedAt: `${new Date(this.createForm.controls['dateCreation'].value)}`,
+          publishedTime: `${new Date()}`,
+          tags: this.createForm.controls['tags'].value,
+          thumbnails: {
+            default: this.createForm.controls['img'].value,
+            medium: this.createForm.controls['img'].value,
+            high: this.createForm.controls['img'].value,
+          },
+          categoryId: '',
+          channelTitle: '',
+          liveBroadcastContent: 'none',
+        }
+      } as ISearchItem;
+      this.store.dispatch(addNewToFavorites({ searchItem: newCard }));
+      this.router.navigate(['/favorite']);
     }
   }
 
@@ -108,5 +142,11 @@ export class CreateCardComponent {
 
   removeTagInput(index: number): void {
     this.tags.removeAt(index);
+  }
+  ngOnInit() {
+    this.store.select(selectFavoriteItems).subscribe((state) => {
+      const myItems = state.filter((e) => e.kind === this.itemTypeName);
+      localStorage.setItem('store', JSON.stringify(myItems));
+    });
   }
 }

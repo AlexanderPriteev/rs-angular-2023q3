@@ -1,0 +1,16 @@
+<div class="favorite">
+  <div class="favorite-list">
+    <ng-container *ngFor="let item of favoritePage">
+      <app-search-item [searchItem]="item" class="favorite-item-wrapper"></app-search-item>
+    </ng-container>
+  </div>
+  <div class="favorite-pagination" *ngIf="paginationNumber.length > 1">
+    <span *ngFor="let pageNumber of paginationNumber"
+          class="favorite-pagination__item"
+          [ngClass]="{'active': pageNumber === currentPage}"
+          (click)="goToPage(pageNumber)">
+      {{ pageNumber }}
+    </span>
+  </div>
+</div>
+

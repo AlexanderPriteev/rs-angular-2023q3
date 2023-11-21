@@ -1,6 +1,6 @@
 <div class="item-wrapper">
   <div class="item" *ngIf="item">
-    <button [routerLink]="['/']" class="item__btn" type="button"
+    <button [routerLink]="[prevRoute]" class="item__btn" type="button"
             appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__btn'">
       <img src="assets/images/svg/back_button.svg" alt="<" class="img img--contain">
     </button>

@@ -1,7 +1,12 @@
 import {
   Component, Input, OnChanges, SimpleChanges
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 
+import { addToFavorites, removeFromFavorites } from '../../../redux/actions/favorite.actions';
+import { AppState } from '../../../redux/interfaces/app-store.interface';
+import { selectFavoriteItems } from '../../../redux/selectors/favorite.selector';
 import { IItemStatistics, ISearchItem } from '../../interfaces/search-item.interface';
 
 @Component({
@@ -12,11 +17,34 @@ import { IItemStatistics, ISearchItem } from '../../interfaces/search-item.inter
 export class SearchItemComponent implements OnChanges {
   @Input() searchItem: ISearchItem = {} as ISearchItem;
   formatStatistics: IItemStatistics | null = null;
+  isFavorite = false;
+  isYoutubeVideo = false;
+  currenRoute = this.router.url;
+
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchItem']) {
       this.formatStatistics = this.transformStatistics();
+      this.isYoutubeVideo = this.searchItem.kind !== 'newItem';
+      this.updateIsFavorite();
     }
+  }
+
+  toggleFavorite(): void {
+    if (this.isFavorite) {
+      this.store.dispatch(removeFromFavorites({ videoId: this.searchItem.id.videoId }));
+      this.isFavorite = false;
+    } else {
+      this.store.dispatch(addToFavorites({ searchItem: this.searchItem }));
+      this.isFavorite = true;
+    }
+  }
+
+  private updateIsFavorite(): void {
+    this.store.pipe(select(selectFavoriteItems)).subscribe((favoriteList: ISearchItem[]) => {
+      this.isFavorite = favoriteList.some((item) => item.id.videoId === this.searchItem.id.videoId);
+    });
   }
 
   private transformStatistics(): IItemStatistics | null {
