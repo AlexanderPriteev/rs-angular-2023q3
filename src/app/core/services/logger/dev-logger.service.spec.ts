@@ -10,7 +10,11 @@ describe('DevLoggerService', () => {
     service = TestBed.inject(DevLoggerService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should log message', () => {
+    const defaultMessage = '[DEV]: App is running in the development mode\n';
+    const logSpy = jest.spyOn(console, 'log');
+    const testMessage = 'Test';
+    service.logMessage(testMessage);
+    expect(logSpy).toHaveBeenCalledWith(`${defaultMessage}${testMessage}`);
   });
 });
