@@ -23,10 +23,11 @@ export class LoginService {
   }
 
   logout(): void {
-    if (!this.isLoggedIn()) return;
-    localStorage.removeItem(this.authTokenKey);
-    this.logger.logMessage(`${this.localUser} has logged out.`);
-    this.currentUser.next('');
+    if (this.isLoggedIn()) {
+      localStorage.removeItem(this.authTokenKey);
+      this.logger.logMessage(`${this.localUser} has logged out.`);
+      this.currentUser.next('');
+    }
   }
 
   isLoggedIn(): boolean {
