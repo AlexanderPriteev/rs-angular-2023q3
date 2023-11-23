@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { LoginService } from './login.service';
 import {Router} from "@angular/router";
 import {LoggerService} from "../../core/services/logger/logger.service";
-import {BehaviorSubject} from "rxjs";
 
 describe('LoginService', () => {
   const username = 'testUser';
