@@ -13,4 +13,14 @@ describe('SearchService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should triggerSearch', () => {
+    const testData = 'test';
+    let emittedData: string | undefined;
+    service.searchTrigger$.subscribe(data => {
+      emittedData = data;
+    });
+    service.triggerSearch(testData);
+    expect(emittedData).toEqual(testData);
+  });
 });
