@@ -13,4 +13,25 @@ describe('SortService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should triggerSort with date', () => {
+    const sortData = 'date';
+    let emittedData: (string | boolean)[] | undefined;
+    service.sortTrigger$.subscribe(data => {
+      emittedData = data;
+    });
+    service.triggerSort(sortData);
+    expect(emittedData).toEqual([sortData, true]);
+  });
+
+  it('should triggerFilter and update filterTrigger$', () => {
+    const filterData = 'test';
+    let emittedData: string | undefined;
+    service.filterTrigger$.subscribe(data => {
+      emittedData = data;
+    });
+    service.triggerFilter(filterData);
+    expect(emittedData).toEqual(filterData);
+  });
+
 });
