@@ -41,13 +41,13 @@ export class SearchItemComponent implements OnChanges {
     }
   }
 
-  private updateIsFavorite(): void {
+  updateIsFavorite(): void {
     this.store.pipe(select(selectFavoriteItems)).subscribe((favoriteList: ISearchItem[]) => {
       this.isFavorite = favoriteList.some((item) => item.id.videoId === this.searchItem.id.videoId);
     });
   }
 
-  private transformStatistics(): IItemStatistics | null {
+  transformStatistics(): IItemStatistics | null {
     if (!this.searchItem.statistics) return null;
     const tmpStatistics: IItemStatistics = { ...this.searchItem.statistics };
     (Object.entries(this.searchItem.statistics) as string[][]).forEach(([key, value]) => {

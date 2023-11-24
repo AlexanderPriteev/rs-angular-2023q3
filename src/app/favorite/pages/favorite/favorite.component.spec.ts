@@ -8,7 +8,6 @@ import { FavoriteComponent } from './favorite.component';
 describe('FavoriteComponent', () => {
   let component: FavoriteComponent;
   let fixture: ComponentFixture<FavoriteComponent>;
-  // let store: Store;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -20,7 +19,6 @@ describe('FavoriteComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(FavoriteComponent);
     component = fixture.componentInstance;
-    // store = TestBed.inject(Store);
     fixture.detectChanges();
   }));
 
