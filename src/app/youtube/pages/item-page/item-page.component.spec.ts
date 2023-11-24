@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { favoriteReducer } from '../../../redux/reducers/favorite.reducer';
 import { testItem } from '../../companents/search-item/search-item.component.spec';
 import { ISearchResults } from '../../interfaces/search-result.interface';
+import { YoutubeModule } from '../../modules/youtube.module';
 import { ResultsService } from '../../services/results.service';
 import { ItemPageComponent } from './item-page.component';
 
@@ -33,6 +34,7 @@ describe('ItemPageComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        YoutubeModule,
         StoreModule.forRoot({}),
         StoreModule.forFeature('favorites', favoriteReducer),
       ],
@@ -56,4 +58,20 @@ describe('ItemPageComponent', () => {
 
     expect(component).toBeTruthy();
   }));
+
+  it('should update item and format publishedAt when data is present', fakeAsync(() => {
+    const dateFormatSpy = jest.spyOn(component, 'dateFormat');
+    jest.spyOn(store, 'select').mockReturnValue(of(testItem));
+
+    fixture.detectChanges();
+    tick();
+
+    expect(dateFormatSpy).toBeCalled();
+  }));
+
+  it('should navigate to not-found', () => {
+    const navigateSpy = jest.spyOn(component.router, 'navigate');
+    component.toNotFound();
+    expect(navigateSpy).toHaveBeenCalledWith(['/not-found']);
+  });
 });

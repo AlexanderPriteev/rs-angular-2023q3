@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { format } from 'date-fns';
@@ -18,40 +18,48 @@ export class ItemPageComponent implements OnInit {
   prevRoute = '/';
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private resultService: ResultsService,
-    private store: Store<AppState>
+    public route: ActivatedRoute,
+    public router: Router,
+    public resultService: ResultsService,
+    private store: Store<AppState>,
+    private ngZone: NgZone
   ) {}
 
   toNotFound() {
-    this.router.navigate(['/not-found']);
+    this.ngZone.run(() => {
+      this.router.navigate(['/not-found']);
+    });
+  }
+
+  dateFormat() {
+    return format(new Date(this.item.snippet.publishedAt), 'EEEE, MMMM dd, yyyy');
   }
 
   async ngOnInit(): Promise<void> {
     this.route.params.subscribe(async (params) => {
       const { id, prevRoute } = params;
       this.prevRoute = prevRoute || '/';
-      const dateFormat = (date: string) => format(new Date(date), 'EEEE, MMMM dd, yyyy');
 
       try {
         const storedItem = this.store.select(selectItemById(id));
         storedItem.subscribe((data) => {
           if (data) {
             this.item = { ...data };
-            this.item.snippet = { ...this.item.snippet, publishedAt: dateFormat(this.item.snippet.publishedAt) };
+            this.item.snippet = { ...this.item.snippet, publishedAt: this.dateFormat() };
           }
         });
         if (!this.item) {
           const data = await this.resultService.getItemById(id).toPromise();
-          if (data !== undefined) {
+          if (data) {
             [this.item] = data.items;
-            this.item.snippet.publishedAt = dateFormat(this.item.snippet.publishedAt);
+            this.item.snippet.publishedAt = this.dateFormat();
           } else {
+            console.log('fsfsdfsdfds');
             this.toNotFound();
           }
         }
       } catch {
+        console.log('fsfsdfsdfds');
         this.toNotFound();
       }
     });
