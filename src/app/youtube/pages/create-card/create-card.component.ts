@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import {
   FormArray, FormControl, FormGroup, ValidationErrors, Validators
 } from '@angular/forms';
@@ -80,7 +80,11 @@ export class CreateCardComponent implements OnInit {
     return result;
   };
 
-  constructor(private router: Router, private store: Store<AppState>) {}
+  constructor(
+    public router: Router,
+    private ngZone: NgZone,
+    private store: Store<AppState>
+  ) {}
 
   reset(): void {
     this.createForm.reset();
@@ -130,7 +134,9 @@ export class CreateCardComponent implements OnInit {
         }
       } as ISearchItem;
       this.store.dispatch(addNewToFavorites({ searchItem: newCard }));
-      this.router.navigate(['/favorite']);
+      this.ngZone.run(() => {
+        this.router.navigate(['/favorite']);
+      });
     }
   }
 
@@ -143,6 +149,7 @@ export class CreateCardComponent implements OnInit {
   removeTagInput(index: number): void {
     this.tags.removeAt(index);
   }
+
   ngOnInit() {
     this.store.select(selectFavoriteItems).subscribe((state) => {
       const myItems = state.filter((e) => e.kind === this.itemTypeName);
