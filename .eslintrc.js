@@ -77,6 +77,14 @@ module.exports = {
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ]
-    }
+    },
+    {
+      "files": [
+        "**/*.spec.ts"
+      ],
+      "rules": {
+        "class-methods-use-this": "off",
+      },
+    },
   ]
 };

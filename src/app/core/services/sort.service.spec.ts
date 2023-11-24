@@ -17,7 +17,7 @@ describe('SortService', () => {
   it('should triggerSort with date', () => {
     const sortData = 'date';
     let emittedData: (string | boolean)[] | undefined;
-    service.sortTrigger$.subscribe(data => {
+    service.sortTrigger$.subscribe((data) => {
       emittedData = data;
     });
     service.triggerSort(sortData);
@@ -27,11 +27,10 @@ describe('SortService', () => {
   it('should triggerFilter and update filterTrigger$', () => {
     const filterData = 'test';
     let emittedData: string | undefined;
-    service.filterTrigger$.subscribe(data => {
+    service.filterTrigger$.subscribe((data) => {
       emittedData = data;
     });
     service.triggerFilter(filterData);
     expect(emittedData).toEqual(filterData);
   });
-
 });

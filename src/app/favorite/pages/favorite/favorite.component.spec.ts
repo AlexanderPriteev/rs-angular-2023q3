@@ -1,15 +1,14 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
+import { favoriteReducer } from '../../../redux/reducers/favorite.reducer';
+import { testItem } from '../../../youtube/companents/search-item/search-item.component.spec';
 import { FavoriteComponent } from './favorite.component';
-import {favoriteReducer} from "../../../redux/reducers/favorite.reducer";
-import {ISearchItem} from "../../../youtube/interfaces/search-item.interface";
-import {testItem} from "../../../youtube/companents/search-item/search-item.component.spec";
 
 describe('FavoriteComponent', () => {
   let component: FavoriteComponent;
   let fixture: ComponentFixture<FavoriteComponent>;
-  let store: Store;
+  // let store: Store;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -21,10 +20,9 @@ describe('FavoriteComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(FavoriteComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(Store);
+    // store = TestBed.inject(Store);
     fixture.detectChanges();
   }));
-
 
   it('should create', () => {
     expect(component).toBeTruthy();

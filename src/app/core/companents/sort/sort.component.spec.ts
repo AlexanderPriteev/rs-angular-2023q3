@@ -1,18 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SortService } from '../../services/sort.service';
 import { SortComponent } from './sort.component';
-import {SortService} from "../../services/sort.service";
-
 
 class MockSortService {
   triggerSort(): void {}
   triggerFilter(): void {}
 }
 
-
 describe('SortComponent', () => {
   let component: SortComponent;
-  let fixture: ComponentFixture<SortComponent>
+  let fixture: ComponentFixture<SortComponent>;
   let sortService: SortService;
 
   beforeEach(() => {
@@ -50,5 +48,4 @@ describe('SortComponent', () => {
 
     expect(triggerFilterSpy).toHaveBeenCalledWith('test');
   });
-
 });

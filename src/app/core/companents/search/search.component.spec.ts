@@ -1,9 +1,10 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {
+  ComponentFixture, fakeAsync, TestBed, tick
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
+import { SearchService } from '../../services/search.service';
 import { SearchComponent } from './search.component';
-import {SearchService} from "../../services/search.service";
-
 
 class MockSearchService {
   triggerSearch(): void {}
@@ -33,15 +34,15 @@ describe('SearchComponent', () => {
 
   it('should call searchService with correct value', fakeAsync(() => {
     const triggerSearchSpy = jest.spyOn(searchService, 'triggerSearch');
-    component['searchItem'].next('test');
-    tick(500)
+    component.searchItem.next('test');
+    tick(500);
     expect(triggerSearchSpy).toHaveBeenCalledWith('test');
   }));
 
   it('should call searchService with invalid value', fakeAsync(() => {
     const triggerSearchSpy = jest.spyOn(searchService, 'triggerSearch');
-    component['searchItem'].next('tt');
-    tick(500)
+    component.searchItem.next('tt');
+    tick(500);
     expect(triggerSearchSpy).not.toHaveBeenCalled();
   }));
 
@@ -50,10 +51,9 @@ describe('SearchComponent', () => {
   });
 
   it('should call searchItem with correct value', () => {
-    const searchItemSpy = jest.spyOn(component['searchItem'], 'next');
-    component['searchTerm'] = 'test';
+    const searchItemSpy = jest.spyOn(component.searchItem, 'next');
+    component.searchTerm = 'test';
     component.onSearch();
     expect(searchItemSpy).toHaveBeenCalledWith('test');
   });
-
 });

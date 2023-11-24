@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 import { CoreModule } from '../../modules/core.module';
 import { HeaderComponent } from './header.component';
-import {NavigationEnd, Router} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
-
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

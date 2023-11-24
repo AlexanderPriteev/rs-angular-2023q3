@@ -10,7 +10,7 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchComponent {
   searchTerm = '';
-  private searchItem = new Subject<string>();
+  searchItem = new Subject<string>();
 
   constructor(private searchService: SearchService) {
     this.setupSearch();

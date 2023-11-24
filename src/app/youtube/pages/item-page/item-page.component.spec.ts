@@ -3,14 +3,14 @@ import {
   ComponentFixture, fakeAsync, TestBed, tick, waitForAsync
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {Store, StoreModule} from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { of } from 'rxjs';
 
+import { favoriteReducer } from '../../../redux/reducers/favorite.reducer';
 import { testItem } from '../../companents/search-item/search-item.component.spec';
 import { ISearchResults } from '../../interfaces/search-result.interface';
 import { ResultsService } from '../../services/results.service';
 import { ItemPageComponent } from './item-page.component';
-import {favoriteReducer} from "../../../redux/reducers/favorite.reducer";
 
 export const testResults: ISearchResults = {
   kind: 'youtube#searchList',

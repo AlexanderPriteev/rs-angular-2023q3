@@ -8,7 +8,7 @@ import { LoggerService } from '../../core/services/logger/logger.service';
   providedIn: 'root'
 })
 export class LoginService {
-  private authTokenKey = 'authToken';
+  authTokenKey = 'authToken';
   private localUser = localStorage.getItem(this.authTokenKey)?.split(':')[0] || '';
   currentUser = new BehaviorSubject<string>(this.localUser);
 

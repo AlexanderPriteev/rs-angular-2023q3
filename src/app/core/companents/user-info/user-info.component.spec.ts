@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs';
 
+import { LoginService } from '../../../auth/services/login.service';
 import { AppRoutesModule } from '../../modules/routes.module';
 import { UserInfoComponent } from './user-info.component';
-import {LoginService} from "../../../auth/services/login.service";
-import {BehaviorSubject} from "rxjs";
 
 class MockLoginService {
   currentUser = new BehaviorSubject<string>('test');
@@ -26,7 +26,7 @@ describe('UserInfoComponent', () => {
     fixture = TestBed.createComponent(UserInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    loginService = TestBed.inject(LoginService)
+    loginService = TestBed.inject(LoginService);
   });
 
   it('should create', () => {

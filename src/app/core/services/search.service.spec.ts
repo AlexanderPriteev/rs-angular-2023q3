@@ -17,7 +17,7 @@ describe('SearchService', () => {
   it('should triggerSearch', () => {
     const testData = 'test';
     let emittedData: string | undefined;
-    service.searchTrigger$.subscribe(data => {
+    service.searchTrigger$.subscribe((data) => {
       emittedData = data;
     });
     service.triggerSearch(testData);

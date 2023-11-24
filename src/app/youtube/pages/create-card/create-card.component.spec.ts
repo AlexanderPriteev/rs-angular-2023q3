@@ -1,10 +1,10 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import {Store, StoreModule} from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
+import { favoriteReducer } from '../../../redux/reducers/favorite.reducer';
 import { ButtonModule } from '../../../shared/modules/button.module';
 import { CreateCardComponent } from './create-card.component';
-import {favoriteReducer} from "../../../redux/reducers/favorite.reducer";
 
 describe('CreateCardComponent', () => {
   let component: CreateCardComponent;

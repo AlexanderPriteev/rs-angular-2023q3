@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
+import { addToFavorites } from '../../redux/actions/favorite.actions';
+import { testItem } from '../../youtube/companents/search-item/search-item.component.spec';
+import { ISearchItem } from '../../youtube/interfaces/search-item.interface';
 import { LocalStorageService } from './local-storage.service';
-import {ISearchItem} from "../../youtube/interfaces/search-item.interface";
-import {testItem} from "../../youtube/companents/search-item/search-item.component.spec";
-import {addToFavorites} from "../../redux/actions/favorite.actions";
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
@@ -27,5 +27,4 @@ describe('LocalStorageService', () => {
     expect(store.dispatch).toHaveBeenCalledTimes(testData.length);
     expect(store.dispatch).toHaveBeenCalledWith(addToFavorites({ searchItem: testData[0] }));
   });
-
 });

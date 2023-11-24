@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AppState } from '../interfaces/app-store.interface';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { first } from 'rxjs';
+
+import { testItem } from '../../youtube/companents/search-item/search-item.component.spec';
 import { ISearchItem } from '../../youtube/interfaces/search-item.interface';
-import {testItem} from "../../youtube/companents/search-item/search-item.component.spec";
-import { selectItemById} from "./favorite.selector";
-import {MockStore, provideMockStore} from "@ngrx/store/testing";
-import {first} from "rxjs";
+import { AppState } from '../interfaces/app-store.interface';
+import { selectItemById } from './favorite.selector';
 
 describe('Favorite Selectors', () => {
   const mockState: ISearchItem[] = [
-    {...testItem, id: {...testItem.id, videoId: '1'}},
-    {...testItem, id: {...testItem.id, videoId: '2'}},
+    { ...testItem, id: { ...testItem.id, videoId: '1' } },
+    { ...testItem, id: { ...testItem.id, videoId: '2' } },
   ];
 
   let store: MockStore<AppState>;

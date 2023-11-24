@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from '../../../shared/modules/button.module';
+import { LoginService } from '../../services/login.service';
 import { LoginComponent } from './login.component';
-import {LoginService} from "../../services/login.service";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +21,7 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  })
+  });
 
   it('should call with correct credentials', () => {
     const name = 'test@example.com';
