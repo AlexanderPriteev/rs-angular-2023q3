@@ -17,7 +17,7 @@ export class SearchResultComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private sortService: SortService,
-    private searchResultService: ResultsService
+    public searchResultService: ResultsService
   ) {}
 
   dataSort(sortTrigger: Array<string | boolean>): void {
@@ -43,13 +43,17 @@ export class SearchResultComponent implements OnInit {
     });
   }
 
+  searchResult(searchTriggered: string) {
+    if (searchTriggered) {
+      this.searchResultService.getSearchResults(searchTriggered).subscribe((data) => {
+        this.searchResults = data;
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.searchService.searchTrigger$.subscribe((searchTriggered) => {
-      if (searchTriggered) {
-        this.searchResultService.getSearchResults(searchTriggered).subscribe((data) => {
-          this.searchResults = data;
-        });
-      }
+      this.searchResult(searchTriggered);
     });
 
     this.sortService.sortTrigger$.subscribe((sortTrigger) => {

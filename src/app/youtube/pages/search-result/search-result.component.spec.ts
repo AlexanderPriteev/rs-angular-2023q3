@@ -1,9 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { testItem } from '../../companents/search-item/search-item.component.spec';
 import { ISearchResults } from '../../interfaces/search-result.interface';
 import { VideoStatsPipe } from '../../pipes/video-stats.pipe';
+import { testResults } from '../item-page/item-page.component.spec';
 import { SearchResultComponent } from './search-result.component';
 
 const testResultsData = {
@@ -49,6 +51,7 @@ describe('SearchResultComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should sort items by date in ascending order', () => {
     delete testResultsData.items[2].statistics;
     component.searchResults = testResultsData;
@@ -65,5 +68,15 @@ describe('SearchResultComponent', () => {
     component.dataSort(['count', false]);
     expect(component.searchResults.items[1].statistics?.viewCount).toEqual('10');
     expect(component.searchResults.items[0].statistics?.viewCount).toBeFalsy();
+
+    component.dataSort(['test', false]);
+    expect(component.searchResults.items[1].statistics?.viewCount).toEqual('10');
+  });
+
+  it('should be called searchResultService', () => {
+    const spy = jest.spyOn(component.searchResultService, 'getSearchResults').mockReturnValue(of(testResults));
+    component.searchResult('testResultsData');
+    expect(spy).toBeCalled();
+    expect(component.searchResults).toEqual(testResults);
   });
 });
