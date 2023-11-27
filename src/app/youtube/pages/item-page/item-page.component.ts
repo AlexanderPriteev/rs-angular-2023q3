@@ -54,12 +54,10 @@ export class ItemPageComponent implements OnInit {
             [this.item] = data.items;
             this.item.snippet.publishedAt = this.dateFormat();
           } else {
-            console.log('fsfsdfsdfds');
             this.toNotFound();
           }
         }
       } catch {
-        console.log('fsfsdfsdfds');
         this.toNotFound();
       }
     });
