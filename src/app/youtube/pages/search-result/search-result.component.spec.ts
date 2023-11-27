@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { testItem } from '../../companents/search-item/search-item.component.spec';
 import { ISearchResults } from '../../interfaces/search-result.interface';
+import { VideoStatsPipe } from '../../pipes/video-stats.pipe';
 import { SearchResultComponent } from './search-result.component';
 
 const testResultsData = {
@@ -38,6 +39,7 @@ describe('SearchResultComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SearchResultComponent],
       imports: [HttpClientTestingModule],
+      providers: [VideoStatsPipe]
     });
     fixture = TestBed.createComponent(SearchResultComponent);
     component = fixture.componentInstance;

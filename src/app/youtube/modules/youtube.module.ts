@@ -10,6 +10,7 @@ import { CreateCardComponent } from '../pages/create-card/create-card.component'
 import { ItemPageComponent } from '../pages/item-page/item-page.component';
 import { SearchResultComponent } from '../pages/search-result/search-result.component';
 import { SearchFilterPipe } from '../pipes/search-filter.pipe';
+import { VideoStatsPipe } from '../pipes/video-stats.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SearchFilterPipe } from '../pipes/search-filter.pipe';
     CreateCardComponent,
     SearchFilterPipe,
     AgeColorDirective,
+    VideoStatsPipe
   ],
   exports: [
     SearchItemComponent
@@ -29,6 +31,7 @@ import { SearchFilterPipe } from '../pipes/search-filter.pipe';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [VideoStatsPipe]
 })
 export class YoutubeModule { }

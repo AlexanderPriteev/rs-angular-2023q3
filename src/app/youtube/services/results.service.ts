@@ -1,11 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  forkJoin, mergeMap, Observable, of
-} from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 
 import { MAX_ITEMS } from '../../api/api-config';
 import { ISearchResults } from '../interfaces/search-result.interface';
+import { VideoStatsPipe } from '../pipes/video-stats.pipe';
 
 @Injectable({
   providedIn: 'root',
@@ -15,21 +14,14 @@ export class ResultsService {
   private apiUrlItem = 'videos';
   private maxItems = MAX_ITEMS;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private videoStatsPipe: VideoStatsPipe) {}
 
-  private getMergeMap(searchResults: ISearchResults) {
+  getMergeMap(searchResults: ISearchResults) {
     const videoObservables: Observable<ISearchResults>[] = [];
     searchResults.items.forEach((item) => {
       videoObservables.push(this.getItemById(item.id.videoId));
     });
-    return forkJoin(videoObservables).pipe(
-      mergeMap((videoStats: ISearchResults[]) => {
-        const updateItems = { ...searchResults };
-        updateItems.items = searchResults.items.map((e, i) => (
-          { ...e, statistics: videoStats[i].items[0].statistics }));
-        return of(updateItems);
-      })
-    );
+    return this.videoStatsPipe.transform(searchResults, videoObservables);
   }
 
   getItemById(id: string): Observable<ISearchResults> {
