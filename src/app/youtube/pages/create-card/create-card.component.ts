@@ -9,7 +9,7 @@ import { addNewToFavorites } from '../../../redux/actions/favorite.actions';
 import { AppState } from '../../../redux/interfaces/app-store.interface';
 import { selectFavoriteItems } from '../../../redux/selectors/favorite.selector';
 import { ISearchItem } from '../../interfaces/search-item.interface';
-import { dateValidate } from './validator';
+import { DateValidateService } from '../../services/date-validate.service';
 
 @Component({
   selector: 'app-create-card',
@@ -27,7 +27,7 @@ export class CreateCardComponent implements OnInit {
     description: new FormControl('', [Validators.maxLength(255)]),
     img: new FormControl('', [Validators.required]),
     video: new FormControl('', [Validators.required]),
-    dateCreation: new FormControl('', [Validators.required, dateValidate()]),
+    dateCreation: new FormControl('', [Validators.required, new DateValidateService().validate()]),
     tags: this.tags
   });
   errorValue: { [k: string]: string | string[] } = {
