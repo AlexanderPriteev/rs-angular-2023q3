@@ -1,0 +1,101 @@
+@import "../../../../resources/scss/basic/variables";
+
+.user {
+  position: relative;
+
+  &:hover .user-menu-wrapper {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  &-data {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: $white;
+    cursor: default;
+
+    &__title {
+      font-size: 1.4rem;
+      width: 180px;
+      min-width: 180px;
+      display: inline-block;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+      text-align: right;
+    }
+
+    &__icon {
+      width: 3.2rem;
+      min-width: 3.2rem;
+      height: 3.2rem;
+      font-size: 3.2rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: icomoon;
+    }
+  }
+
+  &-menu {
+    &-wrapper {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      padding-top: .4rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s linear;
+    }
+
+    box-sizing: border-box;
+    padding: 1rem 0;
+    border-radius: .5rem;
+    background-color: var(--primary-light);
+    box-shadow: 0 .4rem .8rem 0 rgba($black, .25);
+    position: relative;
+    display: block;
+
+    &:before {
+      content: '';
+      display: block;
+      background-color:  var(--primary-light);
+      width: .8rem;
+      height: .8rem;
+      position: absolute;
+      top: -.3rem;
+      right: 1rem;
+      transform: rotate(45deg);
+    }
+
+    &__item {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      box-sizing: border-box;
+      padding: .8rem 1.2rem .5rem;
+      transition: background-color .15s linear;
+      font-size: 14px;
+      line-height: 1;
+
+      &:hover {
+        background-color: rgba($primary, .2);
+      }
+    }
+
+    &__icon {
+      width: 1.6rem;
+      min-width: 1.6rem;
+      height: 1.6rem;
+      font-size: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: icomoon;
+    }
+  }
+}
