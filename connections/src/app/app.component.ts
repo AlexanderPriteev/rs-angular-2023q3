@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { SigninComponent } from './auth/pages/signin/signin.component';
+import { SignupComponent } from './auth/pages/signup/signup.component';
 import { HeaderComponent } from './header/page/header.component';
 import { ThemeToggleService } from './header/services/theme-toggle.service';
 
@@ -11,7 +13,9 @@ import { ThemeToggleService } from './header/services/theme-toggle.service';
   imports: [
     CommonModule,
     RouterOutlet,
-    HeaderComponent
+    HeaderComponent,
+    SigninComponent,
+    SignupComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

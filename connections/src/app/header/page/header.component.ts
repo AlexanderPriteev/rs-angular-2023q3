@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { ThemeToggleComponent } from '../components/theme-toggle/theme-toggle.component';
 import { LogoComponent } from '../components/logo/logo.component';
+import { ThemeToggleComponent } from '../components/theme-toggle/theme-toggle.component';
 import { UserInfoComponent } from '../components/user-info/user-info.component';
 
 @Component({

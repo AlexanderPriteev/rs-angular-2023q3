@@ -6,7 +6,7 @@
   box-sizing: border-box;
   padding: 2.8rem 2rem;
   border-radius: .5rem;
-  background-color: $primary;
+  background-color: var(--primary);
   box-shadow: 0 0 1.2rem 0 rgba($black, 0.25);
 
   &-wrapper{
@@ -20,12 +20,61 @@
   &__title{
     color: $white;
     font-size: 2rem;
+    text-transform: uppercase;
     font-weight: $regular;
+    text-align: center;
+    margin: 0 auto;
   }
   &__wrapper{
     display: flex;
     flex-direction: column;
     gap: .8rem;
+  }
+  &__btn{
+    min-width: 12.4rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .4rem;
+    box-sizing: border-box;
+    padding: .7rem;
+    background-color: var(--primary-dark);
+    color: $white;
+    box-shadow: 0 0 .4rem 0 rgba($black, .15);
+    transition: all .15s linear;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    &:hover{
+      box-shadow: 0 0 0 0 transparent;
+    }
+    &:disabled{
+      opacity: .3;
+      box-shadow: none;
+      pointer-events: none;
+    }
+    &-text{
+      color: $white;
+      transition: opacity .15s linear;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      &:hover{
+        opacity: .8;
+      }
+      &:disabled{
+        opacity: .3;
+        box-shadow: none;
+        pointer-events: none;
+      }
+    }
+    &-wrapper{
+      display: flex;
+      gap: 2.4rem;
+      justify-content: flex-end;
+    }
   }
 }
 
@@ -34,10 +83,28 @@
   flex-direction: column;
   gap: .4rem;
   width: 100%;
+  position: relative;
   &__label{
     font-size: 1.2rem;
     color: $white;
     padding-left: .6rem;
+  }
+  &__icon{
+    font-family: icomoon;
+    display: inline-flex;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--primary);
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+    position: absolute;
+    right: 1rem;
+    top: 2.4rem;
+    transition: color .15s linear;
+    &:hover{
+      color: var(--primary-dark);
+    }
   }
   &__error{
     color: $red;
@@ -50,38 +117,13 @@
     height: 3.7rem;
     line-height: 1;
     font-size: 1rem;
-    color: $text;
-    background-color: $primary-light;
+    color: var(--text);
+    background-color: var(--primary-light);
     &.error{
       border-color: $red;
     }
-  }
-  &__btn{
-    width: 3.7rem;
-    min-width: 3.7rem;
-    height: 3.7rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: .4rem;
-    box-sizing: border-box;
-    padding: .7rem;
-    background-color: $primary-dark;
-    box-shadow: 0 0 .4rem 0 rgba($black, .15);
-    transition: all .15s linear;
-    cursor: pointer;
-    &:hover{
-      box-shadow: 0 0 0 0 transparent;
+    &--password{
+      padding-right: 4rem;
     }
-    &:disabled{
-      opacity: .3;
-      box-shadow: none;
-      pointer-events: none;
-    }
-  }
-
-  &-btn-wrapper{
-    display: flex;
-    gap: 2.4rem;
   }
 }
