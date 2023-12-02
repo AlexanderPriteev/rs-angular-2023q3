@@ -1,4 +1,7 @@
 .c{
+  &-primary{
+   color: var(--primary);
+  }
   &-red{
     color: $red;
   }
@@ -7,5 +10,20 @@
   }
   &-blue{
     color: $blue;
+  }
+}
+
+.bg{
+  &-primary{
+    background-color: var(--primary);
+  }
+  &-red{
+    background-color: $red;
+  }
+  &-green{
+    background-color: $green;
+  }
+  &-blue{
+    background-color: $blue;
   }
 }

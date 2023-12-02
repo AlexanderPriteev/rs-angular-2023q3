@@ -1,0 +1,42 @@
+@import "../../../../resources/scss/basic/variables";
+
+.profile{
+  &-headline{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: .1rem solid var(--text);
+  }
+  &-title{
+    font-size: 2.8rem;
+    line-height: 1;
+    font-weight: $regular;
+  }
+  &-link{
+    display: inline-flex;
+    gap: .6rem;
+    align-items: center;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: $blue;
+    white-space: nowrap;
+    transition: opacity .2s linear;
+    cursor: pointer;
+    &:hover{
+      opacity: .7;
+    }
+    &__icon{
+      font-family: icomoon;
+      width: 2.4rem;
+      min-width: 2.4rem;
+      height: 2.4rem;
+      font-size: 2.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { SigninComponent } from './auth/pages/signin/signin.component';
 import { SignupComponent } from './auth/pages/signup/signup.component';
 import { HeaderComponent } from './header/page/header.component';
 import { ThemeToggleService } from './header/services/theme-toggle.service';
+import { ProfileComponent } from './profile/page/profile.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { ThemeToggleService } from './header/services/theme-toggle.service';
     RouterOutlet,
     HeaderComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

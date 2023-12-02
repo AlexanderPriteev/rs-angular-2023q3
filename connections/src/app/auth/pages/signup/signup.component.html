@@ -28,9 +28,6 @@
       </div>
       <div class="field">
         <label class="field__label" for="repeat-password">repeat password</label>
-        <i class="field__icon"
-           [ngClass]="{'icon-eye-lock-open':!isHidePassword, 'icon-eye-lock':isHidePassword}"
-           (click)="togglePasswordType()"></i>
         <input [type]="isHidePassword ? 'password' : 'text'"
                class="field__input field__input--password"
                name="repeat-password"
