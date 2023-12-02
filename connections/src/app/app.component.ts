@@ -7,6 +7,7 @@ import { SignupComponent } from './auth/pages/signup/signup.component';
 import { HeaderComponent } from './header/page/header.component';
 import { ThemeToggleService } from './header/services/theme-toggle.service';
 import { ProfileComponent } from './profile/page/profile.component';
+import {NotFoundComponent} from "./not-found/page/not-found.component";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { ProfileComponent } from './profile/page/profile.component';
     HeaderComponent,
     SigninComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotFoundComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
