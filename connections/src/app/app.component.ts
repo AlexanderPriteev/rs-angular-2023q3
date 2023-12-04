@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 
 import { SigninComponent } from './auth/pages/signin/signin.component';
 import { SignupComponent } from './auth/pages/signup/signup.component';
+import { DialogComponent } from './dialog/page/dialog.component';
+import { GroupsComponent } from './groups/page/groups.component';
 import { HeaderComponent } from './header/page/header.component';
 import { ThemeToggleService } from './header/services/theme-toggle.service';
+import { NotFoundComponent } from './not-found/page/not-found.component';
 import { ProfileComponent } from './profile/page/profile.component';
-import {NotFoundComponent} from "./not-found/page/not-found.component";
-import {DialogComponent} from "./dialog/page/dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import {DialogComponent} from "./dialog/page/dialog.component";
     SignupComponent,
     ProfileComponent,
     NotFoundComponent,
-    DialogComponent
+    DialogComponent,
+    GroupsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

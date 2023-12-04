@@ -1,0 +1,45 @@
+@import "../../../../resources/scss/basic/variables";
+
+.group-card{
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  border-radius: .3rem;
+  background-color: var(--primary-100);
+  box-sizing: border-box;
+  padding: 1.5rem 1.2rem;
+  cursor: pointer;
+  &:hover &__title{
+    opacity: .85;
+  }
+  &--dialog{
+    background-color: $green;
+    color: $white;
+  }
+  &__title{
+    font-size: 1.4rem;
+    width: calc(100% - 4.4rem);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: opacity .2s linear;
+  }
+  &__icon, &__remove{
+    width: 2.4rem;
+    min-width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+  }
+  &__icon{
+    pointer-events: none;
+  }
+  &__remove{
+    cursor: pointer;
+    color: $red;
+    transition: opacity .2s linear;
+    &:hover{
+      opacity: .7;
+    }
+  }
+}

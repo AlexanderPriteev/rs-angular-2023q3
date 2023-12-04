@@ -1,0 +1,53 @@
+<div class="group">
+  <div class="group__head">
+    <h2 class="group-title">
+      @if (columnItem.type === 'group') {
+        <i class="group-title__icon icon-group"></i>
+        GROUPS
+      } @else {
+        <i class="group-title__icon icon-user"></i>
+        PEOPLES
+      }
+    </h2>
+    <div class="group__head-btn-wrapper">
+      <button type="button"
+              class="group-btn"
+              *ngIf="columnItem.type === 'group'"
+              (click)="toggleModal()">
+        <i class="icon-plus group-btn__icon"></i>
+        add new
+      </button>
+      <button type="button" class="group-btn">
+        <i class="icon-update group-btn__icon"></i>
+        <span class="group-btn__text">update</span>
+      </button>
+    </div>
+  </div>
+  <div class="group__body">
+    @for (item of items; track item) {
+      <app-group-card [item]="item"></app-group-card>
+    }
+  </div>
+
+  <div class="group-modal" *ngIf="isShowModal">
+    <h3 class="group-title">
+      <i class="icon-plus group-title__icon"></i>
+      New group
+    </h3>
+    <div class="field">
+      <label class="field__label" for="group">group name</label>
+      <input type="text"
+             class="field__input"
+             name="group"
+             id="group">
+    </div>
+    <div class="form-btn-wrapper">
+      <button type="button"
+              class="form-btn-text td-none"
+              (click)="toggleModal()">Cancel</button>
+      <button type="button"
+              class="form-btn"
+              (click)="toggleModal()">Create</button>
+    </div>
+  </div>
+</div>

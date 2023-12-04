@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {DialogHeadlineComponent} from "../components/headline/headline.component";
-import {ChatComponent} from "../components/chat/chat.component";
+
+import { ChatComponent } from '../components/chat/chat.component';
+import { DialogHeadlineComponent } from '../components/headline/headline.component';
 
 @Component({
   selector: 'app-dialog',

@@ -10,8 +10,8 @@ describe('HeadlineComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HeadlineComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(HeadlineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
