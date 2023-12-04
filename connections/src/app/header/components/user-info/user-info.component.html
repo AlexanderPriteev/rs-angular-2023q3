@@ -5,13 +5,25 @@
   </div>
   <div class="user-menu-wrapper">
     <ul class="user-menu">
-      <li class="user-menu__item">
+      <li class="user-menu__item" [routerLink]="['/profile']">
         <i class="user-menu__icon icon-settings"></i>
         PROFILE
       </li>
-      <li class="user-menu__item">
+      <li class="user-menu__item" [routerLink]="['/']">
         <i class="user-menu__icon icon-dialog-2"></i>
         MY DIALOGS
+      </li>
+      <li class="user-menu__item" [routerLink]="['/item']">
+        <i class="user-menu__icon icon-group"></i>
+        DIALOG
+      </li>
+      <li class="user-menu__item" [routerLink]="['/login']">
+        <i class="user-menu__icon icon-signin"></i>
+        SIGN IN
+      </li>
+      <li class="user-menu__item" [routerLink]="['/registration']">
+        <i class="user-menu__icon icon-account-plus"></i>
+        SIGN UP
       </li>
       <li class="user-menu__item c-red">
         <i class="user-menu__icon icon-logout"></i>

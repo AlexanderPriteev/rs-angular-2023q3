@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-profile-headline',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './headline.component.html',
   styleUrl: './headline.component.scss'
 })
