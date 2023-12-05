@@ -1,20 +1,28 @@
 <div class="form-wrapper form-auth">
-  <div class="form">
+  <div class="form" [formGroup]="signUpForm">
     <h2 class="form__title">Registration</h2>
     <div class="form__wrapper">
       <div class="field">
         <label class="field__label" for="name">name</label>
         <input type="text"
                class="field__input"
+               [ngClass]="{'error': errors.name}"
+               (blur)="fieldValidate('name')"
+               formControlName="name"
                name="name"
                id="name">
+        <span class="field__error" *ngIf="errors.name">{{ errors.name }}</span>
       </div>
       <div class="field">
         <label class="field__label" for="email">email</label>
         <input type="text"
                class="field__input"
+               [ngClass]="{'error': errors.email}"
+               (blur)="fieldValidate('email')"
+               formControlName="email"
                name="email"
                id="email">
+        <span class="field__error" *ngIf="errors.email">{{ errors.email }}</span>
       </div>
       <div class="field">
         <label class="field__label" for="password">password</label>
@@ -23,20 +31,31 @@
            (click)="togglePasswordType()"></i>
         <input [type]="isHidePassword ? 'password' : 'text'"
                class="field__input field__input--password"
+               [ngClass]="{'error': errors.password}"
+               (blur)="fieldValidate('password')"
+               formControlName="password"
                name="password"
                id="password">
+        <span class="field__error" *ngIf="errors.password">{{ errors.password }}</span>
       </div>
       <div class="field">
         <label class="field__label" for="repeat-password">repeat password</label>
         <input [type]="isHidePassword ? 'password' : 'text'"
                class="field__input field__input--password"
+               [ngClass]="{'error': errors.repeatPassword}"
+               (blur)="fieldValidate('repeatPassword')"
+               formControlName="repeatPassword"
                name="repeat-password"
                id="repeat-password">
+        <span class="field__error" *ngIf="errors.repeatPassword">{{ errors.repeatPassword }}</span>
       </div>
     </div>
     <div class="form-btn-wrapper">
       <button type="button" class="form-btn-text" [routerLink]="['/login']">LOGIN</button>
-      <button type="button" class="form-btn">SIGN UP</button>
+      <button type="button"
+              class="form-btn"
+              (click)="checkFields()"
+              [disabled]="!isFormValid">SIGN UP</button>
     </div>
   </div>
 </div>

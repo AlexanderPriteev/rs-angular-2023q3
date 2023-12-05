@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { IColumn } from '../../interfaces/groups';
-import {GroupCardComponent} from "../group-card/group-card.component";
-import {IItem} from "../../interfaces/items";
+import { IItem } from '../../interfaces/items';
+import { GroupCardComponent } from '../group-card/group-card.component';
 
 @Component({
   selector: 'app-group',
@@ -14,13 +14,13 @@ import {IItem} from "../../interfaces/items";
   templateUrl: './group.component.html',
   styleUrl: './group.component.scss'
 })
-export class GroupComponent implements OnInit{
+export class GroupComponent implements OnInit {
   @Input() columnItem: IColumn = {} as IColumn;
   isShowModal: boolean = false;
-  items: IItem[] = []
+  items: IItem[] = [];
 
   ngOnInit() {
-    this.items = this.columnItem.items.map((e): IItem => ({type: this.columnItem.type, item: e}))
+    this.items = this.columnItem.items.map((e): IItem => ({ type: this.columnItem.type, item: e }));
   }
 
   toggleModal() {

@@ -104,7 +104,7 @@
     }
   }
   &__error{
-    color: $red;
+    color: var(--error);
   }
   &__input{
     width: 100%;
@@ -117,7 +117,7 @@
     color: var(--text);
     background-color: var(--primary-light);
     &.error{
-      border-color: $red;
+      border-color: var(--error);;
     }
     &--password{
       padding-right: 4rem;
