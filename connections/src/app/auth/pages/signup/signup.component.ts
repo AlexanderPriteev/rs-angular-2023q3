@@ -6,13 +6,14 @@ import {
 import { RouterModule } from '@angular/router';
 
 import { FieldValidate } from '../../services/field-validate.service';
+import {AlertsComponent} from "../../../shared/components/alerts/alerts.component";
 
 type SignUpFields = 'name' | 'email' | 'password' | 'repeatPassword';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, AlertsComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -31,6 +32,8 @@ export class SignupComponent implements OnInit {
   };
   isHidePassword = true;
   isFormValid = false;
+  isLoad = false;
+  showAlert = false;
 
   togglePasswordType(): void {
     this.isHidePassword = !this.isHidePassword;
@@ -67,22 +70,13 @@ export class SignupComponent implements OnInit {
     return true;
   }
 
-  checkFields(): void {
-    let isValid = true;
-    (Object.keys(this.signUpForm.controls) as SignUpFields[]).forEach((fieldName) => {
-      const tmp = this.fieldValidate(fieldName);
-      if (!tmp) {
-        isValid = false;
-      }
-    });
-    if (isValid) {
-      const value = {
-        email: this.signUpForm.controls['email'],
-        name: this.signUpForm.controls['name'],
-        password: this.signUpForm.controls['password'],
-      };
-      console.log(JSON.stringify(value));
-    }
+  sendForm(): void {
+   if(this.isFormValid){
+     this.isLoad = true;
+     setTimeout(() => this.isLoad = false, 2000 )
+     const data = JSON.stringify(this.signUpForm.value)
+     this.showAlert = true;
+   }
   }
 
   ngOnInit() {
@@ -92,5 +86,9 @@ export class SignupComponent implements OnInit {
       const isPassValid = password === repeatPassword;
       this.isFormValid = this.signUpForm.valid && isPassValid;
     });
+  }
+
+  alert(): void {
+    this.showAlert = false;
   }
 }

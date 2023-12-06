@@ -21,6 +21,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-chat-info:before {
+  content: "\e91a";
+}
+.icon-error:before {
+  content: "\e91b";
+}
+.icon-info:before {
+  content: "\e91c";
+}
+.icon-success:before {
+  content: "\e91d";
+}
+.icon-warning:before {
+  content: "\e91e";
+}
 .icon-dialog-2:before {
   content: "\e900";
 }

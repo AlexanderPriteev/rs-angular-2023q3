@@ -54,8 +54,14 @@
       <button type="button" class="form-btn-text" [routerLink]="['/login']">LOGIN</button>
       <button type="button"
               class="form-btn"
-              (click)="checkFields()"
-              [disabled]="!isFormValid">SIGN UP</button>
+              [ngClass]="{'form-btn--load': isLoad}"
+              (click)="sendForm()"
+              [disabled]="!isFormValid || isLoad">SIGN UP</button>
     </div>
   </div>
+
+  <app-alert [value]="'ted fgfdgd dfgdfgdf fggdfg'"
+             [type]="'error'"
+             (show)="alert()"
+             *ngIf="showAlert"></app-alert>
 </div>
