@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CommonModule} from "@angular/common";
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
-
-type TAlert = 'error' | 'success' | 'warning' | 'info'
+import { IAlerts } from '../../interfaces/alerts';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-alert',
@@ -11,15 +11,23 @@ type TAlert = 'error' | 'success' | 'warning' | 'info'
   templateUrl: './alerts.component.html',
   styleUrl: './alerts.component.scss'
 })
-export class AlertsComponent implements OnInit{
-  @Input() value: string = '';
-  @Input() type: TAlert = 'info';
-  @Output() show = new EventEmitter<boolean>();
+export class AlertsComponent implements OnInit {
+  alert: IAlerts = {
+    message: '',
+    type: 'error',
+    isShow: false,
+  };
+
+  constructor(private service: AlertsService) {}
 
   close(): void {
-    this.show.emit(false);
+    this.service.updateAlert({ ...this.alert, isShow: false });
   }
+
   ngOnInit() {
-    setTimeout(() => this.close(), 5000);
+    this.service.alert$.pipe().subscribe((alert) => {
+      this.alert = alert;
+      setTimeout(() => this.close(), 8000);
+    });
   }
 }

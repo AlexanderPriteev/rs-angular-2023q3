@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
+import { QueriesService } from '../../../api/services/queries.service';
+import { AlertsComponent } from '../../../shared/components/alerts/alerts.component';
+import { AlertsService } from '../../../shared/services/alerts.service';
 import { FieldValidate } from '../../services/field-validate.service';
-import {AlertsComponent} from "../../../shared/components/alerts/alerts.component";
 
 type SignUpFields = 'name' | 'email' | 'password' | 'repeatPassword';
 
@@ -17,6 +19,7 @@ type SignUpFields = 'name' | 'email' | 'password' | 'repeatPassword';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
+
 export class SignupComponent implements OnInit {
   signUpForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, new FieldValidate().name()]),
@@ -30,10 +33,13 @@ export class SignupComponent implements OnInit {
     password: '',
     repeatPassword: ''
   };
+  blackListEmail = new Set<string>();
   isHidePassword = true;
   isFormValid = false;
   isLoad = false;
-  showAlert = false;
+
+  constructor(private query: QueriesService, private router: Router, private alertService: AlertsService) {
+  }
 
   togglePasswordType(): void {
     this.isHidePassword = !this.isHidePassword;
@@ -67,16 +73,38 @@ export class SignupComponent implements OnInit {
       }
       return false;
     }
+    if (fieldName === 'email' && this.blackListEmail.has(field.value)) {
+      this.errors.email = `User ${field.value} already exists`;
+      return false;
+    }
     return true;
   }
 
   sendForm(): void {
-   if(this.isFormValid){
-     this.isLoad = true;
-     setTimeout(() => this.isLoad = false, 2000 )
-     const data = JSON.stringify(this.signUpForm.value)
-     this.showAlert = true;
-   }
+    if (this.isFormValid) {
+      this.isLoad = true;
+      const data = { ...this.signUpForm.value };
+      delete data.repeatPassword;
+
+      this.query.signUp(data).subscribe(
+        () => {
+          const message = `User ${this.signUpForm.controls['email'].value} successfully created`;
+          this.isLoad = false;
+          this.alertService.updateAlert({ message, type: 'success', isShow: true });
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          const message = error.error?.message || 'An unexpected error';
+          if (error.error?.type === 'PrimaryDuplicationException') {
+            this.blackListEmail.add(this.signUpForm.controls['email'].value);
+            this.errors.email = message;
+            this.isFormValid = false;
+          }
+          this.isLoad = false;
+          this.alertService.updateAlert({ message, type: 'error', isShow: true });
+        }
+      );
+    }
   }
 
   ngOnInit() {
@@ -84,11 +112,8 @@ export class SignupComponent implements OnInit {
       const password = this.signUpForm.controls['password'].value;
       const repeatPassword = this.signUpForm.controls['repeatPassword'].value;
       const isPassValid = password === repeatPassword;
-      this.isFormValid = this.signUpForm.valid && isPassValid;
+      const validEmail = !this.blackListEmail.has(this.signUpForm.controls['email'].value);
+      this.isFormValid = this.signUpForm.valid && isPassValid && validEmail;
     });
-  }
-
-  alert(): void {
-    this.showAlert = false;
   }
 }

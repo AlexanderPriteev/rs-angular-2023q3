@@ -10,8 +10,8 @@ describe('AlertsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AlertsComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AlertsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
