@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ProfileBtnComponent } from '../components/btn/btn.component';
 import { ProfileDataComponent } from '../components/data/data.component';
 import { ProfileHeadlineComponent } from '../components/headline/headline.component';
+import {LogoutService} from "../../auth/services/logout.service";
 
 @Component({
   selector: 'app-profile',
@@ -16,5 +17,6 @@ import { ProfileHeadlineComponent } from '../components/headline/headline.compon
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-
+  constructor(public logoutService: LogoutService) {
+  }
 }

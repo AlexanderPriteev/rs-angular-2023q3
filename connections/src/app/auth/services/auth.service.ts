@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {IHeader} from "../../api/interfaces/interfaces";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,13 @@ export class AuthService {
 
   getEmail(): string {
     return localStorage.getItem('email') || '';
+  }
+  getHeader(): HttpHeaders {
+    return new HttpHeaders({
+      'rs-uid': this.getUid(),
+      'rs-email': this.getEmail(),
+      'Authorization': `Bearer ${this.getToken()}`
+    });
   }
 
   clear():void{

@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Component} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {LogoutService} from "../../../auth/services/logout.service";
 
 @Component({
   selector: 'app-user-info',
@@ -10,5 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './user-info.component.scss'
 })
 export class UserInfoComponent {
+  constructor(public logoutService: LogoutService) {
+  }
 
 }

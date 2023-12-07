@@ -25,7 +25,9 @@
         <i class="user-menu__icon icon-account-plus"></i>
         SIGN UP
       </li>
-      <li class="user-menu__item c-red">
+      <li class="user-menu__item c-red"
+          [ngClass]="{disabled: !logoutService.isActive}"
+          (click)="logoutService.logout()">
         <i class="user-menu__icon icon-logout"></i>
         LOGOUT
       </li>
