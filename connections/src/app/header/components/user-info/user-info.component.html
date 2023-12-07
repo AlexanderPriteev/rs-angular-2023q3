@@ -1,29 +1,39 @@
 <div class="user">
-  <div class="user-data">
+  <div class="user-data" [routerLink]="['/profile']" *ngIf="isAuth">
     <span class="user-data__title">user&#64;mail.com</span>
     <i class="user-data__icon icon-account"></i>
   </div>
-  <div class="user-menu-wrapper">
+  <div class="user-data"
+       [routerLink]="['/signin']"
+       *ngIf="!isAuth && currentURL !== '/signin'">
+    <span class="user-data__title">SIGN IN</span>
+    <i class="user-data__icon icon-signin"></i>
+  </div>
+  <div class="user-data"
+       [routerLink]="['/signup']"
+       *ngIf="!isAuth && currentURL === '/signin'">
+    <span class="user-data__title">SIGN UP</span>
+    <i class="user-data__icon icon-account-plus"></i>
+  </div>
+  <div class="user-menu-wrapper" *ngIf="isAuth">
     <ul class="user-menu">
-      <li class="user-menu__item" [routerLink]="['/profile']">
+      <li class="user-menu__item"
+          [routerLink]="['/profile']"
+          *ngIf="currentURL !== '/profile'">
         <i class="user-menu__icon icon-settings"></i>
         PROFILE
       </li>
-      <li class="user-menu__item" [routerLink]="['/']">
+      <li class="user-menu__item"
+          [routerLink]="['/']"
+          *ngIf="currentURL !== '/'">
         <i class="user-menu__icon icon-dialog-2"></i>
         MY DIALOGS
       </li>
-      <li class="user-menu__item" [routerLink]="['/item']">
+      <li class="user-menu__item"
+          [routerLink]="['/item']"
+          *ngIf="currentURL !== '/item'">
         <i class="user-menu__icon icon-group"></i>
         DIALOG
-      </li>
-      <li class="user-menu__item" [routerLink]="['/signin']">
-        <i class="user-menu__icon icon-signin"></i>
-        SIGN IN
-      </li>
-      <li class="user-menu__item" [routerLink]="['/signup']">
-        <i class="user-menu__icon icon-account-plus"></i>
-        SIGN UP
       </li>
       <li class="user-menu__item c-red"
           [ngClass]="{disabled: !logoutService.isActive}"
