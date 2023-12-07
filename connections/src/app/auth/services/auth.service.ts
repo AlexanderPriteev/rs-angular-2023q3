@@ -1,12 +1,13 @@
+/* eslint-disable class-methods-use-this */
+
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {IHeader} from "../../api/interfaces/interfaces";
-import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  setData(token: string, uid: string, email: string):void{
+  setData(token: string, uid: string, email: string):void {
     localStorage.setItem('token', token);
     localStorage.setItem('uid', uid);
     localStorage.setItem('email', email);
@@ -39,11 +40,11 @@ export class AuthService {
     return new HttpHeaders({
       'rs-uid': this.getUid(),
       'rs-email': this.getEmail(),
-      'Authorization': `Bearer ${this.getToken()}`
+      Authorization: `Bearer ${this.getToken()}`
     });
   }
 
-  clear():void{
+  clear():void {
     localStorage.removeItem('token');
     localStorage.removeItem('uid');
     localStorage.removeItem('email');

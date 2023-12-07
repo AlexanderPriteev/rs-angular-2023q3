@@ -1,9 +1,10 @@
-import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
-import {NavigationEnd, Router, RouterModule} from '@angular/router';
-import {LogoutService} from "../../../auth/services/logout.service";
-import {filter} from "rxjs";
-import {AuthService} from "../../../auth/services/auth.service";
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
+
+import { AuthService } from '../../../auth/services/auth.service';
+import { LogoutService } from '../../../auth/services/logout.service';
 
 @Component({
   selector: 'app-user-info',
@@ -12,12 +13,14 @@ import {AuthService} from "../../../auth/services/auth.service";
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.scss'
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit {
   currentURL = '/';
   isAuth = false;
-  constructor(public logoutService: LogoutService,
-              private authService: AuthService,
-              private router: Router) {
+  constructor(
+    public logoutService: LogoutService,
+    private authService: AuthService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -30,5 +33,4 @@ export class UserInfoComponent {
       }
     });
   }
-
 }
