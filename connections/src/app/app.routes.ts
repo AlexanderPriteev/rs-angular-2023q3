@@ -6,13 +6,15 @@ import { DialogComponent } from './dialog/page/dialog.component';
 import { GroupsComponent } from './groups/page/groups.component';
 import { NotFoundComponent } from './not-found/page/not-found.component';
 import { ProfileComponent } from './profile/page/profile.component';
+import {userGuard} from "./auth/guards/user.guard";
+import {authGuard} from "./auth/guards/auth.guard";
 
 export const routes: Routes = [
-  { path: '', component: GroupsComponent },
-  { path: 'login', component: SigninComponent, },
-  { path: 'registration', component: SignupComponent, },
-  { path: 'profile', component: ProfileComponent, },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'item', component: DialogComponent },
+  { path: '', component: GroupsComponent, canActivate: [authGuard] },
+  { path: 'signin', component: SigninComponent, canActivate: [userGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [userGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'groups', component: GroupsComponent, canActivate: [authGuard] },
+  { path: 'item', component: DialogComponent, canActivate: [authGuard] },
   { path: '**', component: NotFoundComponent },
 ];
