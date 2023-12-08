@@ -5,16 +5,24 @@
   </div>
   <div class="profile-line">
     <h3 class="profile-line__title">User Name:</h3>
-    <input type="text"
-           class="profile-line__data"
-           #nameField
-           [(ngModel)]="profile.name"
-           [readonly]="!isEdit">
+    <div class="profile-line__data-wrapper">
+      <input type="text"
+             class="profile-line__data"
+             #nameField
+             [ngClass]="{'profile-line__data--error': nameError}"
+             [(ngModel)]="currentName"
+             [readonly]="!isEdit || isSend">
+      <span class="profile-line__error" *ngIf="nameError">{{nameError}}</span>
+    </div>
+
     <div class="profile-line__btn-wrapper">
       <button class="profile-line__btn bg-primary" *ngIf="!isEdit" (click)="editMode()">
         <i class="icon-edit profile-line__btn-icon"></i>edit
       </button>
-      <button class="profile-line__btn bg-green" *ngIf="isEdit" (click)="saveEdit()">
+      <button class="profile-line__btn bg-green"
+              [ngClass]="{'profile-line__btn--load': isSend}"
+              *ngIf="isEdit"
+              (click)="saveEdit()">
         <i class="icon-check profile-line__btn-icon"></i>save
       </button>
       <button class="profile-line__btn bg-red" *ngIf="isEdit" (click)="cancelEdit()">

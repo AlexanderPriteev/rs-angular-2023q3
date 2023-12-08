@@ -36,4 +36,10 @@ export class QueriesService {
       catchError((error) => throwError(error))
     );
   }
+
+  profileUpdate(name: string) {
+    return this.http.put(`${PATH}profile`, { name }, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
 }

@@ -37,6 +37,26 @@
       font-weight: $light;
       overflow: hidden;
       text-overflow: ellipsis;
+      &--error{
+        border-color: $red;
+      }
+      &-wrapper{
+        width: 100%;
+        max-width: 27rem;
+        position: relative;
+      }
+    }
+    &__error{
+      font-size: 1rem;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      position: absolute;
+      left: 0;
+      color: $red;
+      top: calc(100% + .2rem);
     }
     &__btn{
       width: 7.2rem;
@@ -61,6 +81,29 @@
         min-width: 1.4rem;
         height: 1.4rem;
         font-size: 1.4rem;
+      }
+      &--load{
+        font-size: 0;
+        color: transparent;
+        position: relative;
+        pointer-events: none;
+        &:before{
+          content: '\e90f';
+          font-family: icomoon;
+          width: 1.2rem;
+          min-width: 1.2rem;
+          height: 1.2rem;
+          font-size: 1.2rem;
+          position: absolute;
+          left: calc(50% - .6rem);
+          top: calc(50% - .6rem);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 1;
+          color: $white;
+          animation: rotated linear .8s infinite;
+        }
       }
 
       &-wrapper{
