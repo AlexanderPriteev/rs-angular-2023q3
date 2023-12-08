@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './header/page/header.component';
 import { ThemeToggleService } from './header/services/theme-toggle.service';
+import { ReduxModule } from './redux/modules/redux.module';
 import { AlertsComponent } from './shared/components/alerts/alerts.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { AlertsComponent } from './shared/components/alerts/alerts.component';
   standalone: true,
   imports: [
     CommonModule,
+    ReduxModule,
     HttpClientModule,
     RouterOutlet,
     HeaderComponent,

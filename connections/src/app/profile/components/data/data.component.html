@@ -1,14 +1,14 @@
 <div class="profile-data">
   <div class="profile-line">
     <h3 class="profile-line__title">User ID:</h3>
-    <span class="profile-line__data">qwertyuiopasdfghjkl1234567890</span>
+    <span class="profile-line__data">{{profile.uid}}</span>
   </div>
   <div class="profile-line">
     <h3 class="profile-line__title">User Name:</h3>
     <input type="text"
            class="profile-line__data"
            #nameField
-           [(ngModel)]="nameValue"
+           [(ngModel)]="profile.name"
            [readonly]="!isEdit">
     <div class="profile-line__btn-wrapper">
       <button class="profile-line__btn bg-primary" *ngIf="!isEdit" (click)="editMode()">
@@ -24,10 +24,10 @@
   </div>
   <div class="profile-line">
     <h3 class="profile-line__title">Email:</h3>
-    <span class="profile-line__data">garsteera&#64;gmail.com</span>
+    <span class="profile-line__data">{{profile.email}}</span>
   </div>
   <div class="profile-line">
     <h3 class="profile-line__title">Profile Creation:</h3>
-    <span class="profile-line__data">2023-11-29 12:44:50</span>
+    <span class="profile-line__data">{{profile.createdAt}}</span>
   </div>
 </div>

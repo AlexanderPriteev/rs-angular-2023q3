@@ -1,4 +1,4 @@
-interface IStr {
+export interface IStr {
   S: string;
 }
 

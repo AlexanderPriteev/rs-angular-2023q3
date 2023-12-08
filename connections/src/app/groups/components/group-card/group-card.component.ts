@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IGroupItem, IItem, IPeopleItem } from '../../interfaces/items';
+import { IGroupItem, IItem, IPeopleItem } from '../../../redux/interfaces/items';
 
 @Component({
   selector: 'app-group-card',

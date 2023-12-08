@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IColumn } from '../../interfaces/groups';
-import { IItem } from '../../interfaces/items';
+import { IColumn } from '../../../redux/interfaces/groups';
+import { IItem } from '../../../redux/interfaces/items';
 import { GroupCardComponent } from '../group-card/group-card.component';
 
 @Component({

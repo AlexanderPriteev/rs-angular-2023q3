@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+import { IColumn, IGroups, IPeoples } from '../../redux/interfaces/groups';
 import { GroupComponent } from '../components/group/group.component';
-import { IColumn, IGroups, IPeoples } from '../interfaces/groups';
 
 const mockPeopleList = {
   Count: 2,

@@ -30,4 +30,10 @@ export class QueriesService {
       catchError((error) => throwError(error))
     );
   }
+
+  profile() {
+    return this.http.get(`${PATH}profile`, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
 }
