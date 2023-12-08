@@ -1,6 +1,6 @@
 <div class="user">
   <div class="user-data" [routerLink]="['/profile']" *ngIf="isAuth">
-    <span class="user-data__title">user&#64;mail.com</span>
+    <span class="user-data__title">{{userEmail}}</span>
     <i class="user-data__icon icon-account"></i>
   </div>
   <div class="user-data"
@@ -37,7 +37,7 @@
       </li>
       <li class="user-menu__item c-red"
           [ngClass]="{disabled: !logoutService.isActive}"
-          (click)="logoutService.logout()">
+          (click)="logout()">
         <i class="user-menu__icon icon-logout"></i>
         LOGOUT
       </li>

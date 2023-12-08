@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 
 import { QueriesService } from '../../../api/services/queries.service';
 import { FieldValidate } from '../../../auth/services/field-validate.service';
@@ -79,29 +80,36 @@ export class ProfileDataComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.store.select(selectProfile).subscribe((state) => {
-      if (state.uid) {
-        this.profile = state;
-      } else {
-        this.query.profile().subscribe((response) => {
-          const data = response as IProfile;
-          const date = parseDateByStamp(data.createdAt.S);
-          this.profile = {
-            email: data.email.S,
-            name: data.name.S,
-            uid: data.uid.S,
-            createdAt: date
-          };
-
-          this.store.dispatch(setProfile({ profile: { ...this.profile } }));
-        }, (error) => {
-          const message = error.error?.message || 'An unexpected error';
-          this.alert.updateAlert({ message, type: 'error', isShow: true });
-        });
-      }
+  private queryProfile() {
+    this.query.profile().subscribe((response) => {
+      const data = response as IProfile;
+      const date = parseDateByStamp(data.createdAt.S);
+      this.profile = {
+        email: data.email.S,
+        name: data.name.S,
+        uid: data.uid.S,
+        createdAt: date
+      };
+      this.store.dispatch(setProfile({ profile: { ...this.profile } }));
       this.currentName = this.profile.name;
       this.editedNameValue = this.profile.name;
+    }, (error) => {
+      const message = error.error?.message || 'An unexpected error';
+      this.alert.updateAlert({ message, type: 'error', isShow: true });
     });
+  }
+
+  ngOnInit() {
+    this.store.select(selectProfile)
+      .pipe(take(1))
+      .subscribe((state) => {
+        if (state.uid) {
+          this.profile = state;
+          this.currentName = this.profile.name;
+          this.editedNameValue = this.profile.name;
+        } else {
+          this.queryProfile();
+        }
+      });
   }
 }

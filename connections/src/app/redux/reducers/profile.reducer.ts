@@ -1,17 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { setProfile, updateProfile } from '../actions/profile.action';
+import { clearProfile, setProfile, updateProfile } from '../actions/profile.action';
 import { IProfileState } from '../interfaces/profile';
 
-export const profileState: IProfileState = {
+const mockProfile = {
   email: '',
   name: '',
   uid: '',
-  createdAt: '',
+  createdAt: ''
 };
+
+export const profileState: IProfileState = { ...mockProfile };
 
 export const profileReducer = createReducer(
   profileState,
   on(setProfile, (state, { profile }) => ({ ...state, ...profile })),
-  on(updateProfile, (state, { name }) => ({ ...state, name }))
+  on(updateProfile, (state, { name }) => ({ ...state, name })),
+  on(clearProfile, () => ({ ...mockProfile }))
 );

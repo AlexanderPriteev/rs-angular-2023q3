@@ -10,6 +10,7 @@ import { QueriesService } from '../../../api/services/queries.service';
 import { AlertsComponent } from '../../../shared/components/alerts/alerts.component';
 import { AlertsService } from '../../../shared/services/alerts.service';
 import { AuthService } from '../../services/auth.service';
+import { UserNameService } from '../../services/user-name.service';
 
 type SignInFields = 'email' | 'password';
 
@@ -38,7 +39,8 @@ export class SigninComponent implements OnInit {
     private query: QueriesService,
     private router: Router,
     private alertService: AlertsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private userName: UserNameService
   ) {}
 
   togglePasswordType() {
@@ -68,8 +70,10 @@ export class SigninComponent implements OnInit {
       this.query.signIn(formData).subscribe(
         (response) => {
           const data = response as IAuth;
-          this.auth.setData(data.token, data.uid, this.signInForm.controls['email'].value);
+          const email = this.signInForm.controls['email'].value;
+          this.auth.setData(data.token, data.uid, email);
           this.isLoad = false;
+          this.userName.setUserName(email);
           this.router.navigate(['/']);
         },
         (error) => {

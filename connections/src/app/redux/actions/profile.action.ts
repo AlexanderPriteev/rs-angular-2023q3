@@ -10,3 +10,6 @@ export const updateProfile = createAction(
   '[Profile] Update',
   props<{ name: string }>()
 );
+export const clearProfile = createAction(
+  '[Profile] Update'
+);
