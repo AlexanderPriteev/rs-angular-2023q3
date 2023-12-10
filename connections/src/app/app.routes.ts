@@ -15,6 +15,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [userGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [authGuard] },
-  { path: 'item', component: DialogComponent, canActivate: [authGuard] },
+  { path: 'people/:id', component: DialogComponent, canActivate: [authGuard] },
+  { path: 'group/:id', component: DialogComponent, canActivate: [authGuard] },
   { path: '**', component: NotFoundComponent },
 ];

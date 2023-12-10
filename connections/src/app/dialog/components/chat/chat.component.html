@@ -11,7 +11,10 @@
 
   </div>
   <div class="chat__body">
-    <app-message></app-message>
+    @for (message of dialog; track message){
+      <app-message [message]="message"></app-message>
+    }
+
   </div>
   <div class="chat__footer">
     <textarea class="chat__field"></textarea>

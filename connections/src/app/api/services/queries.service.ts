@@ -68,4 +68,18 @@ export class QueriesService {
     );
   }
 
+  getGroupByID(groupID: string, since: string = ''){
+    const path = `${PATH}groups/read?groupID=${groupID}${since ? `&since=${since}` : ''}`;
+    return this.http.get(path, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
+  getPeopleByID(UID: string, since: number = 0){
+    const path = `${PATH}conversations/read?conversationID=${UID}${since ? `&since=${since}` : ''}`;
+    return this.http.get(path, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
 }

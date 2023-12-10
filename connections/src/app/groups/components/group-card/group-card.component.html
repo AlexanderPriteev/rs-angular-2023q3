@@ -1,5 +1,8 @@
 <div class="group-card" [ngClass]="{'group-card--dialog': isDialog}">
-  <span class="group-card__title">{{item.item.name.S}}</span>
+  <span class="group-card__title"
+        [routerLink]="[rout, dialogID]">
+    {{item.item.name.S}}
+  </span>
   <i class="group-card__icon icon-dialog" *ngIf="isDialog"></i>
   <i class="group-card__remove icon-remove" *ngIf="isMe" (click)="toggleModal()"></i>
 

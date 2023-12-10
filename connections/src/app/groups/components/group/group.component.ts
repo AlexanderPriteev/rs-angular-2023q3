@@ -17,7 +17,7 @@ import {setPeople} from "../../../redux/actions/people.action";
 import {addGroup, deleteGroup, setGroups} from "../../../redux/actions/groups.action";
 import {selectPeople} from "../../../redux/selectors/people.selector";
 
-type ColumnType = 'people' | 'group';
+export type ColumnType = 'people' | 'group';
 
 @Component({
   selector: 'app-group',
