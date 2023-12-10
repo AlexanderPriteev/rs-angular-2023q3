@@ -10,11 +10,15 @@ export interface IGroupItem {
 }
 
 export interface IPeopleItem {
-  id: IStr;
-  companionID: IStr;
+  name: IStr;
+  uid: IStr;
 }
 
 export interface IItem {
   type: 'people' | 'group';
   item: IPeopleItem | IGroupItem;
+}
+
+export interface IGroupResponse {
+  groupID: string;
 }

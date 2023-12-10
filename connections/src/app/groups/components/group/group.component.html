@@ -1,31 +1,34 @@
 <div class="group">
   <div class="group__head">
     <h2 class="group-title">
-      @if (columnItem.type === 'group') {
+      @if (type === 'group') {
         <i class="group-title__icon icon-group"></i>
         GROUPS
       } @else {
         <i class="group-title__icon icon-user"></i>
-        PEOPLES
+        PEOPLE
       }
     </h2>
     <div class="group__head-btn-wrapper">
       <button type="button"
               class="group-btn"
-              *ngIf="columnItem.type === 'group'"
+              *ngIf="type === 'group'"
               (click)="toggleModal()">
         <i class="icon-plus group-btn__icon"></i>
-        add new
+        create
       </button>
-      <button type="button" class="group-btn">
+      <button type="button"
+              class="group-btn"
+              [disabled]="isUpdate"
+              (click)="updateGroupTimer()">
         <i class="icon-update group-btn__icon"></i>
-        <span class="group-btn__text">update</span>
+        <span class="group-btn__text">{{timer}}</span>
       </button>
     </div>
   </div>
   <div class="group__body">
     @for (item of items; track item) {
-      <app-group-card [item]="item"></app-group-card>
+      <app-group-card [item]="item" (onChange)="updateState()"></app-group-card>
     }
   </div>
 
@@ -39,7 +42,9 @@
       <input type="text"
              class="field__input"
              name="group"
+             [(ngModel)]="newGroupName"
              id="group">
+      <span class="field__error" *ngIf="newGroupError">{{ newGroupError }}</span>
     </div>
     <div class="form-btn-wrapper">
       <button type="button"
@@ -47,7 +52,9 @@
               (click)="toggleModal()">Cancel</button>
       <button type="button"
               class="form-btn"
-              (click)="toggleModal()">Create</button>
+              [disabled]="isSend"
+              [ngClass]="{'form-btn--load': isSend}"
+              (click)="createGroup()">Create</button>
     </div>
   </div>
 </div>

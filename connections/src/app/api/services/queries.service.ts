@@ -42,4 +42,30 @@ export class QueriesService {
       catchError((error) => throwError(error))
     );
   }
+
+  getGroups() {
+    return this.http.get(`${PATH}groups/list`, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
+  createGroup(name: string){
+    return this.http.post(`${PATH}groups/create`, { name }, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+  deleteGroup(groupID: string){
+    return this.http.delete(
+      `${PATH}groups/delete?groupID=${groupID}`,
+      { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
+  getPeople() {
+    return this.http.get(`${PATH}users`, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
 }

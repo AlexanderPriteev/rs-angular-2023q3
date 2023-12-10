@@ -4,7 +4,7 @@ export interface IGroups {
   Count: number;
   Items: IGroupItem[];
 }
-export interface IPeoples {
+export interface IPeople {
   Count: number;
   Items: IPeopleItem[];
 }

@@ -1,5 +1,22 @@
 <div class="group-card" [ngClass]="{'group-card--dialog': isDialog}">
-  <span class="group-card__title">qwertyuiopasdfghj lzxcvbnm1234567</span>
+  <span class="group-card__title">{{item.item.name.S}}</span>
   <i class="group-card__icon icon-dialog" *ngIf="isDialog"></i>
-  <i class="group-card__remove icon-remove" *ngIf="isMe"></i>
+  <i class="group-card__remove icon-remove" *ngIf="isMe" (click)="toggleModal()"></i>
+
+  <div class="group-card-modal" *ngIf="isModal">
+    <span class="group-card-modal__title">Remove this group?</span>
+    <div class="group-card-modal__btn-wrapper">
+      <button type="button"
+              class="group-card-modal__btn"
+              [disabled]="isSend"
+              (click)="deleteItem()">
+        delete
+      </button>
+      <button type="button"
+              class="group-card-modal__btn"
+              (click)="toggleModal()">
+        cancel
+      </button>
+    </div>
+  </div>
 </div>
