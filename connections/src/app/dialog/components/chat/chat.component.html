@@ -17,7 +17,9 @@
 
   </div>
   <div class="chat__footer">
-    <textarea class="chat__field"></textarea>
-    <i class="icon-send chat__send"></i>
+    <textarea class="chat__field" [(ngModel)]="newMessageField"></textarea>
+    <button type="button" class="icon-send chat__send"
+            [disabled]="!newMessageField"
+            (click)="sendMessage()"></button>
   </div>
 </div>

@@ -49,15 +49,16 @@ export class QueriesService {
     );
   }
 
-  createGroup(name: string){
+  createGroup(name: string) {
     return this.http.post(`${PATH}groups/create`, { name }, { headers: this.auth.getHeader() }).pipe(
       catchError((error) => throwError(error))
     );
   }
-  deleteGroup(groupID: string){
+  deleteGroup(groupID: string) {
     return this.http.delete(
       `${PATH}groups/delete?groupID=${groupID}`,
-      { headers: this.auth.getHeader() }).pipe(
+      { headers: this.auth.getHeader() }
+    ).pipe(
       catchError((error) => throwError(error))
     );
   }
@@ -68,18 +69,37 @@ export class QueriesService {
     );
   }
 
-  getGroupByID(groupID: string, since: string = ''){
+  getGroupByID(groupID: string, since: number = 0) {
     const path = `${PATH}groups/read?groupID=${groupID}${since ? `&since=${since}` : ''}`;
     return this.http.get(path, { headers: this.auth.getHeader() }).pipe(
       catchError((error) => throwError(error))
     );
   }
 
-  getPeopleByID(UID: string, since: number = 0){
+  getPeopleByID(UID: string, since: number = 0) {
     const path = `${PATH}conversations/read?conversationID=${UID}${since ? `&since=${since}` : ''}`;
     return this.http.get(path, { headers: this.auth.getHeader() }).pipe(
       catchError((error) => throwError(error))
     );
   }
 
+  postGroupMessage(groupID: string, message: string) {
+    return this.http.post(
+      `${PATH}groups/append`,
+      { groupID, message },
+      { headers: this.auth.getHeader() }
+    ).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
+  postPeopleMessage(conversationID: string, message: string) {
+    return this.http.post(
+      `${PATH}conversations/append`,
+      { conversationID, message },
+      { headers: this.auth.getHeader() }
+    ).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
 }

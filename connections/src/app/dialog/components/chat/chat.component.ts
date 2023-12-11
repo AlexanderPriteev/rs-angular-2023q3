@@ -1,22 +1,24 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {
+  Component, EventEmitter, Input, Output
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { IMessage } from '../../../redux/interfaces/message';
 import { MessageComponent } from '../message/message.component';
-import {IMessage} from "../../../redux/interfaces/message";
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [MessageComponent],
+  imports: [MessageComponent, FormsModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
-export class ChatComponent implements OnChanges {
+export class ChatComponent {
   @Input() dialog: IMessage[] = [];
-
-
-
-  ngOnChanges() {
-    console.log(this.dialog)
+  @Output() newMessage = new EventEmitter<string>();
+  newMessageField: string = '';
+  sendMessage() {
+    this.newMessage.emit(this.newMessageField);
+    this.newMessageField = '';
   }
-
 }

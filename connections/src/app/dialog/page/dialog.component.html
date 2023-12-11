@@ -1,6 +1,6 @@
 <div class="dialog-wrapper">
   <div class="dialog">
     <app-dialog-headline></app-dialog-headline>
-    <app-chat [dialog]="dialog"></app-chat>
+    <app-chat [dialog]="dialog" (newMessage)="sendMessage($event)" ></app-chat>
   </div>
 </div>

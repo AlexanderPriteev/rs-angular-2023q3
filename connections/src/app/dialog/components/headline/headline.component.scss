@@ -20,6 +20,7 @@
     transition: opacity .2s linear;
     &:hover{
       opacity: .7;
+      text-decoration: none;
     }
     &__icon{
       width: 2.4rem;

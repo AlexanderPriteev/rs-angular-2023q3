@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import {IGroupItem} from "../interfaces/items";
+
+import { IGroupItem } from '../interfaces/items';
 
 export const setGroups = createAction(
   '[Groups] Set',

@@ -28,7 +28,7 @@
   </div>
   <div class="group__body">
     @for (item of items; track item) {
-      <app-group-card [item]="item" (onChange)="updateState()"></app-group-card>
+      <app-group-card [item]="item" (targetDelete)="updateState()"></app-group-card>
     }
   </div>
 

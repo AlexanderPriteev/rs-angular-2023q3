@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {IMessage} from "../../../redux/interfaces/message";
-import {parseDateByStamp} from "../../../shared/functions/parseDateByStamp";
-import {AuthService} from "../../../auth/services/auth.service";
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { AuthService } from '../../../auth/services/auth.service';
+import { IMessage } from '../../../redux/interfaces/message';
+import { parseDateByStamp } from '../../../shared/functions/parseDateByStamp';
 
 @Component({
   selector: 'app-message',
@@ -11,8 +12,8 @@ import {AuthService} from "../../../auth/services/auth.service";
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent implements OnInit{
- @Input() message!: IMessage;
+export class MessageComponent implements OnInit {
+  @Input() message!: IMessage;
   name: string = '';
   date: string = '';
   isMe: boolean = false;
@@ -27,5 +28,5 @@ export class MessageComponent implements OnInit{
     this.date = parseDateByStamp(this.message.createdAt.S);
     this.name = this.message?.authorName || this.message.authorID.S;
     this.isMe = this.auth.getUid() === this.message.authorID.S;
- }
+  }
 }

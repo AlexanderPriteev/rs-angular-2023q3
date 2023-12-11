@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 
+import { dialogsReducer } from '../reducers/dialogs.reducer';
+import { groupsReducer } from '../reducers/groups.reducer';
+import { peopleReducer } from '../reducers/people.reducer';
 import { profileReducer } from '../reducers/profile.reducer';
-import {groupsReducer} from "../reducers/groups.reducer";
-import {peopleReducer} from "../reducers/people.reducer";
 
 @NgModule({
   imports: [
     StoreModule.forRoot({
       profile: profileReducer,
       groups: groupsReducer,
-      people: peopleReducer
+      people: peopleReducer,
+      dialogs: dialogsReducer
     })
   ],
   exports: [

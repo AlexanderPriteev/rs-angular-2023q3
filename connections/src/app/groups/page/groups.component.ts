@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 
 import { GroupComponent } from '../components/group/group.component';
 
-
 @Component({
   selector: 'app-groups',
   standalone: true,

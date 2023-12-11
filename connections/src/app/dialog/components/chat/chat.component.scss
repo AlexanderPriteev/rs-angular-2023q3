@@ -94,6 +94,10 @@
     &:hover{
       color: var(--primary);
     }
+    &:disabled{
+      pointer-events: none;
+      opacity: .4;
+    }
   }
   &__field{
     width: calc(100% - 6rem);
