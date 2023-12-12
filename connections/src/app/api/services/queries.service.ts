@@ -95,6 +95,13 @@ export class QueriesService {
     );
   }
 
+  deleteConversation(conversationID: string) {
+    const path = `${PATH}conversations/delete?conversationID=${conversationID}`;
+    return this.http.delete(path, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
   postGroupMessage(groupID: string, message: string) {
     return this.http.post(
       `${PATH}groups/append`,

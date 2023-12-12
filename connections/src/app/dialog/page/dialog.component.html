@@ -1,6 +1,10 @@
 <div class="dialog-wrapper">
   <div class="dialog">
-    <app-dialog-headline></app-dialog-headline>
-    <app-chat [dialog]="dialog" (newMessage)="sendMessage($event)" ></app-chat>
+    <app-dialog-headline [isMyGroup]="isMyGroup"></app-dialog-headline>
+    <app-chat [dialog]="dialog"
+              [timer]="timer"
+              [dialogName]="dialogName"
+              (newMessage)="sendMessage($event)"
+              (dataUpdate)="updateState($event)"></app-chat>
   </div>
 </div>

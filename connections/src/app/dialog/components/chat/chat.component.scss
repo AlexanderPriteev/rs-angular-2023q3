@@ -60,6 +60,15 @@
     &:hover{
       background-color: rgba($white, .2);
     }
+    &:disabled{
+      pointer-events: none;
+      opacity: .8;
+    }
+    &-text{
+      width: 3.8rem;
+      justify-content: center;
+      display: inline-flex;
+    }
   }
 
   &__body{

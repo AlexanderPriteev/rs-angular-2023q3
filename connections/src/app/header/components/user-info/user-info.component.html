@@ -29,12 +29,6 @@
         <i class="user-menu__icon icon-dialog-2"></i>
         MY DIALOGS
       </li>
-      <li class="user-menu__item"
-          [routerLink]="['/item']"
-          *ngIf="currentURL !== '/item'">
-        <i class="user-menu__icon icon-group"></i>
-        DIALOG
-      </li>
       <li class="user-menu__item c-red"
           [ngClass]="{disabled: !logoutService.isActive}"
           (click)="logout()">

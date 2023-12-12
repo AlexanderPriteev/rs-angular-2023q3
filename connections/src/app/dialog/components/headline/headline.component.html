@@ -4,8 +4,11 @@
     Back to my dialogs
     <i class="icon-dialog-2 dialog-link__icon"></i>
   </a>
-  <button type="button" class="dialog-remove" *ngIf="isMyGroup">
+  <button type="button" class="dialog-remove"
+          [disabled]="idDisabled"
+          *ngIf="isMyGroup || type !== 'group'"
+          (click)="deleteDialog()">
     <i class="icon-remove dialog-remove__icon"></i>
-    Remove this dialog
+    Remove this {{type}}
   </button>
 </div>

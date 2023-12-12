@@ -12,6 +12,11 @@ export const addConversationPeople = createAction(
   props<{ uid: string, conversation: string }>()
 );
 
+export const deleteConversationPeople = createAction(
+  '[People] Delete Conversation',
+  props<{ conversation: string }>()
+);
+
 export const clearPeople = createAction(
   '[People] Clear',
 );

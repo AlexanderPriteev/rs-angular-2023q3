@@ -77,7 +77,7 @@ export class GroupCardComponent implements OnInit {
           const data = (response as { conversationID: string }).conversationID;
           this.store.dispatch(addConversationPeople({ uid: companion, conversation: data }));
           this.isCreate = false;
-          this.redirectTimer = 5;
+          this.redirectTimer = 9;
           const interval = setInterval(() => {
             if (this.redirectTimer) this.redirectTimer -= 1;
             else {
