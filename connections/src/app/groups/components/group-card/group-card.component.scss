@@ -8,6 +8,7 @@
   background-color: var(--primary-100);
   position: relative;
   overflow: hidden;
+  min-height: 4.7rem;
 
   &--dialog{
     background-color: $green;
@@ -63,6 +64,10 @@
     gap: 1rem;
     &__title{
       font-size: 1.4rem;
+      &--center{
+        margin: auto;
+        text-align: center;
+      }
     }
     &__btn{
       width: 5rem;
@@ -109,6 +114,31 @@
         display: inline-flex;
         gap: .5rem;
       }
+    }
+  }
+  &-loader{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($primary, .5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:before{
+      content: '\e90f';
+      font-family: icomoon;
+      width: 2rem;
+      height: 2rem;
+      font-size: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      color: $white;
+      animation: rotated linear .8s infinite;
     }
   }
 }

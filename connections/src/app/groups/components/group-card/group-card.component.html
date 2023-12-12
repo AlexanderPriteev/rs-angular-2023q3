@@ -1,6 +1,6 @@
 <div class="group-card" [ngClass]="{'group-card--dialog': isDialog}">
   <span class="group-card__title"
-        [routerLink]="[rout, dialogID]">
+        (click)="navigate()">
     {{item.item.name.S}}
   </span>
   <i class="group-card__icon icon-dialog" *ngIf="isDialog"></i>
@@ -22,4 +22,12 @@
       </button>
     </div>
   </div>
+
+  <div class="group-card-loader" *ngIf="isCreate"></div>
+  <div class="group-card-modal" *ngIf="redirectTimer">
+    <span class="group-card-modal__title group-card-modal__title--center">
+      Conversation created.<br/>
+      You will be redirected in {{redirectTimer}}</span>
+  </div>
+
 </div>

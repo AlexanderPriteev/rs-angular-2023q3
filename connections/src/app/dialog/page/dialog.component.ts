@@ -11,7 +11,7 @@ import {
   updateGroupDialog,
   updatePeopleDialog
 } from '../../redux/actions/dialogs.action';
-import { setPeople } from '../../redux/actions/people.action';
+import {addConversationPeople, setPeople} from '../../redux/actions/people.action';
 import { IPeople } from '../../redux/interfaces/groups';
 import { IDialog, IMessage } from '../../redux/interfaces/message';
 import { AppState } from '../../redux/interfaces/state';
@@ -20,6 +20,7 @@ import { selectPeople } from '../../redux/selectors/people.selector';
 import { AlertsService } from '../../shared/services/alerts.service';
 import { ChatComponent } from '../components/chat/chat.component';
 import { DialogHeadlineComponent } from '../components/headline/headline.component';
+import {IConversationList} from "../../redux/interfaces/items";
 
 @Component({
   selector: 'app-dialog',
@@ -60,7 +61,6 @@ export class DialogComponent implements OnInit {
           this.query.getPeople().subscribe(
             (response) => {
               const data = response as IPeople;
-              this.store.dispatch(setPeople({ people: data.Items }));
               const map = data.Items
                 .reduce(
                   (s, c) => s.set(c.uid.S, c.name.S),

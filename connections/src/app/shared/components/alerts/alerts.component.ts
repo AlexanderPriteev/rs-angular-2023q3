@@ -27,7 +27,7 @@ export class AlertsComponent implements OnInit {
   ngOnInit() {
     this.service.alert$.pipe().subscribe((alert) => {
       this.alert = alert;
-      setTimeout(() => this.close(), 8000);
+      setTimeout(() => this.close(), 80000);
     });
   }
 }

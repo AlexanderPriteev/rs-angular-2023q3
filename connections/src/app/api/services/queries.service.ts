@@ -83,6 +83,18 @@ export class QueriesService {
     );
   }
 
+  getConversationList() {
+    return this.http.get(`${PATH}conversations/list`, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
+  postConversation(companion: string) {
+    return this.http.post(`${PATH}conversations/create`, { companion }, { headers: this.auth.getHeader() }).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
   postGroupMessage(groupID: string, message: string) {
     return this.http.post(
       `${PATH}groups/append`,

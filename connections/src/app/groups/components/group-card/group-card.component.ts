@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import {
   Component, EventEmitter, Input, OnInit, Output
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { QueriesService } from '../../../api/services/queries.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { deleteGroup } from '../../../redux/actions/groups.action';
+import { addConversationPeople } from '../../../redux/actions/people.action';
 import { IGroupItem, IItem, IPeopleItem } from '../../../redux/interfaces/items';
 import { AppState } from '../../../redux/interfaces/state';
 import { AlertsService } from '../../../shared/services/alerts.service';
 
-export type TRoutDialog = '/people' | '/group';
+export type TRoutDialog = '/conversation' | '/group';
 
 @Component({
   selector: 'app-group-card',
@@ -31,12 +32,15 @@ export class GroupCardComponent implements OnInit {
   isSend: boolean = false;
   rout: TRoutDialog = '/group';
   dialogID: string = '';
+  redirectTimer: number = 0;
+  isCreate: boolean = false;
 
   constructor(
     private store: Store<AppState>,
     private auth: AuthService,
     private query: QueriesService,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private router: Router
   ) {
   }
 
@@ -62,14 +66,43 @@ export class GroupCardComponent implements OnInit {
     );
   }
 
+  navigate() {
+    if (this.dialogID) {
+      this.router.navigate([this.rout, this.dialogID]);
+    } else {
+      const companion = (this.item.item as IPeopleItem).uid.S;
+      this.isCreate = true;
+      this.query.postConversation(companion).subscribe(
+        (response) => {
+          const data = (response as { conversationID: string }).conversationID;
+          this.store.dispatch(addConversationPeople({ uid: companion, conversation: data }));
+          this.isCreate = false;
+          this.redirectTimer = 5;
+          const interval = setInterval(() => {
+            if (this.redirectTimer) this.redirectTimer -= 1;
+            else {
+              clearInterval(interval);
+              this.router.navigate([this.rout, data]);
+            }
+          }, 1000);
+        },
+        () => {
+          const message = 'Failed to create conversation';
+          this.alertService.updateAlert({ message, type: 'error', isShow: true });
+          this.isCreate = false;
+        }
+      );
+    }
+  }
+
   ngOnInit() {
     if (this.item.type === 'group') {
       this.dialogID = (this.item.item as IGroupItem).id.S;
       this.isMe = (this.item.item as IGroupItem).createdBy?.S === this.auth.getUid();
     } else {
-      this.dialogID = (this.item.item as IPeopleItem).uid.S;
-      this.rout = '/people';
-      this.isDialog = (this.item.item as IPeopleItem).name?.S === 'me';
+      this.dialogID = (this.item.item as IPeopleItem).conversation || '';
+      this.rout = '/conversation';
+      this.isDialog = !!this.dialogID;
     }
   }
 }

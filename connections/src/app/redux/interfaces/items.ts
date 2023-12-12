@@ -12,6 +12,17 @@ export interface IGroupItem {
 export interface IPeopleItem {
   name: IStr;
   uid: IStr;
+  conversation?: string;
+}
+
+export interface IConversation {
+  id: IStr;
+  companionID: IStr;
+}
+
+export interface IConversationList {
+  Count: number;
+  Items: IConversation[];
 }
 
 export interface IItem {
