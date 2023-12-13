@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, Input, OnDestroy, OnInit
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
@@ -17,6 +19,7 @@ import { AppState } from '../../../redux/interfaces/state';
 import { selectGroups } from '../../../redux/selectors/groups.selector';
 import { selectPeople } from '../../../redux/selectors/people.selector';
 import { AlertsService } from '../../../shared/services/alerts.service';
+import { TimerService } from '../../../shared/services/timer.service';
 import { GroupCardComponent } from '../group-card/group-card.component';
 
 export type ColumnType = 'people' | 'group';
@@ -30,31 +33,32 @@ export type ColumnType = 'people' | 'group';
   templateUrl: './group.component.html',
   styleUrl: './group.component.scss'
 })
-export class GroupComponent implements OnInit {
+export class GroupComponent implements OnInit, OnDestroy {
   @Input() type: ColumnType = 'group';
   isShowModal: boolean = false;
   newGroupName: string = '';
   newGroupError: string = '';
   isSend: boolean = false;
   items: IItem[] = [];
-  timer: string = 'update';
+  timer: number = 0;
   isUpdate: boolean = false;
 
   constructor(
     private store: Store<AppState>,
     private auth: AuthService,
     private query: QueriesService,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private timerService: TimerService
   ) {
   }
 
   countDown(time: number) {
-    let timer = time;
+    if (time <= 0) return;
+    this.timerService.setTimerValue(this.type, time);
+    this.isUpdate = true;
     const interval = setInterval(() => {
-      this.timer = String(timer);
-      if (timer) timer -= 1;
-      else {
-        this.timer = 'update';
+      this.timer = this.timerService.getTimerValue(this.type);
+      if (!this.timer) {
         this.isUpdate = false;
         clearInterval(interval);
       }
@@ -132,7 +136,7 @@ export class GroupComponent implements OnInit {
   }
 
   updateGroupTimer() {
-    this.timer = '60';
+    this.timer = 60;
     this.updateColum(true);
   }
 
@@ -189,5 +193,10 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     this.updateState();
+    this.countDown(this.timerService.getTimerValue(this.type));
+  }
+
+  ngOnDestroy() {
+    this.timerService.setTimerValue(this.type, this.timer);
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
@@ -19,6 +19,7 @@ import { selectGroupDialog, selectPeopleDialog } from '../../redux/selectors/dia
 import { selectGroups } from '../../redux/selectors/groups.selector';
 import { selectPeople } from '../../redux/selectors/people.selector';
 import { AlertsService } from '../../shared/services/alerts.service';
+import { TimerService } from '../../shared/services/timer.service';
 import { ChatComponent } from '../components/chat/chat.component';
 import { DialogHeadlineComponent } from '../components/headline/headline.component';
 
@@ -33,7 +34,7 @@ import { DialogHeadlineComponent } from '../components/headline/headline.compone
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss'
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent implements OnInit, OnDestroy {
   dialogID: string = '';
   type: string = '';
   dialog: IMessage[] = [];
@@ -47,7 +48,8 @@ export class DialogComponent implements OnInit {
     private router: Router,
     private query: QueriesService,
     private alertService: AlertsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private timerService: TimerService
   ) {
   }
 
@@ -111,12 +113,11 @@ export class DialogComponent implements OnInit {
   }
 
   countTimer() {
-    this.timer = 60;
+    if (this.timer !== -1 && !this.timerService.getTimerValue(this.dialogID)) return;
+    if (this.timer === -1) this.timerService.setTimerValue(this.dialogID, 60);
     const interval = setInterval(() => {
-      if (this.timer) this.timer -= 1;
-      else {
-        clearInterval(interval);
-      }
+      this.timer = this.timerService.getTimerValue(this.dialogID);
+      if (!this.timer) clearInterval(interval);
     }, 1000);
   }
 
@@ -133,7 +134,7 @@ export class DialogComponent implements OnInit {
           .sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S));
         this.dialog = this.dialog.concat(data.Items);
         data.lastUpdate = new Date().getTime();
-        if (this.timer) this.countTimer();
+        this.countTimer();
         if (this.type === 'group') {
           this.getGroups();
           if (time) {
@@ -203,6 +204,11 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     [this.type, this.dialogID] = this.route.snapshot.url.map((e) => e.path);
+    this.timer = this.timerService.getTimerValue(this.dialogID);
     this.updateState();
+  }
+
+  ngOnDestroy() {
+    this.timerService.setTimerValue(this.dialogID, this.timer);
   }
 }

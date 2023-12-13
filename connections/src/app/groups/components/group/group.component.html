@@ -22,7 +22,13 @@
               [disabled]="isUpdate"
               (click)="updateGroupTimer()">
         <i class="icon-update group-btn__icon"></i>
-        <span class="group-btn__text">{{timer}}</span>
+        <span class="group-btn__text">
+          @if (timer) {
+            {{timer}}
+          } @else {
+            update
+          }
+        </span>
       </button>
     </div>
   </div>
