@@ -55,7 +55,8 @@
       <input type="text"
              class="field__input"
              name="group"
-             [(ngModel)]="newGroupName"
+             [formControl]="newGroupName"
+             (input)="toggleModalBtn()"
              id="group">
       <span class="field__error" *ngIf="newGroupError">{{ newGroupError }}</span>
     </div>
@@ -65,7 +66,7 @@
               (click)="toggleModal()">Cancel</button>
       <button type="button"
               class="form-btn"
-              [disabled]="isSend"
+              [disabled]="isSend || isDisabled"
               [ngClass]="{'form-btn--load': isSend}"
               (click)="createGroup()">Create</button>
     </div>

@@ -32,7 +32,7 @@ export class DialogHeadlineComponent implements OnInit {
   ) {
   }
 
-  toggleModal(){
+  toggleModal() {
     this.showModal = !this.showModal;
   }
 

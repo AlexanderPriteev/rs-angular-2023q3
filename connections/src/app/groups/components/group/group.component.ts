@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component, Input, OnDestroy, OnInit
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 
@@ -28,7 +28,7 @@ export type ColumnType = 'people' | 'group';
   selector: 'app-group',
   standalone: true,
   imports: [
-    CommonModule, GroupCardComponent, FormsModule
+    CommonModule, GroupCardComponent, FormsModule, ReactiveFormsModule
   ],
   templateUrl: './group.component.html',
   styleUrl: './group.component.scss'
@@ -36,7 +36,6 @@ export type ColumnType = 'people' | 'group';
 export class GroupComponent implements OnInit, OnDestroy {
   @Input() type: ColumnType = 'group';
   isShowModal: boolean = false;
-  newGroupName: string = '';
   newGroupError: string = '';
   isSend: boolean = false;
   items: IItem[] = [];
@@ -44,6 +43,9 @@ export class GroupComponent implements OnInit, OnDestroy {
   timer: number = 0;
   isUpdate: boolean = false;
   isSearch: boolean = false;
+
+  newGroupName = new FormControl('');
+  isDisabled: boolean = true;
 
   constructor(
     private store: Store<AppState>,
@@ -54,14 +56,18 @@ export class GroupComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  toggleSearch(){
+  toggleSearch() {
     this.isSearch = !this.isSearch;
+  }
+  toggleModalBtn() {
+    const str = this.newGroupName.value || '';
+    this.isDisabled = /(?=.*[^a-zA-z\s\d])/.test(str) || str.length > 40 || !str.length;
   }
 
   onInputChange(event: Event) {
     const text = (event.target as HTMLInputElement).value;
     this.items = this.itemsWithoutSearch
-      .filter((e) => e.item.name.S.toLowerCase().includes(text.toLowerCase()))
+      .filter((e) => e.item.name.S.toLowerCase().includes(text.toLowerCase()));
   }
 
   countDown(time: number) {
@@ -151,7 +157,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   updateGroupTimer() {
-   // this.timer = 60;
+    // this.timer = 60;
     this.updateColum(true);
   }
 
@@ -163,13 +169,13 @@ export class GroupComponent implements OnInit, OnDestroy {
 
     if (!this.isSend) {
       this.isSend = true;
-      this.query.createGroup(this.newGroupName).subscribe(
+      this.query.createGroup(this.newGroupName.value || '').subscribe(
         (response) => {
           const newItem: IItem = {
             type: 'group',
             item: {
               id: { S: (response as IGroupResponse).groupID },
-              name: { S: this.newGroupName },
+              name: { S: this.newGroupName.value || '' },
               createdAt: { S: String(new Date().getTime()) },
               createdBy: { S: this.auth.getUid() }
             }
@@ -177,7 +183,7 @@ export class GroupComponent implements OnInit, OnDestroy {
           this.store.dispatch(addGroup({ group: newItem.item as IGroupItem }));
           this.items.unshift(newItem);
           this.itemsWithoutSearch.unshift(newItem);
-          const message = `${this.newGroupName} group created`;
+          const message = `${this.newGroupName.value} group created`;
           this.alertService.updateAlert({ message, type: 'success', isShow: true });
           this.isSend = false;
           this.toggleModal();
@@ -194,7 +200,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   toggleModal() {
     this.isShowModal = !this.isShowModal;
     this.newGroupError = '';
-    this.newGroupName = '';
+    this.newGroupName.setValue('');
   }
 
   updateState() {
