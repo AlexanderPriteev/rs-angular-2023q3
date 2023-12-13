@@ -1,14 +1,27 @@
 .group{
   &-container{
     width: calc(50% - 2.1rem);
+    @media (max-width: 990px) {
+      width: calc(50% - 1rem);
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
   &-wrapper{
     display: flex;
     gap: 4.2rem;
     width: 100%;
-    max-width: 76.2rem;
+    max-width: 80rem;
     box-sizing: border-box;
     padding: 4rem 1rem 2rem;
     margin: 0 auto;
+    @media (max-width: 990px) {
+      gap: 2rem;
+    }
+    @media (max-width: 767px) {
+      padding: 1rem;
+      flex-direction: column;
+    }
   }
 }

@@ -1,35 +1,42 @@
 <div class="group">
   <div class="group__head">
-    <h2 class="group-title">
-      @if (type === 'group') {
+    <div class="group__head-row">
+      <h2 class="group-title">
+        @if (type === 'group') {
         <i class="group-title__icon icon-group"></i>
         GROUPS
-      } @else {
+        } @else {
         <i class="group-title__icon icon-user"></i>
         PEOPLE
-      }
-    </h2>
-    <div class="group__head-btn-wrapper">
-      <button type="button"
-              class="group-btn"
-              *ngIf="type === 'group'"
-              (click)="toggleModal()">
-        <i class="icon-plus group-btn__icon"></i>
-        create
-      </button>
-      <button type="button"
-              class="group-btn"
-              [disabled]="isUpdate"
-              (click)="updateGroupTimer()">
-        <i class="icon-update group-btn__icon"></i>
-        <span class="group-btn__text">
+        }
+      </h2>
+      <div class="group__head-btn-wrapper">
+        <button type="button"
+                class="group-btn"
+                *ngIf="type === 'group'"
+                (click)="toggleModal()">
+          <i class="icon-plus group-btn__icon"></i>
+          create
+        </button>
+        <button type="button"
+                class="group-btn"
+                [disabled]="isUpdate"
+                (click)="updateGroupTimer()">
+          <i class="icon-update group-btn__icon"></i>
+          <span class="group-btn__text">
           @if (timer) {
             {{timer}}
           } @else {
             update
           }
         </span>
-      </button>
+        </button>
+        <i class="icon-search group-btn-icon" (click)="toggleSearch()"></i>
+      </div>
+    </div>
+    <div class="field" *ngIf="isSearch">
+      <input type="text" class="field__input"
+       (input)="onInputChange($event)">
     </div>
   </div>
   <div class="group__body">

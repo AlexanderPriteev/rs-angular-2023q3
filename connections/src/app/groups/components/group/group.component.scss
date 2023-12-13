@@ -7,23 +7,35 @@
   box-shadow: 0 0 .8rem 0 rgba($black, .1);
   background-color: var(--primary-200);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 13rem);
+  @media (max-width: 767px) {
+    height: calc(50vh - 6.2rem);
+  }
   &__head{
     width: 100%;
     box-sizing: border-box;
     padding: .8rem 1rem;
     background-color: var(--primary);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
     &-btn-wrapper{
       display: inline-flex;
       gap: .8rem;
     }
+    &-row{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
   }
   &__body{
     width: 100%;
-    height: calc(100vh - 18rem);
+    flex-grow: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -40,6 +52,10 @@
     font-weight: $regular;
     letter-spacing: .08rem;
     text-transform: uppercase;
+    @media (max-width: 360px) {
+      font-size: 0;
+      gap: 0;
+    }
     &__icon{
       width: 3.2rem;
       min-width: 3.2rem;
@@ -48,8 +64,8 @@
     }
   }
   &-btn{
-    width: 8.2rem;
-    min-width: 8.2rem;
+    width: 7.5rem;
+    min-width: 7.5rem;
     height: 2.4rem;
     display: inline-flex;
     align-items: center;
@@ -73,6 +89,19 @@
       width: 3.8rem;
       justify-content: center;
       display: inline-flex;
+    }
+
+    &-icon{
+      width: 2.4rem;
+      min-width: 2.4rem;
+      height: 2.4rem;
+      font-size: 1.8rem;
+      color: $white;
+      cursor: pointer;
+      transition: opacity .2s linear;
+      &:hover{
+        opacity: .8;
+      }
     }
   }
 

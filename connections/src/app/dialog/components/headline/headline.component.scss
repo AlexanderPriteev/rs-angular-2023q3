@@ -39,6 +39,10 @@
     white-space: nowrap;
     font-size: 1.4rem;
     transition: opacity .2s linear;
+    @media (max-width: 390px) {
+      font-size: 0;
+      gap: 0;
+    }
     &:hover{
       opacity: .7;
     }
@@ -51,6 +55,12 @@
       height: 1.4rem;
       min-width: 1.4rem;
       font-size: 1.4rem;
+      @media (max-width: 390px) {
+        width: 3.2rem;
+        height: 3.2rem;
+        min-width: 3.2rem;
+        font-size: 3.2rem;
+      }
     }
   }
 

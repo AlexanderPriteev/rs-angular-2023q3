@@ -8,14 +8,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
   box-shadow: 0 .4rem .4rem 0 rgba($black, .25);
+  @media (max-width: 767px) {
+    padding: 1rem;
+  }
+  @media (max-width: 449px) {
+    flex-direction: column;
+  }
 
   &-block {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     gap: 4.8rem;
+    @media (max-width: 767px) {
+      gap: 1.5rem;
+    }
+    @media (max-width: 449px) {
+      width: 100%;
+      flex-direction: row-reverse;
+    }
   }
 }
 

@@ -40,8 +40,10 @@ export class GroupComponent implements OnInit, OnDestroy {
   newGroupError: string = '';
   isSend: boolean = false;
   items: IItem[] = [];
+  itemsWithoutSearch: IItem[] = [];
   timer: number = 0;
   isUpdate: boolean = false;
+  isSearch: boolean = false;
 
   constructor(
     private store: Store<AppState>,
@@ -50,6 +52,16 @@ export class GroupComponent implements OnInit, OnDestroy {
     private alertService: AlertsService,
     private timerService: TimerService
   ) {
+  }
+
+  toggleSearch(){
+    this.isSearch = !this.isSearch;
+  }
+
+  onInputChange(event: Event) {
+    const text = (event.target as HTMLInputElement).value;
+    this.items = this.itemsWithoutSearch
+      .filter((e) => e.item.name.S.toLowerCase().includes(text.toLowerCase()))
   }
 
   countDown(time: number) {
@@ -75,6 +87,7 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.items = data.Items
           .map((e) => ({ type: this.type, item: e }))
           .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
+        this.itemsWithoutSearch = [...this.items];
       },
       (error) => {
         const message = error.error?.message || 'Failed to load groups';
@@ -103,6 +116,7 @@ export class GroupComponent implements OnInit, OnDestroy {
             this.items = items
               .map((e) => ({ type: this.type, item: e }))
               .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
+            this.itemsWithoutSearch = [...this.items];
           },
           () => {
             this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
@@ -123,6 +137,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.items = state
         .map((e) => ({ type: this.type, item: e }))
         .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
+      this.itemsWithoutSearch = [...this.items];
     } else if (this.type === 'group') this.getGroup();
     else this.getPeople();
   }
@@ -136,7 +151,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   updateGroupTimer() {
-    this.timer = 60;
+   // this.timer = 60;
     this.updateColum(true);
   }
 
@@ -161,6 +176,7 @@ export class GroupComponent implements OnInit, OnDestroy {
           };
           this.store.dispatch(addGroup({ group: newItem.item as IGroupItem }));
           this.items.unshift(newItem);
+          this.itemsWithoutSearch.unshift(newItem);
           const message = `${this.newGroupName} group created`;
           this.alertService.updateAlert({ message, type: 'success', isShow: true });
           this.isSend = false;

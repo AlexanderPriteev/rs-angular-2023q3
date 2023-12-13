@@ -15,6 +15,9 @@
     max-width: 36.5rem;
     margin: 10rem auto;
     padding: 0 1rem;
+    @media (max-width: 767px) {
+      margin: 4rem auto 1rem;
+    }
   }
 
   &__title{
