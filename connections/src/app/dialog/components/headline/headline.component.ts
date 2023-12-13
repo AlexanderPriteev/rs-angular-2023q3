@@ -21,6 +21,7 @@ export class DialogHeadlineComponent implements OnInit {
   type: string = '';
   dialogID: string = '';
   idDisabled: boolean = false;
+  showModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,10 @@ export class DialogHeadlineComponent implements OnInit {
     private query: QueriesService,
     private alertService: AlertsService
   ) {
+  }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
   }
 
   deleteDialog() {
