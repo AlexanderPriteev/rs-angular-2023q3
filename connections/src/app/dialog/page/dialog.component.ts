@@ -105,54 +105,60 @@ export class DialogComponent implements OnInit, OnDestroy {
     if (people) this.dialogName = people.name.S;
   }
 
+  getConversation(map: Map<string, string>, data: IPeople) {
+    this.query.getConversationList().subscribe(
+      (responseConversation) => {
+        const list = responseConversation as IConversationList;
+        this.getPeopleName(null, list.Items, map);
+        const listMap = list.Items
+          .reduce((s, c) => s.set(c.companionID.S, c.id.S), new Map());
+
+        const items = data.Items.map((e) => {
+          if (listMap.has(e.uid.S)) e.conversation = listMap.get(e.uid.S);
+          return e;
+        });
+        this.store.dispatch(setPeople({ people: items }));
+        this.isPreloader = false;
+      },
+      () => {
+        this.isPreloader = false;
+        this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
+      }
+    );
+  }
+
+  getPeopleQuery(time: number = 0) {
+    this.query.getPeople().subscribe(
+      (response) => {
+        const data = response as IPeople;
+        const map = data.Items.reduce(
+          (s, c) => s.set(c.uid.S, c.name.S),
+          new Map<string, string>()
+        );
+        this.getDialog(map, time);
+        this.getConversation(map, data);
+      },
+      () => {
+        this.isPreloader = false;
+        const message = 'Failed to load people names';
+        this.alertService.updateAlert({ message, type: 'error', isShow: true });
+      }
+    );
+  }
+
   getPeople(time: number = 0) {
     this.store.select(selectPeople).pipe(take(1))
       .subscribe((state) => {
         if (state.length) {
           this.getPeopleName(state);
-          const map = state
-            .reduce(
-              (s, c) => s.set(c.uid.S, c.name.S),
-              new Map<string, string>()
-            );
+          const map = state.reduce(
+            (s, c) => s.set(c.uid.S, c.name.S),
+            new Map<string, string>()
+          );
           this.getDialog(map, time);
           this.isPreloader = false;
         } else {
-          this.query.getPeople().subscribe(
-            (response) => {
-              const data = response as IPeople;
-              const map = data.Items
-                .reduce(
-                  (s, c) => s.set(c.uid.S, c.name.S),
-                  new Map<string, string>()
-                );
-              this.getDialog(map, time);
-              this.query.getConversationList().subscribe(
-                (responseConversation) => {
-                  const list = responseConversation as IConversationList;
-                  this.getPeopleName(null, list.Items, map);
-                  const listMap = list.Items
-                    .reduce((s, c) => s.set(c.companionID.S, c.id.S), new Map());
-
-                  const items = data.Items.map((e) => {
-                    if (listMap.has(e.uid.S)) e.conversation = listMap.get(e.uid.S);
-                    return e;
-                  });
-                  this.store.dispatch(setPeople({ people: items }));
-                  this.isPreloader = false;
-                },
-                () => {
-                  this.isPreloader = false;
-                  this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
-                }
-              );
-            },
-            () => {
-              this.isPreloader = false;
-              const message = 'Failed to load people names';
-              this.alertService.updateAlert({ message, type: 'error', isShow: true });
-            }
-          );
+          this.getPeopleQuery(time);
         }
       });
   }
@@ -164,6 +170,30 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.timer = this.timerService.getTimerValue(this.dialogID);
       if (!this.timer) clearInterval(interval);
     }, 1000);
+  }
+
+  dialogUpdate(data: IDialog, time: number = 0) {
+    const newData: IDialog = {
+      ...data,
+      lastUpdate: new Date().getTime()
+    };
+    const propsData = {
+      messages: newData.Items,
+      lastUpdate: newData.lastUpdate as number
+    };
+
+    if (this.type === 'group') {
+      this.getGroups();
+      if (time) {
+        this.store.dispatch(updateGroupDialog({ groupName: this.dialogID, ...propsData }));
+      } else {
+        this.store.dispatch(addGroupDialog({ groupName: this.dialogID, group: newData }));
+      }
+    } else if (time) {
+      this.store.dispatch(updatePeopleDialog({ peopleName: this.dialogID, ...propsData }));
+    } else {
+      this.store.dispatch(addPeopleDialog({ peopleName: this.dialogID, group: newData }));
+    }
   }
 
   getDialog(map: Map<string, string>, time: number = 0) {
@@ -178,28 +208,8 @@ export class DialogComponent implements OnInit, OnDestroy {
           .map((e) => ({ ...e, authorName: map.get(e.authorID.S) || '' }))
           .sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S));
         this.dialog = this.dialog.concat(data.Items);
-        data.lastUpdate = new Date().getTime();
         this.countTimer();
-        if (this.type === 'group') {
-          this.getGroups();
-          if (time) {
-            this.store.dispatch(updateGroupDialog({
-              groupName: this.dialogID,
-              messages: data.Items,
-              lastUpdate: data.lastUpdate
-            }));
-          } else {
-            this.store.dispatch(addGroupDialog({ groupName: this.dialogID, group: data }));
-          }
-        } else if (time) {
-          this.store.dispatch(updatePeopleDialog({
-            peopleName: this.dialogID,
-            messages: data.Items,
-            lastUpdate: data.lastUpdate
-          }));
-        } else {
-          this.store.dispatch(addPeopleDialog({ peopleName: this.dialogID, group: data }));
-        }
+        this.dialogUpdate(data, time);
       },
       (error) => {
         const message = error.error?.message || 'Failed to load data';

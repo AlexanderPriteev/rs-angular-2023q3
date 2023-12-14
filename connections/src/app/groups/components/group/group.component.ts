@@ -59,6 +59,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   toggleSearch() {
     this.isSearch = !this.isSearch;
   }
+
   toggleModalBtn() {
     const str = this.newGroupName.value || '';
     this.isDisabled = /(?=.*[^a-zA-z\s\d])/.test(str) || str.length > 40 || !str.length;
@@ -105,34 +106,38 @@ export class GroupComponent implements OnInit, OnDestroy {
     );
   }
 
+  getConversation(data: IPeople, timer: boolean = false) {
+    this.query.getConversationList().subscribe(
+      (responseConversation) => {
+        const list = responseConversation as IConversationList;
+        const map = list.Items
+          .reduce((s, c) => s.set(c.companionID.S, c.id.S), new Map());
+        const items = data.Items.map((e) => {
+          if (map.has(e.uid.S)) e.conversation = map.get(e.uid.S);
+          return e;
+        });
+        this.store.dispatch(setPeople({ people: items }));
+        if (timer) this.countDown(59);
+        this.items = items
+          .map((e) => ({ type: this.type, item: e }))
+          .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
+        this.itemsWithoutSearch = [...this.items];
+        this.isPreloader = false;
+      },
+      () => {
+        this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
+        this.isUpdate = false;
+        this.isPreloader = false;
+      }
+    );
+  }
+
   getPeople(timer: boolean = false) {
     if (timer) this.isUpdate = true;
     this.query.getPeople().subscribe(
       (response) => {
         const data = response as IPeople;
-        this.query.getConversationList().subscribe(
-          (responseConversation) => {
-            const list = responseConversation as IConversationList;
-            const map = list.Items
-              .reduce((s, c) => s.set(c.companionID.S, c.id.S), new Map());
-            const items = data.Items.map((e) => {
-              if (map.has(e.uid.S)) e.conversation = map.get(e.uid.S);
-              return e;
-            });
-            this.store.dispatch(setPeople({ people: items }));
-            if (timer) this.countDown(59);
-            this.items = items
-              .map((e) => ({ type: this.type, item: e }))
-              .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
-            this.itemsWithoutSearch = [...this.items];
-            this.isPreloader = false;
-          },
-          () => {
-            this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
-            this.isUpdate = false;
-            this.isPreloader = false;
-          }
-        );
+        this.getConversation(data, timer);
       },
       (error) => {
         const message = error.error?.message || 'Failed to load people';
