@@ -1,0 +1,41 @@
+<div class="form-wrapper form-auth">
+  <div class="form" [formGroup]="signInForm">
+    <h2 class="form__title">Login</h2>
+    <div class="form__wrapper">
+      <div class="field">
+        <label class="field__label" for="email">email</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': errors.email}"
+               (blur)="fieldValidate('email')"
+               formControlName="email"
+               name="email"
+               id="email">
+        <span class="field__error" *ngIf="errors.email">{{ errors.email }}</span>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="password">password</label>
+        <i class="field__icon"
+           [ngClass]="{'icon-eye-lock-open':!isHidePassword, 'icon-eye-lock':isHidePassword}"
+           (click)="togglePasswordType()"></i>
+        <input [type]="isHidePassword ? 'password' : 'text'"
+               class="field__input field__input--password"
+               [ngClass]="{'error': errors.password}"
+               (blur)="fieldValidate('password')"
+               formControlName="password"
+               name="password"
+               id="password">
+        <span class="field__error" *ngIf="errors.password">{{ errors.password }}</span>
+      </div>
+    </div>
+    <div class="form-btn-wrapper">
+      <button type="button" class="form-btn-text" [routerLink]="['/signup']">Registration</button>
+      <button type="button"
+              class="form-btn"
+              [ngClass]="{'form-btn--load': isLoad}"
+              (click)="sendForm()"
+              [disabled]="!isFormValid || isLoad">Login</button>
+    </div>
+  </div>
+</div>

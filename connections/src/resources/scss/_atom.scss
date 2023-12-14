@@ -1,0 +1,37 @@
+.c{
+  &-primary{
+   color: var(--primary);
+  }
+  &-red{
+    color: $red;
+  }
+  &-green{
+    color: $green;
+  }
+  &-blue{
+    color: $blue;
+  }
+}
+
+.bg{
+  &-primary{
+    background-color: var(--primary);
+  }
+  &-red{
+    background-color: $red;
+  }
+  &-green{
+    background-color: $green;
+  }
+  &-blue{
+    background-color: $blue;
+  }
+}
+
+.td-none{
+  text-decoration: none;
+}
+
+.ml-auto{
+  margin-left: auto;
+}

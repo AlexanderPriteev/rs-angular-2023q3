@@ -1,0 +1,17 @@
+.profile{
+  display: flex;
+  flex-direction: column;
+  gap: 4.2rem;
+  &-wrapper{
+    width: 100%;
+    max-width: 59.4rem;
+    box-sizing: border-box;
+    padding: 10rem 1rem 2rem;
+    margin: 0 auto;
+    @media (max-width: 450px) {
+      padding-top: 4rem;
+    }
+  }
+}
+
+

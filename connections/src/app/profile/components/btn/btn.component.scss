@@ -1,0 +1,29 @@
+@import "../../../../resources/scss/basic/variables";
+
+.profile{
+  &-btn{
+    width: 12.4rem;
+    min-width: 12.4rem;
+    height: 3.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .4rem;
+    box-sizing: border-box;
+    padding: .7rem;
+    border: .1rem solid var(--primary);
+    color: var(--primary);
+    transition: background-color .15s linear;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    &:hover{
+      background-color: rgba($primary, .2);
+    }
+    &:disabled{
+      opacity: .3;
+      box-shadow: none;
+      pointer-events: none;
+    }
+  }
+}

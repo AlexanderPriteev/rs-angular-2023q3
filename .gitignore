@@ -146,3 +146,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# final-task
+/connections/.angular
+/connections/dist
+/connections/other
+/connections/coverage
