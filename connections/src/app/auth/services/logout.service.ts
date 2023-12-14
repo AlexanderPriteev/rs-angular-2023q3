@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { QueriesService } from '../../api/services/queries.service';
+import { clearDialogs } from '../../redux/actions/dialogs.action';
+import { clearGroup } from '../../redux/actions/groups.action';
+import { clearPeople } from '../../redux/actions/people.action';
 import { clearProfile } from '../../redux/actions/profile.action';
 import { AppState } from '../../redux/interfaces/state';
 import { AlertsService } from '../../shared/services/alerts.service';
@@ -30,6 +33,9 @@ export class LogoutService {
       this.router.navigate(['/signin']);
       this.isActive = true;
       store.dispatch(clearProfile());
+      store.dispatch(clearDialogs());
+      store.dispatch(clearGroup());
+      store.dispatch(clearPeople());
     };
     this.query.logout().subscribe(
       () => {

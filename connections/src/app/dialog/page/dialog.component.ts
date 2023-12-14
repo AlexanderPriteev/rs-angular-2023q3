@@ -12,7 +12,9 @@ import {
   updateGroupDialog,
   updatePeopleDialog
 } from '../../redux/actions/dialogs.action';
+import { setPeople } from '../../redux/actions/people.action';
 import { IGroups, IPeople } from '../../redux/interfaces/groups';
+import {IConversation, IConversationList, IPeopleItem} from '../../redux/interfaces/items';
 import { IDialog, IMessage } from '../../redux/interfaces/message';
 import { AppState } from '../../redux/interfaces/state';
 import { selectGroupDialog, selectPeopleDialog } from '../../redux/selectors/dialog.selector';
@@ -22,6 +24,7 @@ import { AlertsService } from '../../shared/services/alerts.service';
 import { TimerService } from '../../shared/services/timer.service';
 import { ChatComponent } from '../components/chat/chat.component';
 import { DialogHeadlineComponent } from '../components/headline/headline.component';
+import {setGroups} from "../../redux/actions/groups.action";
 
 @Component({
   selector: 'app-dialog',
@@ -66,7 +69,9 @@ export class DialogComponent implements OnInit, OnDestroy {
         } else {
           this.query.getGroups().subscribe(
             (response) => {
-              const group = (response as IGroups).Items
+              const list = response as IGroups;
+              this.store.dispatch(setGroups({ groups: list.Items}));
+              const group = list.Items
                 .find((e) => e.id.S === this.dialogID);
               if (group) {
                 this.dialogName = group.name.S;
@@ -82,10 +87,26 @@ export class DialogComponent implements OnInit, OnDestroy {
       });
   }
 
+  getPeopleName(state: IPeopleItem[] | null,
+                list: IConversation[] | null = null,
+                map: Map<string,string> | null = null,){
+    if (this.type !== 'conversation') return;
+    if(list && map){
+      const name = list.find((e) => e.id.S === this.dialogID);
+      if (name) {
+        this.dialogName = map.get(name.companionID.S) || 'Me';
+      }
+    }
+    if(!state) return;
+    const people = state.find((e) => e.conversation === this.dialogID);
+    if(people) this.dialogName = people.name.S;
+  }
+
   getPeople(time: number = 0) {
     this.store.select(selectPeople).pipe(take(1))
       .subscribe((state) => {
         if (state.length) {
+          this.getPeopleName(state);
           const map = state
             .reduce(
               (s, c) => s.set(c.uid.S, c.name.S),
@@ -102,6 +123,23 @@ export class DialogComponent implements OnInit, OnDestroy {
                   new Map<string, string>()
                 );
               this.getDialog(map, time);
+              this.query.getConversationList().subscribe(
+                (responseConversation) => {
+                  const list = responseConversation as IConversationList;
+                  this.getPeopleName(null, list.Items, map);
+                  const listMap = list.Items
+                    .reduce((s, c) => s.set(c.companionID.S, c.id.S), new Map());
+
+                  const items = data.Items.map((e) => {
+                    if (listMap.has(e.uid.S)) e.conversation = listMap.get(e.uid.S);
+                    return e;
+                  });
+                  this.store.dispatch(setPeople({ people: items }));
+                },
+                () => {
+                  this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
+                }
+              );
             },
             () => {
               const message = 'Failed to load people names';

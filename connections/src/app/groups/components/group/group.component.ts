@@ -36,7 +36,6 @@ export type ColumnType = 'people' | 'group';
 export class GroupComponent implements OnInit, OnDestroy {
   @Input() type: ColumnType = 'group';
   isShowModal: boolean = false;
-  newGroupError: string = '';
   isSend: boolean = false;
   items: IItem[] = [];
   itemsWithoutSearch: IItem[] = [];
@@ -157,16 +156,10 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   updateGroupTimer() {
-    // this.timer = 60;
     this.updateColum(true);
   }
 
   createGroup() {
-    if (!this.newGroupName) {
-      this.newGroupError = 'Enter the group name';
-      return;
-    }
-
     if (!this.isSend) {
       this.isSend = true;
       this.query.createGroup(this.newGroupName.value || '').subscribe(
@@ -199,7 +192,6 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   toggleModal() {
     this.isShowModal = !this.isShowModal;
-    this.newGroupError = '';
     this.newGroupName.setValue('');
   }
 
