@@ -1,0 +1,68 @@
+@import "../../../../resources/scss/basic/variables";
+
+.dialog{
+  &-headline{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  &-link{
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    line-height: 1;
+    color: $blue;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 1.8rem;
+    transition: opacity .2s linear;
+    &:hover{
+      opacity: .7;
+      text-decoration: none;
+    }
+    &__icon{
+      width: 2.4rem;
+      height: 2.4rem;
+      min-width: 2.4rem;
+      font-size: 2.4rem;
+    }
+  }
+  &-remove{
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    line-height: 1;
+    color: $red;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    transition: opacity .2s linear;
+    @media (max-width: 390px) {
+      font-size: 0;
+      gap: 0;
+    }
+    &:hover{
+      opacity: .7;
+    }
+    &:disabled{
+      opacity: .7;
+      pointer-events: none;
+    }
+    &__icon{
+      width: 1.4rem;
+      height: 1.4rem;
+      min-width: 1.4rem;
+      font-size: 1.4rem;
+      @media (max-width: 390px) {
+        width: 3.2rem;
+        height: 3.2rem;
+        min-width: 3.2rem;
+        font-size: 3.2rem;
+      }
+    }
+  }
+
+  @import '../../../../resources/scss/modal';
+}

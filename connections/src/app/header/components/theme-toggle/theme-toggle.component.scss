@@ -1,0 +1,35 @@
+@import "../../../../resources/scss/basic/variables";
+
+.theme-toggle {
+  position: relative;
+  display: inline-block;
+  width: 4.9rem;
+  height: 2.8rem;
+  border-radius: 1.5rem;
+  background-color: var(--primary-light);
+  box-shadow: 0 0 .5rem 0 rgba($black, .35) inset;
+  cursor: pointer;
+  &:before{
+    content: '\e917';
+    font-family: icomoon;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    line-height: 1;
+    color: $white;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    background-color:  var(--primary-dark);
+    position: absolute;
+    top: 50%;
+    left: -.4rem;
+    transform: translateY(-50%);
+    transition: left .2s linear;
+  }
+  &__dark:before{
+    content: '\e911';
+    left: calc(100% - 2.8rem);
+  }
+}

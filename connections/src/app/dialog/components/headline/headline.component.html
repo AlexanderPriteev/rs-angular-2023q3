@@ -1,0 +1,34 @@
+<div class="dialog-headline">
+  <a href="#" class="dialog-link">
+    <i class="icon-arrow-left dialog-link__icon"></i>
+    Back to my dialogs
+    <i class="icon-dialog-2 dialog-link__icon"></i>
+  </a>
+  <button type="button" class="dialog-remove"
+          *ngIf="isMyGroup || type !== 'group'"
+          (click)="toggleModal()">
+    <i class="icon-remove dialog-remove__icon"></i>
+    Remove this {{type}}
+  </button>
+</div>
+
+<div class="dialog-modal" *ngIf="showModal">
+  <span class="dialog-modal__bg" (click)="toggleModal()"></span>
+  <div class="dialog-modal__content">
+    <h2 class="dialog-modal__title">
+      Do you really want to delete this {{type}}?
+    </h2>
+    <div class="dialog-modal__btn-wrapper">
+      <button type="button" class="form-btn-text td-none"
+              (click)="toggleModal()">
+        cancel
+      </button>
+      <button type="button"
+              class="form-btn bg-red"
+              [disabled]="idDisabled"
+              (click)="deleteDialog()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+@import "../../../../resources/scss/basic/variables";
+
+.group-card{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: .3rem;
+  background-color: var(--primary-100);
+  position: relative;
+  overflow: hidden;
+  min-height: 4.7rem;
+
+  &--dialog{
+    background-color: $green;
+    color: $white;
+  }
+  &__title{
+    font-size: 1.4rem;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 1.5rem 1.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: opacity .2s linear;
+    &:hover{
+      opacity: .85;
+    }
+  }
+  &__icon, &__remove{
+    box-sizing: border-box;
+    width: 2.4rem;
+    min-width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+    margin: 0 1.2rem;
+  }
+  &__icon{
+    pointer-events: none;
+  }
+  &__remove{
+    cursor: pointer;
+    color: $red;
+    transition: opacity .2s linear;
+    &:hover{
+      opacity: .7;
+    }
+  }
+
+  &-modal{
+    color: $white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    box-sizing: border-box;
+    padding: 0 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    &__title{
+      font-size: 1.4rem;
+      &--center{
+        margin: auto;
+        text-align: center;
+      }
+    }
+    &__btn{
+      width: 5rem;
+      min-width: 5rem;
+      height: 2.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: .1rem solid $white;
+      border-radius: .4rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: $white;
+      transition: background-color .2s linear;
+      &:hover{
+        background-color: rgba($white, .2);
+      }
+      &:disabled{
+        pointer-events: none;
+        opacity: .8;
+        font-size: 0;
+        position: relative;
+        &:before{
+          content: '\e90f';
+          font-family: icomoon;
+          width: 1.2rem;
+          min-width: 1.2rem;
+          height: 1.2rem;
+          font-size: 1.2rem;
+          position: absolute;
+          left: calc(50% - .6rem);
+          top: calc(50% - .6rem);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 1;
+          color: $white;
+          animation: rotated linear .8s infinite;
+        }
+      }
+
+
+      &-wrapper{
+        display: inline-flex;
+        gap: .5rem;
+      }
+    }
+  }
+  &-loader{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($primary, .5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:before{
+      content: '\e90f';
+      font-family: icomoon;
+      width: 2rem;
+      height: 2rem;
+      font-size: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      color: $white;
+      animation: rotated linear .8s infinite;
+    }
+  }
+}
+
+.group-remove{
+  @import '../../../../resources/scss/modal';
+}

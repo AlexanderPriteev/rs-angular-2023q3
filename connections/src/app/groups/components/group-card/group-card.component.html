@@ -1,0 +1,37 @@
+<div class="group-card" [ngClass]="{'group-card--dialog': isDialog}">
+  <span class="group-card__title"
+        (click)="navigate()">
+    {{item.item.name.S}}
+  </span>
+  <i class="group-card__icon icon-dialog" *ngIf="isDialog"></i>
+  <i class="group-card__remove icon-remove" *ngIf="isMe" (click)="toggleModal()"></i>
+
+  <div class="group-remove-modal" *ngIf="isModal">
+    <span class="group-remove-modal__bg" (click)="toggleModal()"></span>
+    <div class="group-remove-modal__content">
+      <span class="group-remove-modal__title">Remove this group?</span>
+      <div class="group-remove-modal__btn-wrapper">
+        <button type="button"
+                class="form-btn-text td-none"
+                (click)="toggleModal()">
+          cancel
+        </button>
+        <button type="button"
+                class="form-btn bg-red"
+                [disabled]="isSend"
+                (click)="deleteItem()">
+          delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="group-card-loader" *ngIf="isCreate"></div>
+  <div class="group-card-modal" *ngIf="redirectTimer">
+    <span class="group-card-modal__title group-card-modal__title--center">
+      Conversation created.<br/>
+      You will be redirected in {{redirectTimer}}</span>
+  </div>
+
+</div>

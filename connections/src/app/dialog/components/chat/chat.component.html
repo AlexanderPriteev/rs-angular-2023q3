@@ -1,0 +1,36 @@
+<div class="chat">
+  <div class="chat__head">
+    <h2 class="chat__title">
+      <i class="chat__title-icon "
+         [ngClass]="{'icon-group': type === 'group', 'icon-user': type !== 'group'}"></i>
+        {{dialogName}}
+    </h2>
+    <button type="button"
+            class="chat__update"
+            [disabled]="timer"
+            (click)="update()">
+      <i class="icon-update chat__update-icon"></i>
+      <span class="chat__update-text">
+        @if(timer < 1) {
+          update
+        } @else {
+          {{timer}}
+        }
+      </span>
+
+    </button>
+
+  </div>
+  <div class="chat__body">
+    @for (message of dialog; track message){
+      <app-message [message]="message"></app-message>
+    }
+
+  </div>
+  <div class="chat__footer">
+    <textarea class="chat__field" [(ngModel)]="newMessageField"></textarea>
+    <button type="button" class="icon-send chat__send"
+            [disabled]="!newMessageField"
+            (click)="sendMessage()"></button>
+  </div>
+</div>

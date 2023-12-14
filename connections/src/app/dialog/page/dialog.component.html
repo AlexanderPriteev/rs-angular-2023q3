@@ -1,0 +1,11 @@
+<div class="dialog-wrapper">
+  <div class="dialog">
+    <app-dialog-headline [isMyGroup]="isMyGroup"></app-dialog-headline>
+    <app-chat [dialog]="dialog"
+              [timer]="timer"
+              [dialogName]="dialogName"
+              (newMessage)="sendMessage($event)"
+              (dataUpdate)="updateState($event)"></app-chat>
+  </div>
+  <span class="preloader" *ngIf="isPreloader"></span>
+</div>
