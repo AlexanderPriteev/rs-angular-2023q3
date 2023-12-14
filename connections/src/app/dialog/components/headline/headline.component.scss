@@ -64,47 +64,5 @@
     }
   }
 
-  &-modal{
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 99;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &__bg{
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba($white, .1);
-      backdrop-filter: blur(12px);
-    }
-    &__content{
-      position: relative;
-      width: 100%;
-      max-width: 32rem;
-      border-radius: .5rem;
-      background-color: var(--primary);
-      box-sizing: border-box;
-      padding: 3.2rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2.4rem;
-      text-align: center;
-    }
-    &__title{
-      color: $white;
-      font-size: 1.6rem;
-      font-weight: $regular;
-    }
-    &__btn-wrapper{
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-  }
+  @import '../../../../resources/scss/modal';
 }

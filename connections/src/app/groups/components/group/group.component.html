@@ -45,29 +45,34 @@
     }
   </div>
 
-  <div class="group-modal" *ngIf="isShowModal">
-    <h3 class="group-title">
-      <i class="icon-plus group-title__icon"></i>
-      New group
-    </h3>
-    <div class="field">
-      <label class="field__label" for="group">group name</label>
-      <input type="text"
-             class="field__input"
-             name="group"
-             [formControl]="newGroupName"
-             (input)="toggleModalBtn()"
-             id="group">
-    </div>
-    <div class="form-btn-wrapper">
-      <button type="button"
-              class="form-btn-text td-none"
-              (click)="toggleModal()">Cancel</button>
-      <button type="button"
-              class="form-btn"
-              [disabled]="isSend || isDisabled"
-              [ngClass]="{'form-btn--load': isSend}"
-              (click)="createGroup()">Create</button>
+  <div class="group-modal-wrapper" *ngIf="isShowModal">
+    <span class="group-modal-bg" (click)="toggleModal()"></span>
+    <div class="group-modal">
+      <h3 class="group-title">
+        <i class="icon-plus group-title__icon"></i>
+        New group
+      </h3>
+      <div class="field">
+        <label class="field__label" for="group">group name</label>
+        <input type="text"
+               class="field__input"
+               name="group"
+               [formControl]="newGroupName"
+               (input)="toggleModalBtn()"
+               id="group">
+      </div>
+      <div class="form-btn-wrapper">
+        <button type="button"
+                class="form-btn-text td-none"
+                (click)="toggleModal()">Cancel</button>
+        <button type="button"
+                class="form-btn"
+                [disabled]="isSend || isDisabled"
+                [ngClass]="{'form-btn--load': isSend}"
+                (click)="createGroup()">Create</button>
+      </div>
     </div>
   </div>
+
+  <span class="preloader" *ngIf="isPreloader"></span>
 </div>

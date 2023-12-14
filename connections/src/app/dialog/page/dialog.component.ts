@@ -12,9 +12,10 @@ import {
   updateGroupDialog,
   updatePeopleDialog
 } from '../../redux/actions/dialogs.action';
+import { setGroups } from '../../redux/actions/groups.action';
 import { setPeople } from '../../redux/actions/people.action';
 import { IGroups, IPeople } from '../../redux/interfaces/groups';
-import {IConversation, IConversationList, IPeopleItem} from '../../redux/interfaces/items';
+import { IConversation, IConversationList, IPeopleItem } from '../../redux/interfaces/items';
 import { IDialog, IMessage } from '../../redux/interfaces/message';
 import { AppState } from '../../redux/interfaces/state';
 import { selectGroupDialog, selectPeopleDialog } from '../../redux/selectors/dialog.selector';
@@ -24,7 +25,6 @@ import { AlertsService } from '../../shared/services/alerts.service';
 import { TimerService } from '../../shared/services/timer.service';
 import { ChatComponent } from '../components/chat/chat.component';
 import { DialogHeadlineComponent } from '../components/headline/headline.component';
-import {setGroups} from "../../redux/actions/groups.action";
 
 @Component({
   selector: 'app-dialog',
@@ -44,6 +44,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   timer: number = 0;
   isMyGroup: boolean = false;
   dialogName: string = '';
+  isPreloader: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,7 +71,7 @@ export class DialogComponent implements OnInit, OnDestroy {
           this.query.getGroups().subscribe(
             (response) => {
               const list = response as IGroups;
-              this.store.dispatch(setGroups({ groups: list.Items}));
+              this.store.dispatch(setGroups({ groups: list.Items }));
               const group = list.Items
                 .find((e) => e.id.S === this.dialogID);
               if (group) {
@@ -87,19 +88,21 @@ export class DialogComponent implements OnInit, OnDestroy {
       });
   }
 
-  getPeopleName(state: IPeopleItem[] | null,
-                list: IConversation[] | null = null,
-                map: Map<string,string> | null = null,){
+  getPeopleName(
+    state: IPeopleItem[] | null,
+    list: IConversation[] | null = null,
+    map: Map<string, string> | null = null,
+  ) {
     if (this.type !== 'conversation') return;
-    if(list && map){
+    if (list && map) {
       const name = list.find((e) => e.id.S === this.dialogID);
       if (name) {
         this.dialogName = map.get(name.companionID.S) || 'Me';
       }
     }
-    if(!state) return;
+    if (!state) return;
     const people = state.find((e) => e.conversation === this.dialogID);
-    if(people) this.dialogName = people.name.S;
+    if (people) this.dialogName = people.name.S;
   }
 
   getPeople(time: number = 0) {
@@ -113,6 +116,7 @@ export class DialogComponent implements OnInit, OnDestroy {
               new Map<string, string>()
             );
           this.getDialog(map, time);
+          this.isPreloader = false;
         } else {
           this.query.getPeople().subscribe(
             (response) => {
@@ -135,13 +139,16 @@ export class DialogComponent implements OnInit, OnDestroy {
                     return e;
                   });
                   this.store.dispatch(setPeople({ people: items }));
+                  this.isPreloader = false;
                 },
                 () => {
+                  this.isPreloader = false;
                   this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
                 }
               );
             },
             () => {
+              this.isPreloader = false;
               const message = 'Failed to load people names';
               this.alertService.updateAlert({ message, type: 'error', isShow: true });
             }

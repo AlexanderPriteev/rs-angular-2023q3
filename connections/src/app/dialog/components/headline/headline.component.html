@@ -19,17 +19,15 @@
       Do you really want to delete this {{type}}?
     </h2>
     <div class="dialog-modal__btn-wrapper">
-      <button type="button" class="form-btn bg-red"
+      <button type="button" class="form-btn-text td-none"
               (click)="toggleModal()">
-        <i class="icon-close"></i>
-        no
+        cancel
       </button>
       <button type="button"
-              class="form-btn bg-green"
+              class="form-btn bg-red"
               [disabled]="idDisabled"
               (click)="deleteDialog()">
-        <i class="icon-check"></i>
-        yes
+        Delete
       </button>
     </div>
   </div>

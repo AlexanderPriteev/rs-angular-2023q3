@@ -42,6 +42,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   timer: number = 0;
   isUpdate: boolean = false;
   isSearch: boolean = false;
+  isPreloader: boolean = true;
 
   newGroupName = new FormControl('');
   isDisabled: boolean = true;
@@ -93,11 +94,13 @@ export class GroupComponent implements OnInit, OnDestroy {
           .map((e) => ({ type: this.type, item: e }))
           .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
         this.itemsWithoutSearch = [...this.items];
+        this.isPreloader = false;
       },
       (error) => {
         const message = error.error?.message || 'Failed to load groups';
         this.alertService.updateAlert({ message, type: 'error', isShow: true });
         this.isUpdate = false;
+        this.isPreloader = false;
       }
     );
   }
@@ -122,10 +125,12 @@ export class GroupComponent implements OnInit, OnDestroy {
               .map((e) => ({ type: this.type, item: e }))
               .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
             this.itemsWithoutSearch = [...this.items];
+            this.isPreloader = false;
           },
           () => {
             this.alertService.updateAlert({ message: 'Failed to load', type: 'error', isShow: true });
             this.isUpdate = false;
+            this.isPreloader = false;
           }
         );
       },
@@ -133,6 +138,7 @@ export class GroupComponent implements OnInit, OnDestroy {
         const message = error.error?.message || 'Failed to load people';
         this.alertService.updateAlert({ message, type: 'error', isShow: true });
         this.isUpdate = false;
+        this.isPreloader = false;
       }
     );
   }
@@ -143,6 +149,8 @@ export class GroupComponent implements OnInit, OnDestroy {
         .map((e) => ({ type: this.type, item: e }))
         .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
       this.itemsWithoutSearch = [...this.items];
+
+      this.isPreloader = false;
     } else if (this.type === 'group') this.getGroup();
     else this.getPeople();
   }
