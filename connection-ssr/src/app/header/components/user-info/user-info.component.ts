@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {CommonModule, isPlatformBrowser} from '@angular/common';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
@@ -25,7 +25,8 @@ export class UserInfoComponent implements OnInit {
     public logoutService: LogoutService,
     private authService: AuthService,
     private router: Router,
-    private user: UserNameService
+    private user: UserNameService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
   }
 
@@ -34,6 +35,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
     this.user.userName.subscribe((email) => {
       this.userEmail = email;
     });
@@ -44,6 +46,6 @@ export class UserInfoComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.currentURL = event.url;
       }
-    });
+    });}
   }
 }

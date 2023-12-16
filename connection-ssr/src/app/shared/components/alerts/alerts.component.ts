@@ -1,5 +1,5 @@
 import {CommonModule, isPlatformBrowser} from '@angular/common';
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, inject, Inject, NgZone, OnInit, PLATFORM_ID} from '@angular/core';
 
 import { IAlerts } from '../../interfaces/alerts';
 import { AlertsService } from '../../services/alerts.service';
@@ -19,7 +19,8 @@ export class AlertsComponent implements OnInit {
   };
 
   constructor(private service: AlertsService,
-              @Inject(PLATFORM_ID) private platformId: object ) {}
+              @Inject(PLATFORM_ID) private platformId: object,
+              private zone: NgZone) {}
 
   close(): void {
     this.service.updateAlert({ ...this.alert, isShow: false });
@@ -29,7 +30,9 @@ export class AlertsComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.service.alert$.subscribe((alert) => {
         this.alert = alert;
-        setTimeout(() => this.close(), 12000);
+        this.zone.runOutsideAngular(() => {
+          setTimeout(() => this.close(), 12000);
+        });
       });
     }
   }
