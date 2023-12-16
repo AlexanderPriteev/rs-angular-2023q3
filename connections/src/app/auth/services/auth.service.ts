@@ -2,39 +2,40 @@
 
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {getCookie} from "../../shared/functions/get-cookie";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   setData(token: string, uid: string, email: string):void {
-    localStorage.setItem('token', token);
-    localStorage.setItem('uid', uid);
-    localStorage.setItem('email', email);
+    document.cookie = `token=${token}`;
+    document.cookie = `uid=${uid}`;
+    document.cookie = `email=${email}`;
   }
 
   setToken(token: string):void {
-    localStorage.setItem('token', token);
+    document.cookie = `token=${token}`;
   }
 
   setUid(uid: string):void {
-    localStorage.setItem('uid', uid);
+    document.cookie = `uid=${uid}`;
   }
 
   setEmail(email: string):void {
-    localStorage.setItem('email', email);
+    document.cookie = `token=${email}`;
   }
 
   getToken(): string {
-    return localStorage.getItem('token') || '';
+    return getCookie('token');
   }
 
   getUid(): string {
-    return localStorage.getItem('uid') || '';
+    return getCookie('uid');
   }
 
   getEmail(): string {
-    return localStorage.getItem('email') || '';
+    return getCookie('email');
   }
   getHeader(): HttpHeaders {
     return new HttpHeaders({
@@ -45,8 +46,8 @@ export class AuthService {
   }
 
   clear():void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('uid');
-    localStorage.removeItem('email');
+    document.cookie = `token=`;
+    document.cookie = `uid=`;
+    document.cookie = `email=`;
   }
 }
