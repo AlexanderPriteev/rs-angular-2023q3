@@ -1,0 +1,13 @@
+<!-- <div class="message-wrapper my-message"> -->
+<div class="message-wrapper"
+     [ngClass]="{'my-message': isMe}">
+  <div class="message">
+    <div class="message__headline">
+      <span class="message__name">{{name}}</span>
+      <span class="message__date">{{date}}</span>
+    </div>
+    <p class="message__text">
+      {{message.message.S}}
+    </p>
+  </div>
+</div>

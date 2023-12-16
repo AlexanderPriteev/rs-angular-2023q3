@@ -1,0 +1,4 @@
+<div class="alert" [ngClass] = "alert.type" *ngIf="alert.isShow" >
+  <p class="alert-data">{{alert.message}}</p>
+  <i class="alert-close icon-close" (click)="close()"></i>
+</div>
