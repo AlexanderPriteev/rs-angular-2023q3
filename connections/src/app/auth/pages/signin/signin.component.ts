@@ -75,6 +75,8 @@ export class SigninComponent implements OnInit {
           this.isLoad = false;
           this.userName.setUserName(email);
           this.router.navigate(['/']);
+          const message = `User ${email} has successfully logged in`;
+          this.alertService.updateAlert({ message, type: 'success', isShow: true });
         },
         (error) => {
           const message = error.error?.message || 'An unexpected error';
