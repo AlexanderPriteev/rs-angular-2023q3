@@ -175,7 +175,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   dialogUpdate(data: IDialog, time: number = 0) {
     const newData: IDialog = {
       ...data,
-      lastUpdate: new Date().getTime()
+      lastUpdate: new Date().getTime() - 1000
     };
     const propsData = {
       messages: newData.Items,
@@ -196,6 +196,15 @@ export class DialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  dialogFilter(messages: IMessage[], map: Map<string, string>): IMessage[] {
+    const setItems = this.dialog.reduce((s, c) => s
+      .add(`${c.createdAt.S}-${c.authorID.S}`), new Set<string>());
+    return  messages
+      .filter(e => !setItems.has(`${e.createdAt.S}-${e.authorID.S}`))
+      .map((e) => ({ ...e, authorName: map.get(e.authorID.S) || '' }))
+      .sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S));
+  }
+
   getDialog(map: Map<string, string>, time: number = 0) {
     const query = this.type === 'group'
       ? this.query.getGroupByID(this.dialogID, time)
@@ -204,9 +213,7 @@ export class DialogComponent implements OnInit, OnDestroy {
     query.subscribe(
       (response) => {
         const data = response as IDialog;
-        data.Items = data.Items
-          .map((e) => ({ ...e, authorName: map.get(e.authorID.S) || '' }))
-          .sort((a, b) => Number(a.createdAt.S) - Number(b.createdAt.S));
+        data.Items = this.dialogFilter(data.Items, map);
         this.dialog = this.dialog.concat(data.Items);
         this.countTimer();
         this.dialogUpdate(data, time);
