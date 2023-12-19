@@ -21,6 +21,7 @@ import { selectPeople } from '../../../redux/selectors/people.selector';
 import { AlertsService } from '../../../shared/services/alerts.service';
 import { TimerService } from '../../../shared/services/timer.service';
 import { GroupCardComponent } from '../group-card/group-card.component';
+import {SearchPipe} from "../../pipes/search.pipe";
 
 export type ColumnType = 'people' | 'group';
 
@@ -28,7 +29,7 @@ export type ColumnType = 'people' | 'group';
   selector: 'app-group',
   standalone: true,
   imports: [
-    CommonModule, GroupCardComponent, FormsModule, ReactiveFormsModule
+    CommonModule, GroupCardComponent, FormsModule, ReactiveFormsModule, SearchPipe
   ],
   templateUrl: './group.component.html',
   styleUrl: './group.component.scss'
@@ -38,7 +39,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   isShowModal: boolean = false;
   isSend: boolean = false;
   items: IItem[] = [];
-  itemsWithoutSearch: IItem[] = [];
+  search: string = '';
   timer: number = 0;
   isUpdate: boolean = false;
   isSearch: boolean = false;
@@ -66,9 +67,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   onInputChange(event: Event) {
-    const text = (event.target as HTMLInputElement).value;
-    this.items = this.itemsWithoutSearch
-      .filter((e) => e.item.name.S.toLowerCase().includes(text.toLowerCase()));
+    this.search = (event.target as HTMLInputElement).value;
   }
 
   countDown(time: number) {
@@ -94,7 +93,6 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.items = data.Items
           .map((e) => ({ type: this.type, item: e }))
           .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
-        this.itemsWithoutSearch = [...this.items];
         this.isPreloader = false;
       },
       (error) => {
@@ -121,7 +119,6 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.items = items
           .map((e) => ({ type: this.type, item: e }))
           .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
-        this.itemsWithoutSearch = [...this.items];
         this.isPreloader = false;
       },
       () => {
@@ -153,7 +150,6 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.items = state
         .map((e) => ({ type: this.type, item: e }))
         .sort((a, b) => a.item.name.S.localeCompare(b.item.name.S));
-      this.itemsWithoutSearch = [...this.items];
 
       this.isPreloader = false;
     } else if (this.type === 'group') this.getGroup();
@@ -188,7 +184,6 @@ export class GroupComponent implements OnInit, OnDestroy {
           };
           this.store.dispatch(addGroup({ group: newItem.item as IGroupItem }));
           this.items.unshift(newItem);
-          this.itemsWithoutSearch.unshift(newItem);
           const message = `${this.newGroupName.value} group created`;
           this.alertService.updateAlert({ message, type: 'success', isShow: true });
           this.isSend = false;
