@@ -17,6 +17,7 @@ export class AlertsComponent implements OnInit {
     type: 'error',
     isShow: false,
   };
+  private closeTimer: number = 0;
 
   constructor(private service: AlertsService) {}
 
@@ -27,7 +28,8 @@ export class AlertsComponent implements OnInit {
   ngOnInit() {
     this.service.alert$.pipe().subscribe((alert) => {
       this.alert = alert;
-      setTimeout(() => this.close(), 12000);
+      if (this.closeTimer) clearTimeout(this.closeTimer);
+      this.closeTimer = setTimeout(() => this.close(), 4000);
     });
   }
 }
