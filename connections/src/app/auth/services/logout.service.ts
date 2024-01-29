@@ -48,8 +48,9 @@ export class LogoutService {
         this.alertService.updateAlert({ message, type: 'error', isShow: true });
         if (error.error?.type === 'InvalidTokenException'
            || error.error?.type === 'InvalidUserDataException') {
-          this.isActive = true;
-        } exit();
+          exit();
+        }
+        this.isActive = true;
       }
     );
   }

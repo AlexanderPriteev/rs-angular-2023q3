@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="group__body">
-    @for (item of items; track item) {
+    @for (item of items | searchFilter: search; track item) {
       <app-group-card [item]="item" (targetDelete)="updateState()"></app-group-card>
     }
   </div>
