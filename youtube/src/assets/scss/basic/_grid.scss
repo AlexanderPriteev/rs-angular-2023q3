@@ -1,0 +1,19 @@
+html {
+  font-size: 10px;
+  color: $text;
+  font-weight: $regular;
+  font-family: $primary-text;
+  scroll-behavior: smooth;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}

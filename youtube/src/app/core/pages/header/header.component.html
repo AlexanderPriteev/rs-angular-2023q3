@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="header__inner">
+    <div class="header__main">
+      <app-logo></app-logo>
+      <app-search *ngIf="isMainRoute"></app-search>
+      <button type="button" class="filter-btn" (click)="toggleSort()" *ngIf="isMainRoute">
+        <img src="assets/images/svg/filter.svg" alt="" class="img img--contain">
+      </button>
+    </div>
+    <app-user-info [currentURL]="currentURL"></app-user-info>
+  </div>
+  <app-sort class="sorting" *ngIf="isSortVisible"></app-sort>
+</header>

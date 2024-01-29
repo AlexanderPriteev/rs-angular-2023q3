@@ -1,0 +1,13 @@
+<div class="user">
+  <span class="user__name">{{userName || 'Your Name'}}</span>
+  <div class="user__ava">
+    <img src="assets/images/svg/user.svg" alt="" class="img img--cover">
+  </div>
+  <div class="user__menu">
+    <span class="user__menu-link" *ngIf="currentURL !== '/'" [routerLink]="['/']">Main</span>
+    <span class="user__menu-link" *ngIf="currentURL !== '/create'" [routerLink]="['/create']">Admin controls</span>
+    <span class="user__menu-link" *ngIf="currentURL !== '/favorite'"  [routerLink]="['/favorite']">My favorites</span>
+    <span class="user__menu-link" *ngIf="!userName && currentURL !== '/login'" [routerLink]="['/login']">Login</span>
+    <span class="user__menu-link" *ngIf="userName" (click)="logout()">Logout</span>
+  </div>
+</div>

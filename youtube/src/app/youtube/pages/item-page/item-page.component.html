@@ -1,0 +1,52 @@
+<div class="item-wrapper">
+  <div class="item" *ngIf="item">
+    <button [routerLink]="[prevRoute]" class="item__btn" type="button"
+            appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__btn'">
+      <img src="assets/images/svg/back_button.svg" alt="<" class="img img--contain">
+    </button>
+    <div class="item__inner">
+      <div class="item__image">
+        <img [src]="item.snippet.thumbnails.medium.url" [alt]="item.snippet.title" class="img img--cover">
+      </div>
+      <div class="item__about"
+           appAgeColor [createdDate]="item.snippet.publishedAt" [cssClass]="'item__about'">
+        <div class="item__head">
+          <h2 class="item__title" title="Kuji Podcast #20">{{ item.snippet.title }}</h2>
+          <span class="item__date">{{ item.snippet.publishedAt }}</span>
+        </div>
+        <div class="item__wrapper">
+          <p class="item__subtitle">Description:</p>
+          <p class="item__description">{{ item.snippet.description }}</p>
+        </div>
+        <div class="item__stats-wrapper" *ngIf="item.statistics">
+          <div class="item__stats">
+            <div class="item__stats-image">
+              <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
+            </div>
+            <span class="item__stats-value">{{ item.statistics.viewCount || 0 }}</span>
+          </div>
+          <div class="item__stats">
+            <div class="item__stats-image">
+              <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
+            </div>
+            <span class="item__stats-value">{{ item.statistics.likeCount || 0 }}</span>
+          </div>
+          <div class="item__stats">
+            <div class="item__stats-image">
+              <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
+            </div>
+            <span class="item__stats-value">{{ item.statistics.dislikeCount || 0 }}</span>
+          </div>
+          <div class="item__stats">
+            <div class="item__stats-image">
+              <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
+            </div>
+            <span class="item__stats-value">{{ item.statistics.commentCount || 0 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

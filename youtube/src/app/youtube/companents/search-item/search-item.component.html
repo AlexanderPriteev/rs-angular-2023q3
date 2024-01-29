@@ -1,0 +1,52 @@
+<div class="search-item" [id]="searchItem.id.videoId"
+     appAgeColor [createdDate]="searchItem.snippet.publishedAt" [cssClass]="'search-item'">
+  <div class="search-item__image-wrapper">
+    <div class="search-item__image">
+      <picture>
+        <source media="(min-width:1920px)" [srcset]="searchItem.snippet.thumbnails.high.url">
+        <img [src]="searchItem.snippet.thumbnails.medium.url" [alt]="searchItem.snippet.title" class="img img--cover">
+      </picture>
+    </div>
+    <button type="button"
+            class="favorite-btn"
+            (click)="toggleFavorite()" *ngIf="isYoutubeVideo">
+      <svg viewBox="0 0 32 32" class="favorite-btn__svg img img--contain">
+        <path d="M8.85751 26.9074L10.605 19.2393L10.7372 18.6593L10.2906 18.2664L4.41287 13.0939L12.1678
+                   12.4106L12.7706 12.3575L13.0032 11.7989L16 4.60152L18.9968 11.7989L19.2294 12.3575L19.8322
+                   12.4106L27.5871 13.0939L21.7094 18.2664L21.2628 18.6593L21.395 19.2393L23.1425 26.9074L16.5222
+                   22.8538L16 22.534L15.4778 22.8538L8.85751 26.9074Z"
+              class="favorite-btn__svg-path" [ngClass]="{'checked': isFavorite}" />
+      </svg>
+    </button>
+  </div>
+  <div class="search-item__statistics" *ngIf="formatStatistics">
+    <div class="statistic-item">
+      <div class="statistic-item__image">
+        <img src="assets/images/svg/viewed.svg" alt="viewed" class="img img--contain">
+      </div>
+      <span class="statistic-item__value">{{ formatStatistics.viewCount  || 0 }}</span>
+    </div>
+    <div class="statistic-item">
+      <div class="statistic-item__image">
+        <img src="assets/images/svg/liked.svg" alt="liked" class="img img--contain">
+      </div>
+      <span class="statistic-item__value">{{ formatStatistics.likeCount || 0}}</span>
+    </div>
+    <div class="statistic-item">
+      <div class="statistic-item__image">
+        <img src="assets/images/svg/dislike.svg" alt="disliked" class="img img--contain">
+      </div>
+      <span class="statistic-item__value">{{ formatStatistics.dislikeCount || 0}}</span>
+    </div>
+    <div class="statistic-item">
+      <div class="statistic-item__image">
+        <img src="assets/images/svg/comment.svg" alt="comments" class="img img--contain">
+      </div>
+      <span class="statistic-item__value">{{ formatStatistics.commentCount || 0 }}</span>
+    </div>
+  </div>
+  <h3 class="search-item__title" [title]="searchItem.snippet.title">{{ searchItem.snippet.title }}</h3>
+  <div class="search-item__btn-wrapper">
+    <app-button [routerLink]="['/item', searchItem.id.videoId, { currenRoute: currenRoute }]">more..</app-button>
+  </div>
+</div>

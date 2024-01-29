@@ -1,0 +1,54 @@
+@import "../../../../assets/scss/basic/variables";
+
+.search{
+  display: flex;
+  flex-direction: row-reverse;
+  &__field{
+    width: 39.6rem;
+    height: 2.4rem;
+    background-color: $grey-light-2;
+    box-sizing: border-box;
+    padding: 0 .5rem;
+    color: $text-dark;
+    font-size: 1.2rem;
+    @media (max-width: 600px) {
+      width: auto;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 369px) {
+      width: 12rem;
+    }
+    &::placeholder{
+      color: $grey-text;
+    }
+  }
+  &__btn{
+    width: 8rem;
+    height: 2.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 .4rem .4rem 0;
+    background-color: $blue;
+    font-size: 1.2rem;
+    color: $white;
+    box-shadow: .2rem 0 .4rem 0 $blue;
+    transition: all .15s linear;
+    cursor: pointer;
+    @media (max-width: 369px) {
+      width: auto;
+      box-sizing: border-box;
+      padding: 0 1rem;
+    }
+    &:hover{
+      box-shadow: 0 0 0 0 $cyan;
+      background-color: $cyan;
+    }
+    &:disabled{
+      pointer-events: none;
+      box-shadow: none;
+      background-color: $grey-dark;
+      color: $grey-text-2;
+    }
+  }
+}

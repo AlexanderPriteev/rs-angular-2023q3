@@ -1,0 +1,57 @@
+@import "../../../../assets/scss/basic/variables";
+
+.sorting{
+  box-sizing: border-box;
+  padding: 1.8rem 3rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 65rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  @media (max-width: 910px) {
+    max-width: 62rem;
+    padding: 1rem 1.5rem;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding-top: 0;
+    gap: .8rem;
+    align-items: flex-start;
+    max-width: 37rem;
+  }
+  &__title{
+    color: $grey-text;
+  }
+  &__link{
+    color: $blue;
+    text-decoration: underline;
+    transition: color .15s linear;
+    cursor: pointer;
+    &:hover{
+      color: $cyan;
+    }
+  }
+  &__label{
+    color: $blue;
+  }
+  &__search{
+    width: 15rem;
+    height: 1.3rem;
+    background-color: $white;
+    box-sizing: border-box;
+    padding: 0 .5rem;
+    color: $text-dark;
+    font-size: 1.2rem;
+    line-height: 1;
+    &::placeholder{
+      color: $grey-text;
+    }
+    &-wrapper{
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}

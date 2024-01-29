@@ -1,0 +1,31 @@
+<div class="form-wrapper">
+  <div class="form" [formGroup]="loginForm">
+    <h2 class="form__title">Login</h2>
+    <div class="form__wrapper">
+      <div class="field">
+        <label class="field__label" for="username">login</label>
+        <input type="text"
+               class="field__input"
+               [ngClass]="{'error': nameErrorValue}"
+               formControlName="username"
+               name="username"
+               id="username">
+        <span class="field__error" *ngIf="nameErrorValue">{{ nameErrorValue }}</span>
+      </div>
+      <div class="field">
+        <label class="field__label" for="password">password</label>
+        <input type="password"
+               class="field__input"
+               [ngClass]="{'error': passErrorValue}"
+               formControlName="password"
+               name="password"
+               id="password">
+        <span class="field__error" *ngIf="passErrorValue">{{ passErrorValue }}</span>
+      </div>
+    </div>
+    <div class="form__btn-wrapper">
+      <app-button (click)="login()">Login</app-button>
+    </div>
+  </div>
+</div>
+
